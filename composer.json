@@ -1,0 +1,25 @@
+{
+    "name": "jfcherng/roundcube-show-sidebar-size-plugin",
+    "description": "A Roundcube plugin which shows folder size in the sidebar.",
+    "type": "plugin",
+    "authors": [
+        {
+            "name": "Jack Cherng",
+            "email": "jfcherng@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^5.4.0 || ^7.0.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.11.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "fix": [
+            "php-cs-fixer fix --verbose"
+        ]
+    }
+}

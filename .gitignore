@@ -1,0 +1,12 @@
+# some IDE things
+.idea/
+.tags*
+.ropeproject
+/.project
+/.web-server-pid
+**/oracle.sqlite
+.php_cs.cache
+
+# composer
+composer.lock
+vendor/
