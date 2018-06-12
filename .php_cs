@@ -42,12 +42,12 @@ $config = PhpCsFixer\Config::create()
         'phpdoc_order' => true,
         'phpdoc_to_comment' => false,
         'phpdoc_types_order' => true,
-        'pow_to_exponentiation' => true,
+        'pow_to_exponentiation' => false,
         'random_api_migration' => true,
         'single_line_comment_style' => true,
-        'string_line_ending' => true,
         'strict_comparison' => false,
         'strict_param' => false,
+        'string_line_ending' => true,
         'yoda_style' => false,
     ])
     ->setFinder(

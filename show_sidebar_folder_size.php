@@ -14,7 +14,7 @@ class show_sidebar_folder_size extends rcube_plugin
      */
     public function init()
     {
-        $rcmail = rcmail::get_instance();
+        $rc = rcmail::get_instance();
         $this->load_config();
         $this->include_script('js/main.js');
     }
