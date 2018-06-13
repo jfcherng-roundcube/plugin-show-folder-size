@@ -1,0 +1,8 @@
+<?php
+
+$config = [
+    // auto show the folder size without clicking on the toolbar button
+    'auto_show_folder_size' => true,
+    // show the toolbar button
+    'show_toolbar_button' => true,
+];

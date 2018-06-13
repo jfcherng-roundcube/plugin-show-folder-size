@@ -1,4 +1,8 @@
-$(function() {
+function pluginShowSidebarSize() {
+  $(pluginShowSidebarSize_);
+}
+
+function pluginShowSidebarSize_() {
   setTimeout(function() {
     var mailboxes = rcmail.env.mailboxes_list;
 
@@ -15,12 +19,12 @@ $(function() {
         });
       })(mailboxes[i]);
     }
-  }, 500);
-  
+  }, 300);
+
   function show_size(mailbox, size) {
     var $mailbox_li_a = $('#mailboxlist > li.mailbox.' + mailbox.toLowerCase() + ' > a');
     var $size_span = $('.folder_size', $mailbox_li_a);
-    
+
     if ($size_span.length === 0) {
       $mailbox_li_a.append('<span class="folder_size">' + size + '</span>');
     } else {
@@ -44,12 +48,11 @@ $(function() {
       success: callback
     });
   }
-  
-  function extract_folder_size_from_string (string) {
+
+  function extract_folder_size_from_string(string) {
     var folder_size = /(-?[0-9.,]+)\s*((?:byte|[kmgtp]?b)s?)/i.exec(string);
     var folder_size_str = folder_size[1] + ' ' + folder_size[2];
-    
+
     return folder_size_str;
   }
-});
-
+}

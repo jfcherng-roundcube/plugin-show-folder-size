@@ -1,0 +1,9 @@
+#messagetoolbar a.show-folder-size {
+  background-image: url('images/capacity.png');
+  background-position: center top;
+
+  /* hide inner text */
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}

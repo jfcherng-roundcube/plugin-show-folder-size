@@ -10,3 +10,6 @@
 # composer
 composer.lock
 vendor/
+
+# ...
+config.inc.php
