@@ -1,7 +1,10 @@
 {
     "name": "jfcherng/roundcube-show-sidebar-size-plugin",
     "description": "A Roundcube plugin which shows folder size in the sidebar.",
-    "type": "plugin",
+    "type": "roundcube-plugin",
+    "license": "MIT",
+    "homepage": "https://github.com/jfcherng/roundcube-show-sidebar-size-plugin",
+    "version": "0.0.2",
     "authors": [
         {
             "name": "Jack Cherng",
