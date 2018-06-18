@@ -1,9 +1,5 @@
 function pluginShowSidebarSize() {
-  $(pluginShowSidebarSize_);
-}
-
-function pluginShowSidebarSize_() {
-  setTimeout(function() {
+  $(function() {
     var mailboxes = rcmail.env.mailboxes_list;
 
     for (var i in mailboxes) {
@@ -19,7 +15,7 @@ function pluginShowSidebarSize_() {
         });
       })(mailboxes[i]);
     }
-  }, 300);
+  });
 
   function show_size(mailbox, size) {
     var $mailbox_li_a = $('#mailboxlist > li.mailbox.' + mailbox.toLowerCase() + ' > a');

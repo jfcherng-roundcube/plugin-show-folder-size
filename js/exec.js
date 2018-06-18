@@ -1,1 +1,1 @@
-pluginShowSidebarSize();
+setTimeout(pluginShowSidebarSize, 300);
