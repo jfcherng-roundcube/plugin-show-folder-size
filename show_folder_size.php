@@ -1,6 +1,6 @@
 <?php
 
-class show_sidebar_folder_size extends rcube_plugin
+class show_folder_size extends rcube_plugin
 {
     /**
      * We only load this plugin in the 'mail' task.
@@ -25,7 +25,7 @@ class show_sidebar_folder_size extends rcube_plugin
 
         $this->add_texts('localization/', true);
 
-        $this->include_stylesheet($this->local_skin_path() . '/show_sidebar_folder_size.css');
+        $this->include_stylesheet($this->local_skin_path() . '/show_folder_size.css');
         $this->include_script('js/main.js');
 
         if ($this->config['auto_show_folder_size']) {
@@ -44,8 +44,8 @@ class show_sidebar_folder_size extends rcube_plugin
     {
         if ($this->config['show_toolbar_button']) {
             $this->add_button([
-                'label' => 'show_sidebar_folder_size.show_folder_size',
-                'title' => 'show_sidebar_folder_size.show_folder_size',
+                'label' => 'show_folder_size.show_folder_size',
+                'title' => 'show_folder_size.show_folder_size',
                 'href' => '#',
                 'class' => 'button show-folder-size',
                 'onclick' => 'pluginShowSidebarSize();',
