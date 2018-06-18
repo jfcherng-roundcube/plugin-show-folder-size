@@ -1,4 +1,4 @@
-A Roundcube plugin which shows folder size in the sidebar.
+A Roundcube plugin which shows folder size.
 
 
 ## Requirements
@@ -9,7 +9,7 @@ A Roundcube plugin which shows folder size in the sidebar.
 
 ## Demo
 
-![](https://raw.githubusercontent.com/jfcherng/roundcube-show-sidebar-size-plugin/master/doc/screenshot/demo.png)
+![](https://raw.githubusercontent.com/jfcherng/roundcube-show-folder-size-plugin/master/doc/screenshot/demo.png)
 
 
 ## How to install this plugin in Roundcube?
@@ -29,7 +29,7 @@ $config = [
 ];
 ```
 
-4. Edit `ROUNDCUBE_HOME/conf/config.inc.php` locate `$config['plugins']` and add `'show_sidebar_folder_size',` there:
+4. Edit `ROUNDCUBE_HOME/conf/config.inc.php` locate `$config['plugins']` and add `'show_folder_size',` there:
 ```php
 <?php
 
@@ -37,7 +37,7 @@ $config = [
 
 $config['plugins'] = array(
     // some other plugins...
-    'show_sidebar_folder_size', // <-- add this
+    'show_folder_size', // <-- add this
 );
 ```
 
