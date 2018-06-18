@@ -2,4 +2,4 @@
 
 $labels = [];
 
-$labels['show_folder_size'] = '文件夾大小';
+$labels['show_folder_size'] = '文件夹大小';
