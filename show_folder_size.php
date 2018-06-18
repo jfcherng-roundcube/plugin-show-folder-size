@@ -25,7 +25,7 @@ class show_folder_size extends rcube_plugin
 
         $this->add_texts('localization/', true);
 
-        $this->include_stylesheet($this->local_skin_path() . '/show_folder_size.css');
+        $this->include_stylesheet($this->local_skin_path() . '/' . __CLASS__ . '.css');
         $this->include_script('js/main.js');
 
         if ($this->config['auto_show_folder_size']) {
@@ -44,8 +44,8 @@ class show_folder_size extends rcube_plugin
     {
         if ($this->config['show_toolbar_button']) {
             $this->add_button([
-                'label' => 'show_folder_size.show_folder_size',
-                'title' => 'show_folder_size.show_folder_size',
+                'label' => __CLASS__ . '.show_folder_size',
+                'title' => __CLASS__ . '.show_folder_size',
                 'href' => '#',
                 'class' => 'button show-folder-size',
                 'onclick' => 'pluginShowSidebarSize();',
