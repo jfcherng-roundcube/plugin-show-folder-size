@@ -3,6 +3,12 @@ VERSION 0  NITS
 ===============
 
    Version 0.2 - nits
+      18/06/2019 21:04  0.2.4  fix tiny UI problem
+         687b7f6 Bump version
+         73b3f07 Do not show button on some pages
+         c3a7449 year++
+         f431360 Update README
+         a5bbb31 Rename CHANGELOG.md -> CHANGELOG
       11/08/2018 04:49  0.2.3  Fix typo
          2e07ea4 Fix typo
       04/07/2018 15:55  0.2.2  initial release
