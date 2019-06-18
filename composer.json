@@ -4,18 +4,25 @@
     "type": "roundcube-plugin",
     "license": "MIT",
     "homepage": "https://github.com/jfcherng/roundcube-show-folder-size-plugin",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "authors": [
         {
             "name": "Jack Cherng",
             "email": "jfcherng@gmail.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://plugins.roundcube.net"
+        }
+    ],
     "require": {
-        "php": "^5.4.0 || ^7.0.0"
+        "php": "^5.4.0 || ^7.0.0",
+        "roundcube/plugin-installer": "~0.1"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "~2.2.0"
+        "friendsofphp/php-cs-fixer": "^2.12.0"
     },
     "config": {
         "sort-packages": true
