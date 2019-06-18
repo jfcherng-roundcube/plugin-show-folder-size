@@ -3,6 +3,8 @@ VERSION 0  NITS
 ===============
 
    Version 0.2 - nits
+      19/06/2019 02:47  0.2.5  RoundCube plugin installer
+         e189d10 Update composer.json for RoundCube plugin installer
       18/06/2019 21:04  0.2.4  fix tiny UI problem
          687b7f6 Bump version
          73b3f07 Do not show button on some pages
