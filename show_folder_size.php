@@ -21,6 +21,13 @@ class show_folder_size extends rcube_plugin
      */
     public function init()
     {
+        $action = rcube_utils::get_input_value('_action', rcube_utils::INPUT_GET);
+
+        // some pages should not use this plugin
+        if (in_array($action, ['get'])) {
+            return;
+        }
+
         $this->loadPluginConfig();
 
         $this->add_texts('localization/', true);
