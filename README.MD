@@ -4,7 +4,7 @@ A Roundcube plugin which shows folder size.
 ## Requirements
 
 - PHP: >= `5.4.0`
-- Roundcube: only tested for `1.1.x` but others may work as well.
+- Roundcube: I only tested this plugin with `1.1.12`, `1.3.9` and `1.4-rc1`
 
 
 ## Demo
@@ -14,10 +14,10 @@ A Roundcube plugin which shows folder size.
 
 ## How to install this plugin in Roundcube?
 
-1. Create folder `quota` in `ROUNDCUBE_HOME/plugins` if it does not exist.
+1. Create folder `show_folder_size` in `ROUNDCUBE_HOME/plugins` if it does not exist.
 2. Copy all plugin files there.
 
-3. Copy `config.inc.php.dist` to `config.inc.php` and edit `config.inc.php` if you want.
+3. If you want to do plugin configuration, copy `config.inc.php.dist` to `config.inc.php` and then edit `config.inc.php`.
 
 ```php
 <?php
@@ -30,7 +30,7 @@ $config = [
 ];
 ```
 
-4. Edit `ROUNDCUBE_HOME/conf/config.inc.php` locate `$config['plugins']` and add `'show_folder_size',` there:
+4. Edit your Roundcube's config file (`ROUNDCUBE_HOME/config/config.inc.php` or maybe `/etc/roundcube/config.inc.php`), locate `$config['plugins']` and add `'show_folder_size',`.
 
 ```php
 <?php
