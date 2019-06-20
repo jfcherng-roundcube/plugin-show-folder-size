@@ -3,6 +3,11 @@ VERSION 0  NITS
 ===============
 
    Version 0.2 - nits
+      20/06/2019 23:26  0.2.7  Fix subfolder's size
+         0127546 Config "auto_show_folder_size" is now false by default
+         fa77dc0 Use modern frontend tool for assets
+         d3d2ef8 Fix not showing subfolder's size
+         e2d9b98 Code tidy
       20/06/2019 08:41  0.2.6  Fix composer package
          c68fd00 Update readme
          a1ef82f Try to fix installation via composer
