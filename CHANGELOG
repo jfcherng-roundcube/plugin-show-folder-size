@@ -3,6 +3,11 @@ VERSION 0  NITS
 ===============
 
    Version 0.2 - nits
+      20/06/2019 08:41  0.2.6  Fix composer package
+         c68fd00 Update readme
+         a1ef82f Try to fix installation via composer
+         96c3e19 Code tidy
+         ff2b235 Update readme
       19/06/2019 02:47  0.2.5  RoundCube plugin installer
          e189d10 Update composer.json for RoundCube plugin installer
       18/06/2019 21:04  0.2.4  fix tiny UI problem
