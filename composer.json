@@ -1,5 +1,5 @@
 {
-    "name": "jfcherng/roundcube-show-folder-size-plugin",
+    "name": "jfcherng/show-folder-size",
     "description": "A Roundcube plugin which shows folder size.",
     "type": "roundcube-plugin",
     "license": "MIT",
