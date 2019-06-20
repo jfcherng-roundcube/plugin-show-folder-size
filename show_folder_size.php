@@ -55,7 +55,7 @@ final class show_folder_size extends rcube_plugin
                 'title' => __CLASS__ . '.show_folder_size',
                 'href' => '#',
                 'class' => 'button show-folder-size',
-                'onclick' => 'pluginShowSidebarSize();',
+                'onclick' => 'pluginShowFolderSize();',
             ], 'toolbar');
         }
 

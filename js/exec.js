@@ -1,1 +1,1 @@
-setTimeout(pluginShowSidebarSize, 300);
+setTimeout(pluginShowFolderSize, 300);

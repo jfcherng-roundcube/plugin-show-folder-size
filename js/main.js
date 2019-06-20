@@ -1,35 +1,35 @@
-function pluginShowSidebarSize() {
+function pluginShowFolderSize() {
+  var rcmail = window.rcmail;
+
   $(function() {
     var mailboxes = rcmail.env.mailboxes_list;
 
-    for (var i in mailboxes) {
+    for (var idx in mailboxes) {
       (function(mailbox) {
         get_folder_size(mailbox, true, function(data) {
           data = JSON.parse(data);
 
-          var folder_size_str = extract_folder_size_from_string(data.exec);
-
-          $(function() {
-            show_size(mailbox, ' (' + folder_size_str + ')');
-          });
+          html_show_size(mailbox, extract_size_from_api_response(data.exec));
         });
-      })(mailboxes[i]);
+      })(mailboxes[idx]);
     }
   });
 
-  function show_size(mailbox, size) {
-    var $mailbox_li_a = $('#mailboxlist > li.mailbox.' + mailbox.toLowerCase() + ' > a');
-    var $size_span = $('.folder_size', $mailbox_li_a);
+  function html_show_size(mailbox, size) {
+    var $mailbox_a = $('#mailboxlist a[rel="' + mailbox + '"]');
+    var $size_span = $('.folder_size', $mailbox_a);
+
+    var size_decorated = ' (' + size + ')';
 
     if ($size_span.length === 0) {
-      $mailbox_li_a.append('<span class="folder_size">' + size + '</span>');
+      $mailbox_a.append('<span class="folder_size">' + size_decorated + '</span>');
     } else {
-      $size_span.html(size);
+      $size_span.html(size_decorated);
     }
   }
 
   function get_folder_size(mailbox, async, callback) {
-    async = typeof async === 'undefined' ? false: !!async;
+    async = typeof async === 'undefined' ? false : Boolean(async);
     callback = typeof callback === 'undefined' ? function() {} : callback;
 
     $.ajax({
@@ -45,10 +45,9 @@ function pluginShowSidebarSize() {
     });
   }
 
-  function extract_folder_size_from_string(string) {
-    var folder_size = /(-?[0-9.,]+)\s*((?:byte|[kmgtp]?b)s?)/i.exec(string);
-    var folder_size_str = folder_size[1] + ' ' + folder_size[2];
+  function extract_size_from_api_response(string) {
+    var folder_size = /(['"])([^'"]+)\1/.exec(string);
 
-    return folder_size_str;
+    return folder_size ? folder_size[2] : '';
   }
 }
