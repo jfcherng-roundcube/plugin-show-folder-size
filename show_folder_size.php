@@ -12,9 +12,9 @@ class show_folder_size extends rcube_plugin
     /**
      * The loaded configuration.
      *
-     * @var array
+     * @var rcube_config
      */
-    protected $config = [];
+    protected $config;
 
     /**
      * {@inheritdoc}
@@ -28,18 +28,18 @@ class show_folder_size extends rcube_plugin
             return;
         }
 
-        $this->loadPluginConfig();
+        $this->load_plugin_config();
 
         $this->add_texts('localization/', true);
 
         $this->include_stylesheet($this->local_skin_path() . '/' . __CLASS__ . '.css');
         $this->include_script('js/main.js');
 
-        if ($this->config['auto_show_folder_size']) {
+        if ($this->config->get('auto_show_folder_size')) {
             $this->include_script('js/exec.js');
         }
 
-        $this->addPluginButton();
+        $this->add_plugin_button();
     }
 
     /**
@@ -47,9 +47,9 @@ class show_folder_size extends rcube_plugin
      *
      * @return self
      */
-    protected function addPluginButton()
+    protected function add_plugin_button()
     {
-        if ($this->config['show_toolbar_button']) {
+        if ($this->config->get('show_toolbar_button')) {
             $this->add_button([
                 'label' => __CLASS__ . '.show_folder_size',
                 'title' => __CLASS__ . '.show_folder_size',
@@ -64,22 +64,14 @@ class show_folder_size extends rcube_plugin
 
     /**
      * Load plugin configuration.
-     *
-     * @return self
      */
-    protected function loadPluginConfig()
+    protected function load_plugin_config()
     {
-        $rc = rcmail::get_instance();
-
-        $userPerf = $this->load_config('config.inc.php')
-            ? $rc->config->all()
-            : [];
+        $rcmail = rcmail::get_instance();
 
         $this->load_config('config.inc.php.dist');
-        $rc->config->merge($userPerf);
+        $this->load_config('config.inc.php');
 
-        $this->config = $rc->config->all();
-
-        return $this;
+        $this->config = $rcmail->config;
     }
 }
