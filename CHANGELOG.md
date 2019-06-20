@@ -2,6 +2,13 @@
 ## VERSION 0  INIT
 
  * Version **0.2** - nits
+   * 2019-06-21 05:27  **0.2.8**  Reduce HTTP requests
+      * 11ed356 Add a single API to get all folder sizes
+      * e96553c Update .php_cs
+      * 3eb4f54 Use markdown format for CHANGELOG
+      * 5859dd3 Fix permission bits for compile.sh
+      * 703ffaf Check asset files exists before compilation
+      * 86d0e3f Rename repo to roundcube-plugin-show-folder-size
    * 2019-06-20 23:26  **0.2.7**  Fix subfolder's size
       * 0127546 Config "auto_show_folder_size" is now false by default
       * fa77dc0 Use modern frontend tool for assets
