@@ -3,7 +3,7 @@
     "description": "A Roundcube plugin which shows folder size.",
     "type": "roundcube-plugin",
     "license": "MIT",
-    "homepage": "https://github.com/jfcherng/roundcube-show-folder-size-plugin",
+    "homepage": "https://github.com/jfcherng/roundcube-plugin-show-folder-size",
     "version": "0.2.7",
     "authors": [
         {
