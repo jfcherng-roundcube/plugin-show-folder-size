@@ -2,7 +2,8 @@
 
 $config = [
     // auto show the folder size without clicking on the toolbar button
-    'auto_show_folder_size' => true,
+    // this could be a serious performance penalty if there are many users
+    'auto_show_folder_size' => false,
     // show the toolbar button
     'show_toolbar_button' => true,
 ];
