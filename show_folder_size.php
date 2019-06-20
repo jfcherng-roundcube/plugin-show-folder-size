@@ -34,7 +34,7 @@ final class show_folder_size extends rcube_plugin
         $this->register_action('plugin.all-folder-size', [$this, 'action_all_folder_size']);
 
         $this->add_plugin_assets();
-        $this->add_plugin_button();
+        $this->add_plugin_button($skin);
     }
 
     /**
@@ -89,18 +89,33 @@ final class show_folder_size extends rcube_plugin
 
     /**
      * Add a plugin button.
+     *
+     * @param string $skin the current skin name
      */
-    private function add_plugin_button()
+    private function add_plugin_button($skin)
     {
-        if ($this->config->get('show_toolbar_button')) {
-            $this->add_button([
-                'label' => __CLASS__ . '.show_folder_size',
-                'title' => __CLASS__ . '.show_folder_size',
-                'href' => '#',
-                'class' => 'button show-folder-size',
-                'onclick' => 'pluginShowFolderSize();',
-            ], 'toolbar');
+        if (!$this->config->get('show_toolbar_button')) {
+            return;
         }
+
+        $baseAttrs = [
+            'type' => 'link',
+            'label' => __CLASS__ . '.show_folder_size',
+            'title' => __CLASS__ . '.show_folder_size',
+            'href' => '#',
+            'class' => 'button show-folder-size',
+            'onclick' => 'pluginShowFolderSize();',
+        ];
+
+        $extraAttrs = [];
+
+        if ($skin === 'elastic') {
+            $extraAttrs = [
+                'innerclass' => 'inner',
+            ];
+        }
+
+        $this->add_button($extraAttrs + $baseAttrs, 'toolbar');
     }
 
     /**
