@@ -21,12 +21,12 @@ final class show_folder_size extends rcube_plugin
      */
     public function init()
     {
-        $action = rcube_utils::get_input_value('_action', rcube_utils::INPUT_GET);
-
-        // some pages should not use this plugin
-        if (\in_array($action, ['get'])) {
+        if ($this->can_stop_init()) {
             return;
         }
+
+        $RCMAIL = rcmail::get_instance();
+        $skin = $RCMAIL->config->get('skin');
 
         $this->load_plugin_config();
 
@@ -55,6 +55,23 @@ final class show_folder_size extends rcube_plugin
 
         $OUTPUT->command('plugin.callback_all_folder_size', $sizes);
         $OUTPUT->send();
+    }
+
+    /**
+     * Determine can we stop the plugin initialization.
+     *
+     * @return boolean
+     */
+    private function can_stop_init()
+    {
+        $action = rcube_utils::get_input_value('_action', rcube_utils::INPUT_GET);
+
+        // some pages should not use this plugin
+        if (\in_array($action, ['get'])) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
