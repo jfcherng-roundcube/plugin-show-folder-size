@@ -35,6 +35,11 @@ pushd "${SCRIPT_DIR}" || exit
 #--------------------#
 
 for file_src in "${LESS_FILES[@]}"; do
+    if [ ! -f "${file_src}" ]; then
+        echo "'${file_src}' is not a file..."
+        continue
+    fi
+
     echo "==================================="
     echo "Begin compile '${file_src}'..."
     echo "==================================="
@@ -52,6 +57,11 @@ done
 #----------------------------#
 
 for file_src in "${JS_FILES[@]}"; do
+    if [ ! -f "${file_src}" ]; then
+        echo "'${file_src}' is not a file..."
+        continue
+    fi
+
     echo "==================================="
     echo "Begin transpile '${file_src}'..."
     echo "==================================="
