@@ -1,1 +1,1 @@
-setTimeout(pluginShowFolderSize, 300);
+setTimeout(global.pluginShowFolderSize, 300);

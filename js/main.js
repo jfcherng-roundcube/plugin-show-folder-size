@@ -1,53 +1,56 @@
-function pluginShowFolderSize() {
-  var rcmail = window.rcmail;
+global.pluginShowFolderSize = () => {
+  let rcmail = global.rcmail;
 
-  $(function() {
-    var mailboxes = rcmail.env.mailboxes_list;
+  let hash_string_to_int = (str) => str.split('').reduce(
+    (sum, char) => ((sum << 5) - sum) + char.charCodeAt(),
+    0
+  );
 
-    for (var idx in mailboxes) {
-      (function(mailbox) {
-        get_folder_size(mailbox, true, function(data) {
-          data = JSON.parse(data);
+  let extract_size_from_api_response = (str) => {
+    let size = /(['"])([^'"]+)\1/.exec(str);
 
-          html_show_size(mailbox, extract_size_from_api_response(data.exec));
-        });
-      })(mailboxes[idx]);
-    }
-  });
+    return size ? size[2] : '';
+  };
 
-  function html_show_size(mailbox, size) {
-    var $mailbox_a = $('#mailboxlist a[rel="' + mailbox + '"]');
-    var $size_span = $('.folder_size', $mailbox_a);
+  let html_show_size = (mailbox, size) => {
+    let size_decorated = `(${size})`;
 
-    var size_decorated = ' (' + size + ')';
+    let hash_id = 'folder-size-' + Math.abs(hash_string_to_int(mailbox));
+    let $mailbox_a = $(`#mailboxlist a[rel="${mailbox}"]`);
+    let $size_span = $(`#${hash_id}`, $mailbox_a);
 
     if ($size_span.length === 0) {
-      $mailbox_a.append('<span class="folder_size">' + size_decorated + '</span>');
+      $mailbox_a.append(` <span id="${hash_id}">${size_decorated}</span>`);
     } else {
       $size_span.html(size_decorated);
     }
-  }
+  };
 
-  function get_folder_size(mailbox, async, callback) {
-    async = typeof async === 'undefined' ? false : Boolean(async);
-    callback = typeof callback === 'undefined' ? function() {} : callback;
+  let get_folder_size = (mailbox, async = false, callback = () => {}) => $.ajax({
+    type: 'post',
+    url: rcmail.get_task_url('settings') + '&_framed=1&_action=folder-size',
+    data: {
+      _mbox: mailbox,
+      _remote: '1',
+      _unlock: 'loading' + Math.floor(Math.random() * 1e8),
+    },
+    async: Boolean(async),
+    success: callback,
+  });
 
-    $.ajax({
-      type: 'post',
-      url: rcmail.get_task_url('settings') + '&_framed=1&_action=folder-size',
-      data: {
-        _mbox: mailbox,
-        _remote: '1',
-        _unlock: 'loading' + Math.floor(Math.random() * 1e8)
-      },
-      async: async,
-      success: callback
-    });
-  }
+  // the real working horse
+  $(() => {
+    let mailboxes = rcmail.env.mailboxes_list;
 
-  function extract_size_from_api_response(string) {
-    var folder_size = /(['"])([^'"]+)\1/.exec(string);
-
-    return folder_size ? folder_size[2] : '';
-  }
-}
+    for (let mailbox of mailboxes) {
+      get_folder_size(
+        mailbox,
+        true,
+        (data) => html_show_size(
+          mailbox,
+          extract_size_from_api_response(JSON.parse(data).exec)
+        )
+      );
+    }
+  });
+};

@@ -1,0 +1,52 @@
+{
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "globals": {
+    "$": true,
+    "appUtil": true,
+    "ClipboardJS": true,
+    "dayjs": true,
+    "dayjses": true,
+    "echarts": true,
+    "Handsontable": true,
+    "jQuery": true,
+    "pageResources": true,
+    "tinycolor": true,
+    "toastr": true,
+    "Vue": true
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "comma-dangle": ["warn", "always-multiline"],
+    "comma-spacing": ["warn"],
+    "curly": ["warn", "all"],
+    "eol-last": ["warn"],
+    "eqeqeq": ["warn", "smart"],
+    "func-call-spacing": ["warn", "never"],
+    "indent": ["warn", 2, {"SwitchCase": 1} ],
+    "linebreak-style": ["error", "unix"],
+    "new-parens": ["warn"],
+    "no-console": "off",
+    "no-constant-condition": "off",
+    "no-empty": ["warn"],
+    "no-implicit-coercion": ["warn"],
+    "no-irregular-whitespace": ["warn"],
+    "no-lonely-if": ["warn"],
+    "no-multi-spaces": ["warn"],
+    "no-trailing-spaces": ["warn"],
+    "no-unused-vars": ["warn"],
+    "quotes": ["warn", "single"],
+    "semi": ["error"],
+    "semi-spacing": ["warn"],
+    "space-infix-ops": ["warn", {"int32Hint": false}],
+    "spaced-comment": ["warn", "always", {"exceptions": ["/", "-", "+", "!"]}],
+    "unicode-bom": ["error", "never"]
+  }
+}

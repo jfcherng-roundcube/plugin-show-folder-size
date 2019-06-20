@@ -33,10 +33,10 @@ final class show_folder_size extends rcube_plugin
         $this->add_texts('localization/', true);
 
         $this->include_stylesheet($this->local_skin_path() . '/' . __CLASS__ . '.css');
-        $this->include_script('js/main.js');
+        $this->include_script('js/main.min.js');
 
         if ($this->config->get('auto_show_folder_size')) {
-            $this->include_script('js/exec.js');
+            $this->include_script('js/exec.min.js');
         }
 
         $this->add_plugin_button();

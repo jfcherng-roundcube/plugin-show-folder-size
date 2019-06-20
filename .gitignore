@@ -9,7 +9,8 @@
 
 # composer
 composer.lock
-vendor/
+/vendor/
+/node_modules/
 
 # ...
 config.inc.php
