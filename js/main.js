@@ -1,15 +1,20 @@
 const debug = false;
 
 const rcmail = global.rcmail;
+const plugin_button_selector = '.button.show-folder-size';
 
 // button onclick function
-global.pluginShowFolderSize = () => rcmail.http_post(
-  'plugin.all-folder-size',
-  {
-    _humanize: 1,
-  },
-  true
-);
+global.pluginShowFolderSize = () => {
+  let $btn = $(plugin_button_selector);
+
+  if ($btn.hasClass('disabled')) {
+    return;
+  }
+
+  $btn.addClass('disabled');
+
+  rcmail.http_post('plugin.all-folder-size', {_humanize: 1}, true);
+};
 
 let hash_string_to_int = (str) => str.split('').reduce(
   (sum, char) => ((sum << 5) - sum) + char.charCodeAt(),
@@ -41,6 +46,8 @@ let callback_show_folder_size = (resp) => {
   $.each(resp, (mailbox, size) => {
     html_show_folder_size(mailbox, size);
   });
+
+  $(plugin_button_selector).removeClass('disabled');
 };
 
 rcmail.addEventListener('plugin.callback_all_folder_size', callback_show_folder_size);
