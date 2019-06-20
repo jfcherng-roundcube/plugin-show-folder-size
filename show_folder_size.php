@@ -1,6 +1,6 @@
 <?php
 
-class show_folder_size extends rcube_plugin
+final class show_folder_size extends rcube_plugin
 {
     /**
      * We only load this plugin in the 'mail' task.
@@ -14,7 +14,7 @@ class show_folder_size extends rcube_plugin
      *
      * @var rcube_config
      */
-    protected $config;
+    private $config;
 
     /**
      * {@inheritdoc}
@@ -47,7 +47,7 @@ class show_folder_size extends rcube_plugin
      *
      * @return self
      */
-    protected function add_plugin_button()
+    private function add_plugin_button()
     {
         if ($this->config->get('show_toolbar_button')) {
             $this->add_button([
@@ -65,7 +65,7 @@ class show_folder_size extends rcube_plugin
     /**
      * Load plugin configuration.
      */
-    protected function load_plugin_config()
+    private function load_plugin_config()
     {
         $rcmail = rcmail::get_instance();
 
