@@ -30,16 +30,10 @@ final class show_folder_size extends rcube_plugin
 
         $this->load_plugin_config();
 
-        $this->add_texts('localization/', true);
+        $this->add_texts('locales/', true);
         $this->register_action('plugin.all-folder-size', [$this, 'action_all_folder_size']);
 
-        $this->include_stylesheet($this->local_skin_path() . '/' . __CLASS__ . '.css');
-        $this->include_script('js/main.min.js');
-
-        if ($this->config->get('auto_show_folder_size')) {
-            $this->include_script('js/exec.min.js');
-        }
-
+        $this->add_plugin_assets();
         $this->add_plugin_button();
     }
 
@@ -61,6 +55,19 @@ final class show_folder_size extends rcube_plugin
 
         $OUTPUT->command('plugin.callback_all_folder_size', $sizes);
         $OUTPUT->send();
+    }
+
+    /**
+     * Add plugin assets.
+     */
+    private function add_plugin_assets()
+    {
+        $this->include_stylesheet($this->local_skin_path() . '/' . __CLASS__ . '.css');
+        $this->include_script('js/main.min.js');
+
+        if ($this->config->get('auto_show_folder_size')) {
+            $this->include_script('js/exec.min.js');
+        }
     }
 
     /**
@@ -97,7 +104,7 @@ final class show_folder_size extends rcube_plugin
      *
      * @param bool $humanize format the result for human reading
      *
-     * @return array an array in the form of [mailbox_1 => size_1, ...]
+     * @return int[]|string[] an array in the form of [mailbox_1 => size_1, ...]
      */
     private function get_all_folder_size($humanize = false)
     {
