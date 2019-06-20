@@ -14,6 +14,7 @@ $config = PhpCsFixer\Config::create()
         'concat_space' => ['spacing' => 'one'],
         'linebreak_after_opening_tag' => true,
         'method_argument_space' => true,
+        'native_function_invocation' => true,
         'no_multiline_whitespace_before_semicolons' => true,
         'no_short_echo_tag' => true,
         'no_unneeded_control_parentheses' => true,
