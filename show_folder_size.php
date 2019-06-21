@@ -82,7 +82,7 @@ final class show_folder_size extends rcube_plugin
      */
     private function add_plugin_assets()
     {
-        $this->include_stylesheet($this->local_skin_path() . '/' . __CLASS__ . '.css');
+        $this->include_stylesheet($this->local_skin_path() . '/main.css');
         $this->include_script('js/main.min.js');
 
         if ($this->config->get('auto_show_folder_size')) {

@@ -11,9 +11,9 @@ THREAD_CNT=$(getconf _NPROCESSORS_ONLN)
 PROJECT_ROOT=${SCRIPT_DIR}
 
 LESS_FILES=(
-    "skins/classic/show_folder_size.less"
-    "skins/elastic/show_folder_size.less"
-    "skins/larry/show_folder_size.less"
+    "skins/classic/main.less"
+    "skins/elastic/main.less"
+    "skins/larry/main.less"
 )
 
 JS_FILES=(
