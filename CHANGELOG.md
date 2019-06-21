@@ -1,6 +1,18 @@
 
 ## VERSION 0  INIT
 
+ * Version **0.3** - Support Elastic skin
+   * 2019-06-21 08:50  **0.3.0**  initial release
+      * 15b7107 nits
+      * 0fa6239 Update .php_cs
+      * 018fe5a Fix the Classic skin show twice folder size
+      * 1b38e8b Disable plugin button before the API responses
+      * 043fc8e Add support for Elastic skin (since RC 1.4)
+      * 3c0bff5 Code tidy
+      * 8b605b2 Update button image
+      * c2674f7 Update composer.json (bump php-cs-fixer)
+      * ae5ed3b Code tidy
+
  * Version **0.2** - nits
    * 2019-06-21 05:27  **0.2.8**  Reduce HTTP requests
       * 11ed356 Add a single API to get all folder sizes
