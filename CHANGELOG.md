@@ -2,6 +2,8 @@
 ## VERSION 0  INIT
 
  * Version **0.4** - Add mailbox options button
+   * 2019-06-21 17:23  **0.4.1**  nits
+      * 4233e56 Fix Elastic mailbox options icon does not show up
    * 2019-06-21 17:12  **0.4.0**  initial release
       * 5ed62f4 Update readme
       * 9aefe8f Update demo screenshot
