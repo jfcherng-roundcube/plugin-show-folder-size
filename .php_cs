@@ -31,6 +31,7 @@ $config = PhpCsFixer\Config::create()
         'random_api_migration' => true,
         'strict_comparison' => false,
         'strict_param' => false,
+        'yoda_style' => false,
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
