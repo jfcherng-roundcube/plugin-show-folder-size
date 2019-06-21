@@ -1,6 +1,15 @@
 
 ## VERSION 0  INIT
 
+ * Version **0.4** - Add mailbox options button
+   * 2019-06-21 17:12  **0.4.0**  initial release
+      * 5ed62f4 Update readme
+      * 9aefe8f Update demo screenshot
+      * fdb7663 Add a configurable button to mailbox options
+      * 939a1d4 Update .editorconfig
+      * 9efcbe2 API can response partial folder size (or all)
+      * 7cc24e4 Shrink images
+
  * Version **0.3** - Support Elastic skin
    * 2019-06-21 08:50  **0.3.0**  initial release
       * 15b7107 nits
