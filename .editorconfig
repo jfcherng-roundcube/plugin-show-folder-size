@@ -12,7 +12,7 @@ trim_trailing_whitespace = true
 charset = latin1
 end_of_line = crlf
 
-[*.{css,sass,scss}]
+[*.{css,sass,scss,less}]
 indent_size = 2
 
 [*.{html,xml,twig,blade,volt}]
