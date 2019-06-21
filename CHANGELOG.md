@@ -2,6 +2,12 @@
 ## VERSION 0  INIT
 
  * Version **0.4** - Add mailbox options button
+   * 2019-06-22 04:49  **0.4.2**  nits
+      * 10eef4b Rename skins stylesheets to main.less
+      * 389ebca Simplify CSS rules for Larray skin
+      * a46100d Add skins/_variables.less
+      * 1cc5035 Always uses initiated "rcube_storage" object
+      * a362fb3 Stop init if _action is not set and not plugin API call
    * 2019-06-21 17:23  **0.4.1**  nits
       * 4233e56 Fix Elastic mailbox options icon does not show up
    * 2019-06-21 17:12  **0.4.0**  initial release
