@@ -1,3 +1,7 @@
+#mailboxlist li > a[rel]:after {
+  content: attr(data-folder-size);
+  padding-left: .5em
+}
 .toolbar a.button.show-folder-size {
   background-image: url(images/capacity.png);
   background-position: center top

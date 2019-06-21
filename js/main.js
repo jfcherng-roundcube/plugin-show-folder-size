@@ -16,35 +16,13 @@ global.pluginShowFolderSize = () => {
   rcmail.http_post('plugin.all-folder-size', {_humanize: 1}, true);
 };
 
-let hash_string_to_int = (str) => str.split('').reduce(
-  (sum, char) => ((sum << 5) - sum) + char.charCodeAt(),
-  0
-);
-
-let html_show_folder_size = (mailbox, size) => {
-  const size_decorated = `(${size})`;
-  const hash_id = 'folder-size-' + Math.abs(hash_string_to_int(mailbox));
-
-  let $mailbox_a = $(`#mailboxlist a[rel="${mailbox}"]`);
-  let $size_span = $(`#${hash_id}`, $mailbox_a);
-
-  // no previous size has been appended yet, let's create a new one
-  if ($size_span.length === 0) {
-    $mailbox_a.append(` <span id="${hash_id}">${size_decorated}</span>`);
-  }
-  // update previous size
-  else {
-    $size_span.html(size_decorated);
-  }
-};
-
 let callback_show_folder_size = (resp) => {
   if (debug) {
-    console.log(resp);
+    console.log('callback_show_folder_size', resp);
   }
 
   $.each(resp, (mailbox, size) => {
-    html_show_folder_size(mailbox, size);
+    $(`#mailboxlist a[rel="${mailbox}"]`).attr('data-folder-size', `(${size})`);
   });
 
   $(plugin_button_selector).removeClass('disabled');
