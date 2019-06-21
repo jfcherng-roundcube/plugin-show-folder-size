@@ -3,7 +3,7 @@ const debug = false;
 const $ = global.$;
 const rcmail = global.rcmail;
 
-const plugin_button_selector = '.button.show-folder-size';
+const plugin_button_selector = 'a.show-folder-size';
 
 // button onclick function
 global.pluginShowFolderSize = () => {

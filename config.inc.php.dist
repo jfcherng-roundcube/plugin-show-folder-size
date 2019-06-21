@@ -4,6 +4,8 @@ $config = [
     // auto show the folder size without clicking on the toolbar button
     // this could be a serious performance penalty if there are many users
     'auto_show_folder_size' => false,
+    // show mailbox options button
+    'show_mailboxoptions_button' => true,
     // show the toolbar button
     'show_toolbar_button' => true,
 ];

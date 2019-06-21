@@ -34,7 +34,7 @@ final class show_folder_size extends rcube_plugin
         $this->register_action('plugin.folder-size', [$this, 'action_folder_size']);
 
         $this->add_plugin_assets();
-        $this->add_plugin_button($skin);
+        $this->add_plugin_buttons($skin);
     }
 
     /**
@@ -96,34 +96,43 @@ final class show_folder_size extends rcube_plugin
     }
 
     /**
-     * Add a plugin button.
+     * Add a plugin buttons.
      *
      * @param string $skin the current skin name
      */
-    private function add_plugin_button($skin)
+    private function add_plugin_buttons($skin)
     {
-        if (!$this->config->get('show_toolbar_button')) {
-            return;
-        }
-
-        $baseAttrs = [
-            'type' => 'link',
-            'label' => __CLASS__ . '.show_folder_size',
-            'title' => __CLASS__ . '.show_folder_size',
-            'href' => '#',
-            'class' => 'button show-folder-size',
-            'onclick' => 'pluginShowFolderSize();',
-        ];
-
-        $superAttrs = [];
-
-        if ($skin === 'elastic') {
-            $superAttrs = [
-                'innerclass' => 'inner',
+        if ($this->config->get('show_mailboxoptions_button')) {
+            $attrs = [
+                'type' => 'link-menuitem',
+                'label' => __CLASS__ . '.show_folder_size (longer)',
+                'title' => __CLASS__ . '.show_folder_size (longer)',
+                'class' => 'show-folder-size active',
+                'href' => '#',
+                'onclick' => 'pluginShowFolderSize();',
             ];
+
+            $this->add_button($attrs, 'mailboxoptions');
         }
 
-        $this->add_button($superAttrs + $baseAttrs, 'toolbar');
+        if ($this->config->get('show_toolbar_button')) {
+            $attrs = [
+                'type' => 'link',
+                'label' => __CLASS__ . '.show_folder_size',
+                'title' => __CLASS__ . '.show_folder_size',
+                'class' => 'show-folder-size button',
+                'href' => '#',
+                'onclick' => 'pluginShowFolderSize();',
+            ];
+
+            if ($skin === 'elastic') {
+                $attrs = \array_merge($attrs, [
+                    'innerclass' => 'inner',
+                ]);
+            }
+
+            $this->add_button($attrs, 'toolbar');
+        }
     }
 
     /**
