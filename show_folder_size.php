@@ -60,7 +60,7 @@ final class show_folder_size extends rcube_plugin
     /**
      * Determine can we stop the plugin initialization.
      *
-     * @return boolean
+     * @return bool
      */
     private function can_stop_init()
     {
