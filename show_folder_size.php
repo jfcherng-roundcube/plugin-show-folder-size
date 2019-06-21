@@ -72,14 +72,9 @@ final class show_folder_size extends rcube_plugin
      */
     private function can_stop_init()
     {
-        $action = rcube_utils::get_input_value('_action', rcube_utils::INPUT_GET);
+        $action = (string) rcube_utils::get_input_value('_action', rcube_utils::INPUT_GET);
 
-        // some pages should not use this plugin
-        if (\in_array($action, ['get'])) {
-            return true;
-        }
-
-        return false;
+        return $action !== '' && \stripos($action, 'plugin.') !== 0;
     }
 
     /**
