@@ -2,6 +2,7 @@
   content: attr(data-folder-size);
   padding-left: .5em
 }
+.menu a.show-folder-size:before,
 .toolbar a.show-folder-size:before,
 .toolbarmenu li a.show-folder-size:before {
   content: "\f200"
