@@ -43,8 +43,8 @@ final class show_folder_size extends rcube_plugin
     public function action_folder_size()
     {
         $RCMAIL = rcmail::get_instance();
+        $STORAGE = $RCMAIL->get_storage();
         $OUTPUT = $RCMAIL->output;
-        $STORAGE = $RCMAIL->storage;
 
         // sanitize: _folders
         $folders = rcube_utils::get_input_value('_folders', rcube_utils::INPUT_POST) ?: '__ALL__';
@@ -154,7 +154,7 @@ final class show_folder_size extends rcube_plugin
     private function get_folder_size(array $folders, $humanize = false)
     {
         $RCMAIL = rcmail::get_instance();
-        $STORAGE = $RCMAIL->storage;
+        $STORAGE = $RCMAIL->get_storage();
 
         // fast array_unique() for folders
         $folders = \array_keys(\array_count_values($folders));
