@@ -1,1 +1,2 @@
-setTimeout(global.pluginShowFolderSize, 300);
+// execute the plugin function when DOMs are ready
+global.$(global.pluginShowFolderSize);

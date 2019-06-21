@@ -30,30 +30,38 @@ final class show_folder_size extends rcube_plugin
 
         $this->load_plugin_config();
 
-        $this->add_texts('locales/', true);
-        $this->register_action('plugin.all-folder-size', [$this, 'action_all_folder_size']);
+        $this->add_texts('locales', true);
+        $this->register_action('plugin.folder-size', [$this, 'action_folder_size']);
 
         $this->add_plugin_assets();
         $this->add_plugin_button($skin);
     }
 
     /**
-     * The action handler for "plugin.all-folder-size".
+     * The action handler for "plugin.folder-size".
      */
-    public function action_all_folder_size()
+    public function action_folder_size()
     {
         $RCMAIL = rcmail::get_instance();
         $OUTPUT = $RCMAIL->output;
+        $STORAGE = $RCMAIL->storage;
 
+        // sanitize: _folders
+        $folders = rcube_utils::get_input_value('_folders', rcube_utils::INPUT_POST) ?: '__ALL__';
+        if (\is_string($folders)) {
+            $folders = $folders === '__ALL__' ? $STORAGE->list_folders() : [$folders];
+        }
+
+        // sanitize: _humanize
         $humanize = \filter_var(
             rcube_utils::get_input_value('_humanize', rcube_utils::INPUT_POST),
             \FILTER_VALIDATE_BOOLEAN
         );
         $humanize = isset($humanize) ? $humanize : true;
 
-        $sizes = $this->get_all_folder_size($humanize);
+        $sizes = $this->get_folder_size($folders, $humanize);
 
-        $OUTPUT->command('plugin.callback_all_folder_size', $sizes);
+        $OUTPUT->command('plugin.callback_folder_size', $sizes);
         $OUTPUT->send();
     }
 
@@ -107,15 +115,15 @@ final class show_folder_size extends rcube_plugin
             'onclick' => 'pluginShowFolderSize();',
         ];
 
-        $extraAttrs = [];
+        $superAttrs = [];
 
         if ($skin === 'elastic') {
-            $extraAttrs = [
+            $superAttrs = [
                 'innerclass' => 'inner',
             ];
         }
 
-        $this->add_button($extraAttrs + $baseAttrs, 'toolbar');
+        $this->add_button($superAttrs + $baseAttrs, 'toolbar');
     }
 
     /**
@@ -132,25 +140,26 @@ final class show_folder_size extends rcube_plugin
     }
 
     /**
-     * Get size for all folders.
+     * Get size for folders.
      *
-     * @param bool $humanize format the result for human reading
+     * @param array $folders  folder names
+     * @param bool  $humanize format the result for human reading
      *
-     * @return int[]|string[] an array in the form of [mailbox_1 => size_1, ...]
+     * @return int[]|string[] an array in the form of [folder_1 => size_1, ...]
      */
-    private function get_all_folder_size($humanize = false)
+    private function get_folder_size(array $folders, $humanize = false)
     {
         $RCMAIL = rcmail::get_instance();
         $STORAGE = $RCMAIL->storage;
 
-        // somehow the listed folders are duplicated hence unique()
-        $mailboxes = \array_unique($STORAGE->list_folders());
-        $sizes = \array_map([$STORAGE, 'folder_size'], $mailboxes);
+        // fast array_unique() for folders
+        $folders = \array_keys(\array_count_values($folders));
+        $sizes = \array_map([$STORAGE, 'folder_size'], $folders);
 
         if ($humanize) {
             $sizes = \array_map([$RCMAIL, 'show_bytes'], $sizes);
         }
 
-        return \array_combine($mailboxes, $sizes);
+        return \array_combine($folders, $sizes);
     }
 }

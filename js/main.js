@@ -1,6 +1,8 @@
 const debug = false;
 
+const $ = global.$;
 const rcmail = global.rcmail;
+
 const plugin_button_selector = '.button.show-folder-size';
 
 // button onclick function
@@ -13,7 +15,7 @@ global.pluginShowFolderSize = () => {
 
   $btn.addClass('disabled');
 
-  rcmail.http_post('plugin.all-folder-size', {_humanize: 1}, true);
+  rcmail.http_post('plugin.folder-size', {_folders: '__ALL__', _humanize: 1}, true);
 };
 
 let callback_show_folder_size = (resp) => {
@@ -28,4 +30,4 @@ let callback_show_folder_size = (resp) => {
   $(plugin_button_selector).removeClass('disabled');
 };
 
-rcmail.addEventListener('plugin.callback_all_folder_size', callback_show_folder_size);
+rcmail.addEventListener('plugin.callback_folder_size', callback_show_folder_size);
