@@ -15,6 +15,7 @@ global.pluginShowFolderSize = () => {
 
   $btn.addClass('disabled');
 
+  get_mailbox_a().attr('data-folder-size', '');
   rcmail.http_post('plugin.folder-size', {_folders: '__ALL__', _humanize: 1}, true);
 };
 
@@ -24,10 +25,16 @@ let callback_show_folder_size = (resp) => {
   }
 
   $.each(resp, (mailbox, size) => {
-    $(`#mailboxlist a[rel="${mailbox}"]`).attr('data-folder-size', `(${size})`);
+    get_mailbox_a(mailbox).attr('data-folder-size', `(${size})`);
   });
 
   $(plugin_button_selector).removeClass('disabled');
+};
+
+let get_mailbox_a = (mailbox) => {
+  let attr_selector = typeof mailbox !== 'undefined' ? `[rel="${mailbox}"]` : '[rel]';
+
+  return $(`#mailboxlist a${attr_selector}`);
 };
 
 rcmail.addEventListener('plugin.callback_folder_size', callback_show_folder_size);
