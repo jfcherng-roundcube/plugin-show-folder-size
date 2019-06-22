@@ -1,5 +1,5 @@
 {
-  "dependencies": {
+  "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/plugin-transform-runtime": "^7.4.4",
@@ -8,6 +8,7 @@
     "browserify": "^16.2.3",
     "clean-css-cli": "^4.3.0",
     "core-js": "^3",
+    "eslint": "^6.0.0",
     "less": "^3.9.0",
     "uglify-js": "^3.6.0"
   }
