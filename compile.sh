@@ -48,6 +48,7 @@ for file_src in "${LESS_FILES[@]}"; do
     file_dst=${file_src%.*}.css
 
     lessc --insecure "${file_src}" \
+        | printf "%s\n" "$(cat -)" \
         | cleancss -O 2 -f 'breaks:afterAtRule=on,afterBlockBegins=on,afterBlockEnds=on,afterComment=on,afterProperty=on,afterRuleBegins=on,afterRuleEnds=on,beforeBlockEnds=on,betweenSelectors=on;spaces:aroundSelectorRelation=on,beforeBlockBegins=on,beforeValue=on;indentBy:2;indentWith:space;breakWith:lf' \
         > "${file_dst}"
 done
