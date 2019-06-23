@@ -114,7 +114,7 @@ final class show_folder_size extends rcube_plugin
             $attrs = [
                 'type' => 'link',
                 'label' => __CLASS__ . '.show_folder_size',
-                'title' => __CLASS__ . '.show_folder_size',
+                'title' => __CLASS__ . '.show_folder_size (longer)',
                 'class' => 'show-folder-size button',
                 'href' => '#',
                 'onclick' => 'pluginShowFolderSize();',
