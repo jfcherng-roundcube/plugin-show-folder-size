@@ -2,6 +2,14 @@
 ## VERSION 0  INIT
 
  * Version **0.4** - Add mailbox options button
+   * 2019-06-26 18:10  **0.4.3**  es_ES localization
+      * b949aee Add liip/rmt as a dev dep to composer.json
+      * 1593af2 Locale coding style fix
+      * a660bd2 Add es_ES
+      * f9ccec7 Toolbar title uses "show_folder_size (longer)"
+      * cdc604d Update deps
+      * 0d7e235 Fix compilation stopped when an input .less file is empty
+      * 3573c87 Remove folders size before send a API request
    * 2019-06-22 04:49  **0.4.2**  nits
       * 10eef4b Rename skins stylesheets to main.less
       * 389ebca Simplify CSS rules for Larray skin
