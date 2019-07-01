@@ -77,7 +77,10 @@ for file_src in "${JS_FILES[@]}"; do
     fi
 
     # to make the output file more diff-friendly, we beautify it and remove leading spaces
+    # the 1st "browserify" is used to expand the require/import in the original script
+    # the 2nd "browserify" is used to expand the require/import polyfills in the babeled script
     cat "${file_src}" "${file_export}" \
+        | browserify - \
         | babel --filename "${file_src}" \
         | browserify - \
         | uglifyjs --compress --mangle --beautify indent_level=0 \
