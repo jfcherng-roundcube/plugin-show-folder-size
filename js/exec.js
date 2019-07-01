@@ -1,2 +1,2 @@
 // execute the plugin function when DOMs are ready
-global.$(global.pluginShowFolderSize);
+global.$(global.plugin_show_folder_size);

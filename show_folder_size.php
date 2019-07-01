@@ -104,7 +104,7 @@ final class show_folder_size extends rcube_plugin
                 'title' => __CLASS__ . '.show_folder_size (longer)',
                 'class' => 'show-folder-size active',
                 'href' => '#',
-                'onclick' => 'pluginShowFolderSize();',
+                'onclick' => 'plugin_show_folder_size();',
             ];
 
             $this->add_button($attrs, 'mailboxoptions');
@@ -117,7 +117,7 @@ final class show_folder_size extends rcube_plugin
                 'title' => __CLASS__ . '.show_folder_size (longer)',
                 'class' => 'show-folder-size button',
                 'href' => '#',
-                'onclick' => 'pluginShowFolderSize();',
+                'onclick' => 'plugin_show_folder_size();',
             ];
 
             if ($skin === 'elastic') {
