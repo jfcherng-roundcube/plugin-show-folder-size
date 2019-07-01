@@ -2,6 +2,12 @@
 ## VERSION 0  INIT
 
  * Version **0.4** - Add mailbox options button
+   * 2019-07-02 00:25  **0.4.4**  Do not fire useless API request
+      * 5864bf5 Update compiled assets
+      * 3c0ffb1 Do not fire API request if there is no mailbox list in the UI
+      * 09a5c39 Change "PluginShowFolderSize" to "plugin_show_folder_size"
+      * b45c197 Fix the compilation flows of JS files
+      * 6101b8c Simplify LESS codes
    * 2019-06-26 18:10  **0.4.3**  es_ES localization
       * b949aee Add liip/rmt as a dev dep to composer.json
       * 1593af2 Locale coding style fix
