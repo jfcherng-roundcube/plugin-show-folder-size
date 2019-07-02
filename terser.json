@@ -1,0 +1,9 @@
+{
+    "compress": true,
+    "mangle": true,
+    "output": {
+        "beautify": true,
+        "indent_level": 0,
+        "preamble": "/* eslint-disable */\n"
+    }
+}
