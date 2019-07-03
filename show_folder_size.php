@@ -3,9 +3,7 @@
 final class show_folder_size extends rcube_plugin
 {
     /**
-     * We only load this plugin in the 'mail' task.
-     *
-     * @var string
+     * {@inheritdoc}
      */
     public $task = 'mail';
 
