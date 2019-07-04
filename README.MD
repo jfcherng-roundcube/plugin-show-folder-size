@@ -3,9 +3,12 @@ A Roundcube plugin which shows folder size.
 
 ## Requirements
 
+I only (occasionally) test this plugin with following environments.
+Other setup should hopefully work as well but I cannot guarantee.
+
 - PHP: >= `5.4.0`
-- Roundcube: I only tested this plugin with `1.3.9` and `1.4-rc1`
-- Supported Roundcube skins: `Classic`, `Larry`, `Elastic` (Other skins may work but in a ugly looking.)
+- Roundcube: `1.1.12`, `1.3.9`, `1.4-rc1`
+- Supported skins: `Classic`, `Larry`, `Elastic`
 
 
 ## Demo
@@ -37,10 +40,10 @@ This plugin has been [published](https://plugins.roundcube.net/packages/jfcherng
 
 // some other codes...
 
-$config['plugins'] = array(
+$config['plugins'] = [
     // some other plugins...
-    'show_folder_size', // <-- add this
-);
+    'show_folder_size', // <-- add this line
+];
 ```
 
 
