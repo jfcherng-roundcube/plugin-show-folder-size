@@ -23,15 +23,15 @@ final class show_folder_size extends rcube_plugin
             return;
         }
 
-        $RCMAIL = rcmail::get_instance();
-        $skin = $RCMAIL->config->get('skin');
-
         $this->load_plugin_config();
+
+        $skin = $this->config->get('skin');
+        $local_skin_path = $this->local_skin_path();
 
         $this->add_texts('locales', true);
         $this->register_action('plugin.folder-size', [$this, 'action_folder_size']);
 
-        $this->add_plugin_assets();
+        $this->add_plugin_assets($local_skin_path);
         $this->add_plugin_buttons($skin);
     }
 
@@ -77,10 +77,12 @@ final class show_folder_size extends rcube_plugin
 
     /**
      * Add plugin assets.
+     *
+     * @param string $local_skin_path the local skin path such as "skins/elastic"
      */
-    private function add_plugin_assets()
+    private function add_plugin_assets($local_skin_path)
     {
-        $this->include_stylesheet($this->local_skin_path() . '/main.css');
+        $this->include_stylesheet("{$local_skin_path}/main.css");
         $this->include_script('js/main.min.js');
 
         if ($this->config->get('auto_show_folder_size')) {
@@ -89,39 +91,64 @@ final class show_folder_size extends rcube_plugin
     }
 
     /**
-     * Add a plugin buttons.
+     * Add plugin buttons.
      *
      * @param string $skin the current skin name
      */
     private function add_plugin_buttons($skin)
     {
+        $this->add_plugin_buttons_mailboxoptions($skin);
+        $this->add_plugin_buttons_toolbar($skin);
+    }
+
+    /**
+     * Add plugin buttons to mailboxoptions.
+     *
+     * @param string $skin the current skin name
+     */
+    private function add_plugin_buttons_mailboxoptions($skin)
+    {
         if ($this->config->get('show_mailboxoptions_button')) {
             $attrs = [
                 'type' => 'link-menuitem',
-                'label' => __CLASS__ . '.show_folder_size (longer)',
-                'title' => __CLASS__ . '.show_folder_size (longer)',
+                'label' => "{$this->ID}.show_folder_size (longer)",
+                'title' => "{$this->ID}.show_folder_size (longer)",
                 'class' => 'show-folder-size active',
                 'href' => '#',
-                'onclick' => 'plugin_show_folder_size();',
+                'onclick' => 'plugin_show_folder_size()',
             ];
 
             $this->add_button($attrs, 'mailboxoptions');
         }
+    }
 
+    /**
+     * Add plugin buttons to toolbar.
+     *
+     * @param string $skin the current skin name
+     */
+    private function add_plugin_buttons_toolbar($skin)
+    {
         if ($this->config->get('show_toolbar_button')) {
             $attrs = [
                 'type' => 'link',
-                'label' => __CLASS__ . '.show_folder_size',
-                'title' => __CLASS__ . '.show_folder_size (longer)',
-                'class' => 'show-folder-size button',
+                'label' => "{$this->ID}.show_folder_size",
+                'title' => "{$this->ID}.show_folder_size (longer)",
+                'class' => 'show-folder-size',
                 'href' => '#',
-                'onclick' => 'plugin_show_folder_size();',
+                'onclick' => 'plugin_show_folder_size()',
             ];
 
+            if ($skin === 'classic') {
+                $attrs['class'] .= ' button';
+            }
+
             if ($skin === 'elastic') {
-                $attrs = \array_merge($attrs, [
-                    'innerclass' => 'inner',
-                ]);
+                $attrs['innerclass'] = 'inner';
+            }
+
+            if ($skin === 'larry') {
+                $attrs['class'] .= ' button';
             }
 
             $this->add_button($attrs, 'toolbar');
