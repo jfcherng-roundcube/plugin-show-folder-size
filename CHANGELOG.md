@@ -2,6 +2,17 @@
 ## VERSION 0  INIT
 
  * Version **0.4** - Add mailbox options button
+   * 2019-07-07 08:43  **0.4.5**  nits
+      * 64b7231 Remove can_stop_init()
+      * 9bc87e4 Fix JSDoc
+      * 2cf7d0b Some coding style tweaks
+      * 5bdb7b8 Fix LESS indentation width
+      * 6088e03 README.MD -> README.md
+      * e21ecec Update readme
+      * 2f2e4df nits
+      * de2370d Re-compile assets
+      * 53f3fc6 Simplify the JS compilation flow
+      * fa48006 Add .gitattributes
    * 2019-07-02 00:25  **0.4.4**  Do not fire useless API request
       * 5864bf5 Update compiled assets
       * 3c0ffb1 Do not fire API request if there is no mailbox list in the UI
