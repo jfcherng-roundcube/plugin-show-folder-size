@@ -51,8 +51,8 @@ const callback_show_folder_size = (resp) => {
 /**
  * Get the jQuery DOM of a mailbox.
  *
- * @param  {string} mailbox the mailbox
- * @return {JQuery} the jQuery DOM
+ * @param  {string}   mailbox the mailbox
+ * @return {JQuery[]} jQuery DOMs
  */
 const get_mailbox_a = (mailbox) => {
   const attr_selector = typeof mailbox !== 'undefined' ? `[rel="${mailbox}"]` : '[rel]';
