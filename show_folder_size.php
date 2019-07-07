@@ -19,10 +19,6 @@ final class show_folder_size extends rcube_plugin
      */
     public function init()
     {
-        if ($this->can_stop_init()) {
-            return;
-        }
-
         $this->load_plugin_config();
 
         $skin = $this->config->get('skin');
@@ -61,18 +57,6 @@ final class show_folder_size extends rcube_plugin
 
         $OUTPUT->command('plugin.callback_folder_size', $sizes);
         $OUTPUT->send();
-    }
-
-    /**
-     * Determine can we stop the plugin initialization.
-     *
-     * @return bool
-     */
-    private function can_stop_init()
-    {
-        $action = (string) rcube_utils::get_input_value('_action', rcube_utils::INPUT_GET);
-
-        return $action !== '' && \stripos($action, 'plugin.') !== 0;
     }
 
     /**
