@@ -2,6 +2,11 @@
 ## VERSION 0  INIT
 
  * Version **0.4** - Add mailbox options button
+   * 2019-07-13 05:21  **0.4.6**  revert "Remove can_stop_init()":
+      * b53fb93 Update compiled assets
+      * 37ab049 Update deps
+      * 0e398ce Small code tweak (easier understanding)
+      * 9c502df Revert "Remove can_stop_init()"
    * 2019-07-07 08:43  **0.4.5**  nits
       * 64b7231 Remove can_stop_init()
       * 9bc87e4 Fix JSDoc
