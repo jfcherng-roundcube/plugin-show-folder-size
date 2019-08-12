@@ -1,3 +1,5 @@
+# Roundcube Plugin: Show Folder Size
+
 A Roundcube plugin which shows folder size.
 
 
@@ -21,7 +23,7 @@ Other setup should hopefully work as well but I cannot guarantee.
 
 ### Install via Composer
 
-This plugin has been [published](https://plugins.roundcube.net/packages/jfcherng/show-folder-size) on the official Roundcube plugin repository.
+This plugin has been published on [the official Roundcube plugin repository](https://plugins.roundcube.net) by the name of [jfcherng/show-folder-size](https://plugins.roundcube.net/packages/jfcherng/show-folder-size).
 
 1. Go to your `ROUNDCUBE_HOME` (i.e., the root directory of your Roundcube).
 2. Run `$ composer require jfcherng/show-folder-size`.
