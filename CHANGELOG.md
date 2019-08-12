@@ -2,6 +2,12 @@
 ## VERSION 0  INIT
 
  * Version **0.4** - Add mailbox options button
+   * 2019-08-12 20:43  **0.4.7**  nits
+      * 91e0541 Update deps
+      * ac4597c Better code structor (reuseable methods)
+      * 9c11383 Fix compile.sh cleancss flag
+      * f718a18 Update .gitignore
+      * 9ad5dc4 Fix CVE-2019-10744 by lodash@^4.17.13
    * 2019-07-13 05:21  **0.4.6**  revert "Remove can_stop_init()":
       * b53fb93 Update compiled assets
       * 37ab049 Update deps
