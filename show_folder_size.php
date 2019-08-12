@@ -98,61 +98,74 @@ final class show_folder_size extends rcube_plugin
      */
     private function add_plugin_buttons($skin)
     {
-        $this->add_plugin_buttons_mailboxoptions($skin);
-        $this->add_plugin_buttons_toolbar($skin);
+        if ($this->config->get('show_mailboxoptions_button')) {
+            $this->add_plugin_buttons_mailboxoptions([
+                [
+                    'type' => 'link-menuitem',
+                    'label' => "{$this->ID}.show_folder_size (longer)",
+                    'title' => "{$this->ID}.show_folder_size (longer)",
+                    'class' => 'show-folder-size active',
+                    'href' => '#',
+                    'onclick' => 'plugin_show_folder_size()',
+                ],
+            ], $skin);
+        }
+
+        if ($this->config->get('show_toolbar_button')) {
+            $this->add_plugin_buttons_toolbar([
+                [
+                    'type' => 'link',
+                    'label' => "{$this->ID}.show_folder_size",
+                    'title' => "{$this->ID}.show_folder_size (longer)",
+                    'class' => 'show-folder-size',
+                    'href' => '#',
+                    'onclick' => 'plugin_show_folder_size()',
+                ],
+            ], $skin);
+        }
     }
 
     /**
      * Add plugin buttons to mailboxoptions.
      *
+     * @param array  $btns the buttons
      * @param string $skin the current skin name
      */
-    private function add_plugin_buttons_mailboxoptions($skin)
+    private function add_plugin_buttons_mailboxoptions(array $btns, $skin)
     {
-        if ($this->config->get('show_mailboxoptions_button')) {
-            $attrs = [
-                'type' => 'link-menuitem',
-                'label' => "{$this->ID}.show_folder_size (longer)",
-                'title' => "{$this->ID}.show_folder_size (longer)",
-                'class' => 'show-folder-size active',
-                'href' => '#',
-                'onclick' => 'plugin_show_folder_size()',
-            ];
-
-            $this->add_button($attrs, 'mailboxoptions');
+        foreach ($btns as $btn) {
+            $this->add_button($btn, 'mailboxoptions');
         }
     }
 
     /**
      * Add plugin buttons to toolbar.
      *
+     * @param array  $btns the buttons
      * @param string $skin the current skin name
      */
-    private function add_plugin_buttons_toolbar($skin)
+    private function add_plugin_buttons_toolbar(array $btns, $skin)
     {
-        if ($this->config->get('show_toolbar_button')) {
-            $attrs = [
-                'type' => 'link',
-                'label' => "{$this->ID}.show_folder_size",
-                'title' => "{$this->ID}.show_folder_size (longer)",
-                'class' => 'show-folder-size',
-                'href' => '#',
-                'onclick' => 'plugin_show_folder_size()',
-            ];
-
-            if ($skin === 'classic') {
-                $attrs['class'] .= ' button';
+        $btns = \array_map(function (array $btn) use ($skin): array {
+            switch ($skin) {
+                case 'classic':
+                    $btn['class'] .= ' button';
+                    break;
+                case 'elastic':
+                    $btn['innerclass'] = 'inner';
+                    break;
+                case 'larry':
+                    $btn['class'] .= ' button';
+                    break;
+                default:
+                    break;
             }
 
-            if ($skin === 'elastic') {
-                $attrs['innerclass'] = 'inner';
-            }
+            return $btn;
+        }, $btns);
 
-            if ($skin === 'larry') {
-                $attrs['class'] .= ' button';
-            }
-
-            $this->add_button($attrs, 'toolbar');
+        foreach ($btns as $btn) {
+            $this->add_button($btn, 'toolbar');
         }
     }
 
