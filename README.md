@@ -1,12 +1,17 @@
 # Roundcube Plugin: Show Folder Size
 
+<a href="https://plugins.roundcube.net/packages/jfcherng/show-folder-size"><img alt="Roundcube Plugins" src="https://img.shields.io/badge/dynamic/json?label=downloads&query=$.package.downloads.total&url=https://plugins.roundcube.net/packages/jfcherng/show-folder-size.json"></a>
+<a href="https://github.com/jfcherng/roundcube-plugin-show-folder-size/tags"><img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/tag/jfcherng/roundcube-plugin-show-folder-size?logo=github"></a>
+<a href="https://github.com/jfcherng/roundcube-plugin-show-folder-size/blob/master/LICENSE"><img alt="Project license" src="https://img.shields.io/github/license/jfcherng/roundcube-plugin-show-folder-size"></a>
+<a href="https://github.com/jfcherng/roundcube-plugin-show-folder-size/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/jfcherng/roundcube-plugin-show-folder-size?logo=github"></a>
+<a href="https://www.paypal.me/jfcherng/5usd" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-blue.svg?logo=paypal" /></a>
+
 A Roundcube plugin which shows folder size.
 
 
 ## Requirements
 
-I only (occasionally) test this plugin with following environments.
-Other setup should hopefully work as well but I cannot guarantee.
+I only test this plugin with following environments. Other setup may work with luck.
 
 - PHP: >= `5.4.0`
 - Roundcube: `1.1.12`, `1.3.9`, `1.4-rc1`
@@ -47,9 +52,3 @@ $config['plugins'] = [
     'show_folder_size', // <-- add this line
 ];
 ```
-
-
-Supporters <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ATXYY9Y78EQ3Y" target="_blank"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /></a>
-==========
-
-Thank you guys for sending me some cups of coffee.
