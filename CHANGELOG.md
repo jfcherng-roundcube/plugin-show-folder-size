@@ -2,6 +2,12 @@
 ## VERSION 0  INIT
 
  * Version **0.4** - Add mailbox options button
+   * 2019-09-11 18:43  **0.4.8**  fr_FR translation
+      * a837ddf Update compiled assets
+      * 5898ac9 Update deps
+      * c010634 Add translation: fr_FR
+      * d380868 Update readme to use badges from shields.io
+      * 9b977ee Update readme
    * 2019-08-12 20:43  **0.4.7**  nits
       * 91e0541 Update deps
       * ac4597c Better code structor (reuseable methods)
