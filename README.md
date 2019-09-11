@@ -20,7 +20,7 @@ I only test this plugin with following environments. Other setup may work with l
 
 ## Demo
 
-![](https://raw.githubusercontent.com/jfcherng/roundcube-show-folder-size-plugin/master/doc/screenshot/demo.png)
+![](https://raw.githubusercontent.com/jfcherng/roundcube-show-folder-size-plugin/master/docs/screenshot/demo.png)
 
 
 ## How to install this plugin in Roundcube?
