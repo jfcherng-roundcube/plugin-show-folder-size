@@ -1,18 +1,24 @@
+**/*.less export-ignore
+.editorconfig export-ignore
+.eslintrc export-ignore
 .gitattributes export-ignore
 .github/ export-ignore
 .gitignore export-ignore
-
-.editorconfig export-ignore
-.eslintrc export-ignore
 .phan/ export-ignore
 .php_cs export-ignore
 .rmt.yml export-ignore
 .travis.yml export-ignore
-doc/ export-ignore
+babel.config.js export-ignore
+compile.sh export-ignore
 docs/ export-ignore
-example/images export-ignore
-FUNDING.yml export-ignore
+package.json export-ignore
 phpcs.xml export-ignore
 phpunit.xml export-ignore
 pyproject.toml export-ignore
+skins/_src/ export-ignore
+terser.json export-ignore
 tests/ export-ignore
+yarn.lock export-ignore
+
+js/exec.js export-ignore
+js/main.js export-ignore
