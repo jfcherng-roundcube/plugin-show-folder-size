@@ -1,6 +1,13 @@
 
 ## VERSION 0  INIT
 
+ * Version **0.5** - PHP 7.1
+   * 2019-10-13 17:19  **0.5.0**  initial release
+      * a63095c Update deps
+      * f7d3ab4 Bump min PHP version to 7.1.3
+      * ccfb65c Update readme (flat-square style badges)
+      * 663778d nits
+
  * Version **0.4** - Add mailbox options button
    * 2019-09-11 18:43  **0.4.8**  fr_FR translation
       * a837ddf Update compiled assets
