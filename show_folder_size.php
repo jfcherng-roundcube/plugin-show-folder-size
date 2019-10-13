@@ -17,7 +17,7 @@ final class show_folder_size extends rcube_plugin
     /**
      * {@inheritdoc}
      */
-    public function init()
+    public function init(): void
     {
         if ($this->can_stop_init()) {
             return;
@@ -31,14 +31,15 @@ final class show_folder_size extends rcube_plugin
         $this->add_texts('locales', true);
         $this->register_action('plugin.folder-size', [$this, 'action_folder_size']);
 
-        $this->add_plugin_assets($local_skin_path);
-        $this->add_plugin_buttons($skin);
+        $this
+            ->add_plugin_assets($local_skin_path)
+            ->add_plugin_buttons($skin);
     }
 
     /**
      * The action handler for "plugin.folder-size".
      */
-    public function action_folder_size()
+    public function action_folder_size(): void
     {
         $RCMAIL = rcmail::get_instance();
         $STORAGE = $RCMAIL->get_storage();
@@ -54,8 +55,7 @@ final class show_folder_size extends rcube_plugin
         $humanize = \filter_var(
             rcube_utils::get_input_value('_humanize', rcube_utils::INPUT_POST),
             \FILTER_VALIDATE_BOOLEAN
-        );
-        $humanize = isset($humanize) ? $humanize : true;
+        ) ?? true;
 
         $sizes = $this->get_folder_size($folders, $humanize);
 
@@ -68,7 +68,7 @@ final class show_folder_size extends rcube_plugin
      *
      * @return bool
      */
-    private function can_stop_init()
+    private function can_stop_init(): bool
     {
         $action = (string) rcube_utils::get_input_value('_action', rcube_utils::INPUT_GET);
         $is_api_call = \stripos($action, 'plugin.') === 0;
@@ -80,8 +80,10 @@ final class show_folder_size extends rcube_plugin
      * Add plugin assets.
      *
      * @param string $local_skin_path the local skin path such as "skins/elastic"
+     *
+     * @return self
      */
-    private function add_plugin_assets($local_skin_path)
+    private function add_plugin_assets(string $local_skin_path): self
     {
         $this->include_stylesheet("{$local_skin_path}/main.css");
         $this->include_script('js/main.min.js');
@@ -89,14 +91,18 @@ final class show_folder_size extends rcube_plugin
         if ($this->config->get('auto_show_folder_size')) {
             $this->include_script('js/exec.min.js');
         }
+
+        return $this;
     }
 
     /**
      * Add plugin buttons.
      *
      * @param string $skin the current skin name
+     *
+     * @return self
      */
-    private function add_plugin_buttons($skin)
+    private function add_plugin_buttons(string $skin): self
     {
         if ($this->config->get('show_mailboxoptions_button')) {
             $this->add_plugin_buttons_mailboxoptions([
@@ -123,28 +129,36 @@ final class show_folder_size extends rcube_plugin
                 ],
             ], $skin);
         }
+
+        return $this;
     }
 
     /**
      * Add plugin buttons to mailboxoptions.
      *
-     * @param array  $btns the buttons
-     * @param string $skin the current skin name
+     * @param array[] $btns the buttons
+     * @param string  $skin the current skin name
+     *
+     * @return self
      */
-    private function add_plugin_buttons_mailboxoptions(array $btns, $skin)
+    private function add_plugin_buttons_mailboxoptions(array $btns, string $skin): self
     {
         foreach ($btns as $btn) {
             $this->add_button($btn, 'mailboxoptions');
         }
+
+        return $this;
     }
 
     /**
      * Add plugin buttons to toolbar.
      *
-     * @param array  $btns the buttons
-     * @param string $skin the current skin name
+     * @param array[] $btns the buttons
+     * @param string  $skin the current skin name
+     *
+     * @return self
      */
-    private function add_plugin_buttons_toolbar(array $btns, $skin)
+    private function add_plugin_buttons_toolbar(array $btns, string $skin): self
     {
         $btns = \array_map(function (array $btn) use ($skin): array {
             switch ($skin) {
@@ -167,12 +181,14 @@ final class show_folder_size extends rcube_plugin
         foreach ($btns as $btn) {
             $this->add_button($btn, 'toolbar');
         }
+
+        return $this;
     }
 
     /**
      * Load plugin configuration.
      */
-    private function load_plugin_config()
+    private function load_plugin_config(): void
     {
         $RCMAIL = rcmail::get_instance();
 
@@ -190,7 +206,7 @@ final class show_folder_size extends rcube_plugin
      *
      * @return int[]|string[] an array in the form of [folder_1 => size_1, ...]
      */
-    private function get_folder_size(array $folders, $humanize = false)
+    private function get_folder_size(array $folders, bool $humanize = false): array
     {
         $RCMAIL = rcmail::get_instance();
         $STORAGE = $RCMAIL->get_storage();
