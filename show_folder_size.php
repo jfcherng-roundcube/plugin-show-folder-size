@@ -146,7 +146,7 @@ final class show_folder_size extends rcube_plugin
      */
     private function add_plugin_buttons_toolbar(array $btns, $skin)
     {
-        $btns = \array_map(function (array $btn) use ($skin): array {
+        $btns = \array_map(function (array $btn) use ($skin) {
             switch ($skin) {
                 case 'classic':
                     $btn['class'] .= ' button';
