@@ -25,14 +25,15 @@ final class show_folder_size extends rcube_plugin
 
         $this->load_plugin_config();
 
-        $skin = $this->config->get('skin');
-        $local_skin_path = $this->local_skin_path();
+        // the current skin name like from `$this->config->get('skin')` is not much
+        // helpful for extended skins, we try to get it's base skin name directly
+        $base_skin = $this->get_base_skin_name();
 
         $this->add_texts('locales', true);
         $this->register_action('plugin.folder-size', [$this, 'action_folder_size']);
 
-        $this->add_plugin_assets($local_skin_path);
-        $this->add_plugin_buttons($skin);
+        $this->add_plugin_assets($base_skin);
+        $this->add_plugin_buttons($base_skin);
     }
 
     /**
@@ -79,11 +80,11 @@ final class show_folder_size extends rcube_plugin
     /**
      * Add plugin assets.
      *
-     * @param string $local_skin_path the local skin path such as "skins/elastic"
+     * @param string $skin the skin name
      */
-    private function add_plugin_assets($local_skin_path)
+    private function add_plugin_assets($skin)
     {
-        $this->include_stylesheet("{$local_skin_path}/main.css");
+        $this->include_stylesheet("skins/{$skin}/main.css");
         $this->include_script('js/main.min.js');
 
         if ($this->config->get('auto_show_folder_size')) {
@@ -94,7 +95,7 @@ final class show_folder_size extends rcube_plugin
     /**
      * Add plugin buttons.
      *
-     * @param string $skin the current skin name
+     * @param string $skin the skin name
      */
     private function add_plugin_buttons($skin)
     {
@@ -129,7 +130,7 @@ final class show_folder_size extends rcube_plugin
      * Add plugin buttons to mailboxoptions.
      *
      * @param array  $btns the buttons
-     * @param string $skin the current skin name
+     * @param string $skin the skin name
      */
     private function add_plugin_buttons_mailboxoptions(array $btns, $skin)
     {
@@ -142,7 +143,7 @@ final class show_folder_size extends rcube_plugin
      * Add plugin buttons to toolbar.
      *
      * @param array  $btns the buttons
-     * @param string $skin the current skin name
+     * @param string $skin the skin name
      */
     private function add_plugin_buttons_toolbar(array $btns, $skin)
     {
@@ -180,6 +181,29 @@ final class show_folder_size extends rcube_plugin
         $this->load_config('config.inc.php');
 
         $this->config = $RCMAIL->config;
+    }
+
+    /**
+     * Get the lowercase base skin name for the current skin.
+     *
+     * @return string The base skin name. Empty if none.
+     */
+    private function get_base_skin_name()
+    {
+        static $base_skins = ['classic', 'larry', 'elastic'];
+
+        $rcube = rcube::get_instance();
+
+        // information about current skin and extended skins (if any)
+        $skins = (array) $rcube->output->skins;
+
+        foreach ($base_skins as $base_skin) {
+            if (isset($skins[$base_skin])) {
+                return $base_skin;
+            }
+        }
+
+        return '';
     }
 
     /**
