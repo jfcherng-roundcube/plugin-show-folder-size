@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 final class show_folder_size extends rcube_plugin
 {
     /**
