@@ -2,6 +2,12 @@
 ## VERSION 0  INIT
 
  * Version **0.5** - PHP 7.1
+   * 2019-10-31 00:47  **0.5.1**  Support extended skins
+      * 5e39ae8 Update deps
+      * e49ef91 Use strict_types
+      * a64854c Lowercase all variable names
+      * 9a5c9ef Tidy code for allowing extended skins
+      * b57b153 Support extended skins
    * 2019-10-13 17:19  **0.5.0**  initial release
       * a63095c Update deps
       * f7d3ab4 Bump min PHP version to 7.1.3
