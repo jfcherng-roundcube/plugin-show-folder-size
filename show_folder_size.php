@@ -160,19 +160,13 @@ final class show_folder_size extends rcube_plugin
      */
     private function add_plugin_buttons_toolbar(array $btns, string $skin): self
     {
-        $btns = \array_map(function (array $btn) use ($skin): array {
-            switch ($skin) {
-                case 'classic':
-                    $btn['class'] .= ' button';
-                    break;
-                case 'elastic':
-                    $btn['innerclass'] = 'inner';
-                    break;
-                case 'larry':
-                    $btn['class'] .= ' button';
-                    break;
-                default:
-                    break;
+        $skins = (array) rcmail::get_instance()->output->skins;
+
+        $btns = \array_map(function (array $btn) use ($skins): array {
+            if (array_key_exists('classic', $skins) || array_key_exists('larry', $skins)) {
+                $btn['class'] .= ' button';
+            } elseif (array_key_exists('elastic', $skins)) {
+                $btn['innerclass'] = 'inner';
             }
 
             return $btn;
