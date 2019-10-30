@@ -2,6 +2,11 @@
 ## VERSION 0  INIT
 
  * Version **0.4** - Add mailbox options button
+   * 2019-10-31 01:02  **0.4.9**  Fix PHP 5 compatibility
+      * 97f2b94 test
+      * eaee648 Lowercase variable names
+      * 09a0497 Support extended skins
+      * ecf3188 Fix PHP 5 compatibility
    * 2019-09-11 18:43  **0.4.8**  fr_FR translation
       * a837ddf Update compiled assets
       * 5898ac9 Update deps
@@ -14,7 +19,7 @@
       * 9c11383 Fix compile.sh cleancss flag
       * f718a18 Update .gitignore
       * 9ad5dc4 Fix CVE-2019-10744 by lodash@^4.17.13
-   * 2019-07-13 05:21  **0.4.6**  revert "Remove can_stop_init()":
+   * 2019-07-13 05:21  **0.4.6**  revert "Remove can_stop_init()":
       * b53fb93 Update compiled assets
       * 37ab049 Update deps
       * 0e398ce Small code tweak (easier understanding)
