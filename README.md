@@ -2,7 +2,7 @@
 
 <a href="https://plugins.roundcube.net/packages/jfcherng/show-folder-size"><img alt="Roundcube Plugins" src="https://img.shields.io/badge/dynamic/json?style=flat-square&label=downloads&query=$.package.downloads.total&url=https://plugins.roundcube.net/packages/jfcherng/show-folder-size.json"></a>
 <a href="https://github.com/jfcherng/roundcube-plugin-show-folder-size/tags"><img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/tag/jfcherng/roundcube-plugin-show-folder-size?style=flat-square&logo=github"></a>
-<a href="https://github.com/jfcherng/roundcube-plugin-show-folder-size/blob/master/LICENSE"><img alt="Project license" src="https://img.shields.io/github/license/jfcherng/roundcube-plugin-show-folder-size?style=flat-square&"></a>
+<a href="https://github.com/jfcherng/roundcube-plugin-show-folder-size/blob/php5/LICENSE"><img alt="Project license" src="https://img.shields.io/github/license/jfcherng/roundcube-plugin-show-folder-size?style=flat-square&"></a>
 <a href="https://github.com/jfcherng/roundcube-plugin-show-folder-size/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/jfcherng/roundcube-plugin-show-folder-size?style=flat-square&logo=github"></a>
 <a href="https://www.paypal.me/jfcherng/5usd" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-blue.svg?style=flat-square&logo=paypal" /></a>
 
@@ -20,7 +20,7 @@ I only test this plugin with following environments. Other setup may work with l
 
 ## Demo
 
-![](https://raw.githubusercontent.com/jfcherng/roundcube-show-folder-size-plugin/master/docs/screenshot/demo.png)
+![](https://raw.githubusercontent.com/jfcherng/roundcube-show-folder-size-plugin/php5/docs/screenshot/demo.png)
 
 
 ## How to install this plugin in Roundcube?
