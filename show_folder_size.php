@@ -68,8 +68,6 @@ final class show_folder_size extends rcube_plugin
 
     /**
      * Determine can we stop the plugin initialization.
-     *
-     * @return bool
      */
     private function can_stop_init(): bool
     {
@@ -83,8 +81,6 @@ final class show_folder_size extends rcube_plugin
      * Add plugin assets.
      *
      * @param string $skin the skin name
-     *
-     * @return self
      */
     private function add_plugin_assets(string $skin): self
     {
@@ -102,8 +98,6 @@ final class show_folder_size extends rcube_plugin
      * Add plugin buttons.
      *
      * @param string $skin the skin name
-     *
-     * @return self
      */
     private function add_plugin_buttons(string $skin): self
     {
@@ -141,8 +135,6 @@ final class show_folder_size extends rcube_plugin
      *
      * @param array[] $btns the buttons
      * @param string  $skin the skin name
-     *
-     * @return self
      */
     private function add_plugin_buttons_mailboxoptions(array $btns, string $skin): self
     {
@@ -158,8 +150,6 @@ final class show_folder_size extends rcube_plugin
      *
      * @param array[] $btns the buttons
      * @param string  $skin the skin name
-     *
-     * @return self
      */
     private function add_plugin_buttons_toolbar(array $btns, string $skin): self
     {
