@@ -184,7 +184,7 @@ final class show_folder_size extends rcube_plugin
     /**
      * Get the lowercase base skin name for the current skin.
      *
-     * @return string The base skin name. Empty if none.
+     * @return string The base skin name.
      */
     private function get_base_skin_name()
     {
@@ -201,7 +201,7 @@ final class show_folder_size extends rcube_plugin
             }
         }
 
-        return '';
+        return isset($skins[0]) ? $skins[0] : '';
     }
 
     /**
