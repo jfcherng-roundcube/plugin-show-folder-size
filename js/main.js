@@ -14,8 +14,6 @@ const plugin_button_selector = 'a.show-folder-size';
  * Button onclick function.
  *
  * @global
- *
- * @return {void}
  */
 const plugin_show_folder_size = () => {
   const $btn = $(plugin_button_selector);
@@ -33,8 +31,7 @@ const plugin_show_folder_size = () => {
 /**
  * The callback function when RC's API responses.
  *
- * @param  {Object.<string, string|Number>} resp the response, { mailbox: size }
- * @return {void}
+ * @param {Object.<string, string|Number>} resp the response, { mailbox: size }
  */
 const callback_show_folder_size = (resp) => {
   if (debug) {

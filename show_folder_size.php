@@ -47,9 +47,7 @@ final class show_folder_size extends rcube_plugin
 
         // sanitize: _folders
         $folders = rcube_utils::get_input_value('_folders', rcube_utils::INPUT_POST) ?: '__ALL__';
-        if (\is_string($folders)) {
-            $folders = $folders === '__ALL__' ? $storage->list_folders() : [$folders];
-        }
+        $folders = $folders === '__ALL__' ? $storage->list_folders() : (array) $folders;
 
         // sanitize: _humanize
         $humanize = \filter_var(
@@ -219,8 +217,7 @@ final class show_folder_size extends rcube_plugin
         $rcmail = rcmail::get_instance();
         $storage = $rcmail->get_storage();
 
-        // fast array_unique() for folders
-        $folders = \array_keys(\array_count_values($folders));
+        $folders = \array_unique($folders);
         $sizes = \array_map([$storage, 'folder_size'], $folders);
 
         if ($humanize) {
