@@ -2,6 +2,24 @@
 ## VERSION 0  INIT
 
  * Version **0.5** - PHP 7.1
+   * 2019-11-04 22:41  **0.5.2**  Fix get_base_skin_name() for unsupported base skins
+      * 2c79582 Adapt PHP 7 syntax
+      * 95b1e10 Update deps
+      * c719130 Release of new version 0.4.10
+      * 3f99c1d Fix get_base_skin_name() for unsupported base skins
+      * ef36a62 Update deps
+      * 9f55195 Remove PHP ^7 from composer.json
+      * a90b268 nits
+      * ae1add0 $ composer fix
+      * afe1e43 Update deps
+      * c789a8a Fix readme for the php5 branch information
+      * f657de6 Fix links in readme
+      * 34c3769 Update readme (flat-square style badges)
+      * 5dbf2ed nits
+      * 0fcf32c Release of new version 0.4.9
+      * eaee648 Lowercase variable names
+      * 09a0497 Support extended skins
+      * ecf3188 Fix PHP 5 compatibility
    * 2019-10-31 00:47  **0.5.1**  Support extended skins
       * 5e39ae8 Update deps
       * e49ef91 Use strict_types
