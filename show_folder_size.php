@@ -209,7 +209,7 @@ final class show_folder_size extends rcube_plugin
             }
         }
 
-        return isset($skins[0]) ? $skins[0] : '';
+        return $skins[0] ?? '';
     }
 
     /**
