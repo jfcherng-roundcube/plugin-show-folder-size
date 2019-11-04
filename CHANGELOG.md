@@ -15,6 +15,12 @@
       * 663778d nits
 
  * Version **0.4** - Add mailbox options button
+   * 2019-11-04 22:34  **0.4.10**  Fix get_base_skin_name() for unsupported base skins
+      * fec0acd Fix get_base_skin_name() for unsupported base skins
+      * a90b268 nits
+      * f657de6 Fix links in readme
+      * 34c3769 Update readme (flat-square style badges)
+      * 5dbf2ed nits
    * 2019-10-31 01:02  **0.4.9**  Fix PHP 5 compatibility
       * 97f2b94 test
       * eaee648 Lowercase variable names
