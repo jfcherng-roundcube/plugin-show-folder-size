@@ -14,16 +14,16 @@ A Roundcube plugin which shows folder size.
 I only test this plugin with following environments. Other setup may work with luck.
 
 - PHP: >= `5.4.0`
-- Roundcube: `1.1.12`, `1.3.9`, `1.4-rc1`
+- Roundcube: `1.1.12`, `1.3.9`, `1.4.0`
 - Supported skins: `Classic`, `Larry`, `Elastic`
 
 
 ## Demo
 
-![](https://raw.githubusercontent.com/jfcherng/roundcube-show-folder-size-plugin/php5/docs/screenshot/demo.png)
+![demo](https://raw.githubusercontent.com/jfcherng/roundcube-show-folder-size-plugin/php5/docs/screenshot/demo.png)
 
 
-## How to install this plugin in Roundcube?
+## How to install this plugin in Roundcube
 
 
 ### Install via Composer
