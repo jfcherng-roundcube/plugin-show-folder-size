@@ -14,7 +14,7 @@ A Roundcube plugin which shows folder size.
 I only test this plugin with following environments. Other setup may work with luck.
 
 - PHP: >= `7.1.3`
-- Roundcube: `1.3.9`, `1.4-rc1`
+- Roundcube: `1.3.9`, `1.4.0`
 - Supported skins: `Classic`, `Larry`, `Elastic`
 
 If you need support for PHP `5.4` ~ `7.0`, go to
