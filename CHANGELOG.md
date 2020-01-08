@@ -2,6 +2,10 @@
 ## VERSION 0  INIT
 
  * Version **0.4** - Add mailbox options button
+   * 2020-01-08 14:47  **0.4.11**  Add translation: lv_LV
+      * 226eb5a Update deps
+      * 9957f49 Add translation: lv_LV
+      * 96b0532 Update readme
    * 2019-11-04 22:34  **0.4.10**  Fix get_base_skin_name() for unsupported base skins
       * fec0acd Fix get_base_skin_name() for unsupported base skins
       * a90b268 nits
