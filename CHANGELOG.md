@@ -2,6 +2,12 @@
 ## VERSION 0  INIT
 
  * Version **0.5** - PHP 7.1
+   * 2020-01-08 14:49  **0.5.3**  Add translation: lv_LV
+      * f7a87c4 Release of new version 0.4.11
+      * 226eb5a Update deps
+      * 37d1e53 Update deps
+      * 9957f49 Add translation: lv_LV
+      * 96b0532 Update readme
    * 2019-11-04 22:41  **0.5.2**  Fix get_base_skin_name() for unsupported base skins
       * 2c79582 Adapt PHP 7 syntax
       * 95b1e10 Update deps
