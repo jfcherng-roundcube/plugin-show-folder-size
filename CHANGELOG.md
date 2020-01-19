@@ -2,6 +2,9 @@
 ## VERSION 0  INIT
 
  * Version **0.5** - PHP 7.1
+   * 2020-01-19 13:11  **0.5.4**  Add translations: de_DE and id_ID
+      * 1336209 Release of new version 0.4.12
+      * 6f57f1a Add translations: de_DE and id_ID
    * 2020-01-08 14:49  **0.5.3**  Add translation: lv_LV
       * f7a87c4 Release of new version 0.4.11
       * 226eb5a Update deps
