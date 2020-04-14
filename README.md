@@ -9,7 +9,6 @@
 
 A Roundcube plugin which shows folder size.
 
-
 ## Requirements
 
 I only test this plugin with following environments. Other setup may work with luck.
@@ -22,14 +21,11 @@ If you need support for PHP `5.4` ~ `7.0`, go to
 [php5](https://github.com/jfcherng/roundcube-plugin-show-folder-size/tree/php5)
 branch or just let Composer decide the version to be installed.
 
-
 ## Demo
 
 ![demo](https://raw.githubusercontent.com/jfcherng/roundcube-show-folder-size-plugin/master/docs/screenshot/demo.png)
 
-
 ## How to install this plugin in Roundcube
-
 
 ### Install via Composer
 
@@ -38,7 +34,6 @@ This plugin has been published on [the official Roundcube plugin repository](htt
 1. Go to your `ROUNDCUBE_HOME` (i.e., the root directory of your Roundcube).
 2. Run `$ composer require jfcherng/show-folder-size`.
 3. You may edit the `config.inc.php` under this plugin's directory if you want to do some configurations.
-
 
 ### Install manually
 
