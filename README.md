@@ -1,10 +1,11 @@
 # Roundcube Plugin: Show Folder Size
 
-<a href="https://plugins.roundcube.net/packages/jfcherng/show-folder-size"><img alt="Roundcube Plugins" src="https://img.shields.io/badge/dynamic/json?style=flat-square&label=downloads&query=$.package.downloads.total&url=https://plugins.roundcube.net/packages/jfcherng/show-folder-size.json"></a>
-<a href="https://github.com/jfcherng/roundcube-plugin-show-folder-size/tags"><img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/tag/jfcherng/roundcube-plugin-show-folder-size?style=flat-square&logo=github"></a>
-<a href="https://github.com/jfcherng/roundcube-plugin-show-folder-size/blob/master/LICENSE"><img alt="Project license" src="https://img.shields.io/github/license/jfcherng/roundcube-plugin-show-folder-size?style=flat-square&"></a>
-<a href="https://github.com/jfcherng/roundcube-plugin-show-folder-size/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/jfcherng/roundcube-plugin-show-folder-size?style=flat-square&logo=github"></a>
-<a href="https://www.paypal.me/jfcherng/5usd" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-blue.svg?style=flat-square&logo=paypal" /></a>
+[![Codacy grade](https://img.shields.io/codacy/grade/3a7a07d2ed67434e8e8582ea4ec9867b/v6?style=flat-square)](https://app.codacy.com/project/jfcherng/roundcube-plugin-show-folder-size/dashboard)
+[![Packagist](https://img.shields.io/packagist/dt/jfcherng/show-folder-size?style=flat-square)](https://packagist.org/packages/jfcherng/show-folder-size)
+[![Packagist Version](https://img.shields.io/packagist/v/jfcherng/show-folder-size?style=flat-square)](https://packagist.org/packages/jfcherng/show-folder-size)
+[![Project license](https://img.shields.io/github/license/jfcherng/roundcube-plugin-show-folder-size?style=flat-square)](https://github.com/jfcherng/roundcube-plugin-show-folder-size/blob/v6/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/jfcherng/roundcube-plugin-show-folder-size?style=flat-square&logo=github)](https://github.com/jfcherng/roundcube-plugin-show-folder-size/stargazers)
+[![Donate to this project using Paypal](https://img.shields.io/badge/paypal-donate-blue.svg?style=flat-square&logo=paypal)](https://www.paypal.me/jfcherng/5usd)
 
 A Roundcube plugin which shows folder size.
 
