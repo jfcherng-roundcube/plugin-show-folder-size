@@ -31,7 +31,7 @@ final class show_folder_size extends rcube_plugin
         // helpful for extended skins, we try to get it's base skin name directly
         $base_skin = $this->get_base_skin_name();
 
-        $this->add_texts('locales', true);
+        $this->add_texts('localization/', false);
         $this->register_action('plugin.folder-size', [$this, 'action_folder_size']);
 
         $this
