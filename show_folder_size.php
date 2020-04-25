@@ -2,8 +2,14 @@
 
 declare(strict_types=1);
 
+include __DIR__ . '/lib/vendor/autoload.php';
+
+use Jfcherng\Roundcube\Plugin\ShowFolderSize\RoundcubePluginTrait;
+
 final class show_folder_size extends rcube_plugin
 {
+    use RoundcubePluginTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -25,28 +31,22 @@ final class show_folder_size extends rcube_plugin
             return;
         }
 
-        $this->load_plugin_config();
-
-        // the current skin name like from `$this->config->get('skin')` is not much
-        // helpful for extended skins, we try to get it's base skin name directly
-        $base_skin = $this->get_base_skin_name();
+        $this->loadPluginConfig();
 
         $this->add_texts('localization/', false);
-        $this->register_action('plugin.folder-size', [$this, 'action_folder_size']);
+        $this->register_action('plugin.folder-size', [$this, 'actionFolderSize']);
 
-        $this
-            ->add_plugin_assets($base_skin)
-            ->add_plugin_buttons($base_skin);
+        $this->addPluginAssets();
+        $this->addPluginButtons();
     }
 
     /**
      * The action handler for "plugin.folder-size".
      */
-    public function action_folder_size(): void
+    public function actionFolderSize(): void
     {
         $rcmail = rcmail::get_instance();
         $storage = $rcmail->get_storage();
-        $output = $rcmail->output;
 
         // sanitize: _folders
         $folders = rcube_utils::get_input_value('_folders', rcube_utils::INPUT_POST) ?: '__ALL__';
@@ -58,10 +58,10 @@ final class show_folder_size extends rcube_plugin
             \FILTER_VALIDATE_BOOLEAN
         ) ?? true;
 
-        $sizes = $this->get_folder_size($folders, $humanize);
+        $sizes = $this->getFolderSize($folders, $humanize);
 
-        $output->command('plugin.callback_folder_size', $sizes);
-        $output->send();
+        $rcmail->output->command('plugin.callback_folder_size', $sizes);
+        $rcmail->output->send();
     }
 
     /**
@@ -70,37 +70,31 @@ final class show_folder_size extends rcube_plugin
     private function can_stop_init(): bool
     {
         $action = (string) rcube_utils::get_input_value('_action', rcube_utils::INPUT_GET);
-        $is_api_call = \stripos($action, 'plugin.') === 0;
+        $isApiCall = \stripos($action, 'plugin.') === 0;
 
-        return $action !== '' && !$is_api_call;
+        return $action !== '' && !$isApiCall;
     }
 
     /**
      * Add plugin assets.
-     *
-     * @param string $skin the skin name
      */
-    private function add_plugin_assets(string $skin): self
+    private function addPluginAssets(): void
     {
-        $this->include_stylesheet("skins/{$skin}/main.css");
+        $this->include_stylesheet($this->local_skin_path() . '/main.css');
         $this->include_script('js/main.min.js');
 
         if ($this->config->get('auto_show_folder_size')) {
             $this->include_script('js/exec.min.js');
         }
-
-        return $this;
     }
 
     /**
      * Add plugin buttons.
-     *
-     * @param string $skin the skin name
      */
-    private function add_plugin_buttons(string $skin): self
+    private function addPluginButtons(): void
     {
         if ($this->config->get('show_mailboxoptions_button')) {
-            $this->add_plugin_buttons_mailboxoptions([
+            $this->add_buttons_mailboxoptions([
                 [
                     'type' => 'link-menuitem',
                     'label' => "{$this->ID}.show_folder_size (longer)",
@@ -109,11 +103,11 @@ final class show_folder_size extends rcube_plugin
                     'href' => '#',
                     'onclick' => 'plugin_show_folder_size()',
                 ],
-            ], $skin);
+            ]);
         }
 
         if ($this->config->get('show_toolbar_button')) {
-            $this->add_plugin_buttons_toolbar([
+            $this->add_buttons_toolbar([
                 [
                     'type' => 'link',
                     'label' => "{$this->ID}.show_folder_size",
@@ -122,64 +116,14 @@ final class show_folder_size extends rcube_plugin
                     'href' => '#',
                     'onclick' => 'plugin_show_folder_size()',
                 ],
-            ], $skin);
+            ]);
         }
-
-        return $this;
-    }
-
-    /**
-     * Add plugin buttons to mailboxoptions.
-     *
-     * @param array[] $btns the buttons
-     * @param string  $skin the skin name
-     */
-    private function add_plugin_buttons_mailboxoptions(array $btns, string $skin): self
-    {
-        foreach ($btns as $btn) {
-            $this->add_button($btn, 'mailboxoptions');
-        }
-
-        return $this;
-    }
-
-    /**
-     * Add plugin buttons to toolbar.
-     *
-     * @param array[] $btns the buttons
-     * @param string  $skin the skin name
-     */
-    private function add_plugin_buttons_toolbar(array $btns, string $skin): self
-    {
-        $btns = \array_map(function (array $btn) use ($skin): array {
-            switch ($skin) {
-                case 'classic':
-                    $btn['class'] .= ' button';
-                    break;
-                case 'elastic':
-                    $btn['innerclass'] = 'inner';
-                    break;
-                case 'larry':
-                    $btn['class'] .= ' button';
-                    break;
-                default:
-                    break;
-            }
-
-            return $btn;
-        }, $btns);
-
-        foreach ($btns as $btn) {
-            $this->add_button($btn, 'toolbar');
-        }
-
-        return $this;
     }
 
     /**
      * Load plugin configuration.
      */
-    private function load_plugin_config(): void
+    private function loadPluginConfig(): void
     {
         $rcmail = rcmail::get_instance();
 
@@ -190,29 +134,6 @@ final class show_folder_size extends rcube_plugin
     }
 
     /**
-     * Get the lowercase base skin name for the current skin.
-     *
-     * @return string the base skin name
-     */
-    private function get_base_skin_name(): string
-    {
-        static $base_skins = ['classic', 'larry', 'elastic'];
-
-        $rcube = rcube::get_instance();
-
-        // information about current skin and extended skins (if any)
-        $skins = (array) $rcube->output->skins;
-
-        foreach ($base_skins as $base_skin) {
-            if (isset($skins[$base_skin])) {
-                return $base_skin;
-            }
-        }
-
-        return $skins[0] ?? '';
-    }
-
-    /**
      * Get size for folders.
      *
      * @param array $folders  folder names
@@ -220,7 +141,7 @@ final class show_folder_size extends rcube_plugin
      *
      * @return int[]|string[] an array in the form of [folder_1 => size_1, ...]
      */
-    private function get_folder_size(array $folders, bool $humanize = false): array
+    private function getFolderSize(array $folders, bool $humanize = false): array
     {
         $rcmail = rcmail::get_instance();
         $storage = $rcmail->get_storage();
