@@ -1,6 +1,19 @@
 
 ## VERSION 0  INIT
 
+ * Version **0.6** - refactor
+   * 2020-04-26 03:09  **0.6.0**  initial release
+      * 4dcaec9 chore: update deps
+      * e21c53b refactor: extract common methods between plugins
+      * 1887d1f chore: move locales/ to localization/
+      * 4cd40e4 chore: add FUNDING.yml
+      * 6888b1d chore: update package informations
+      * 9e111ba Add bg_BG translation
+      * 4890b64 docs: make markdownlint happy
+      * 0b6e330 docs: update badges to packagist's
+      * 03c1bad chore: update deps
+      * 34df60b [ImgBot] Optimize images (#11)
+
  * Version **0.5** - PHP 7.1
    * 2020-01-19 13:11  **0.5.4**  Add translations: de_DE and id_ID
       * 1336209 Release of new version 0.4.12
