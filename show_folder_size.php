@@ -32,12 +32,25 @@ final class show_folder_size extends rcube_plugin
         }
 
         $this->loadPluginConfig();
+        $this->exposePluginConfig();
 
         $this->add_texts('localization/', false);
         $this->register_action('plugin.folder-size', [$this, 'actionFolderSize']);
 
         $this->addPluginAssets();
         $this->addPluginButtons();
+    }
+
+    public function exposePluginConfig(): void
+    {
+        $rcmail = rcmail::get_instance();
+
+        $rcmail->output->set_env(
+            'show_folder_size.config',
+            [
+                'auto_show_folder_size' => $this->config->get('auto_show_folder_size'),
+            ]
+        );
     }
 
     /**
@@ -82,10 +95,6 @@ final class show_folder_size extends rcube_plugin
     {
         $this->include_stylesheet($this->local_skin_path() . '/main.css');
         $this->include_script('js/main.min.js');
-
-        if ($this->config->get('auto_show_folder_size')) {
-            $this->include_script('js/exec.min.js');
-        }
     }
 
     /**

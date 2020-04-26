@@ -3,6 +3,8 @@ const debug = false;
 const $ = global.$;
 const rcmail = global.rcmail;
 
+const config = rcmail.env['show_folder_size.config'] || {};
+
 /**
  * The jQuery selector for "Show folder size" buttons.
  *
@@ -57,27 +59,16 @@ const get_mailbox_a = (mailbox) => {
   return $(`#mailboxlist a${attr_selector}`);
 };
 
-rcmail.addEventListener('plugin.callback_folder_size', callback_show_folder_size);
+rcmail.addEventListener('init', (evt) => {
+  rcmail.addEventListener('plugin.callback_folder_size', callback_show_folder_size);
+});
+
+$(() => {
+  // auto show folder size?
+  if (config['auto_show_folder_size'] && $('#mailboxlist').length) {
+    plugin_show_folder_size();
+  }
+});
 
 // expose
 global.plugin_show_folder_size = plugin_show_folder_size;
-
-/*
-// the way to call the plugin API manually
-$.ajax({
-  type: 'POST',
-  dataType: 'json',
-  url: '?_action=plugin.folder-size',
-  data: {
-    _remote: 1, _unlock: 1, // Roundcube's must
-    _folders: '__ALL__',
-    _humanize: 1,
-  },
-  success: (data) => {
-    const resp = data.callbacks[0][1];
-    console.log(resp);
-
-    callback_show_folder_size(resp);
-  },
-});
-*/

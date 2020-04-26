@@ -17,7 +17,6 @@ LESS_FILES=(
 )
 
 JS_FILES=(
-    "js/exec.js"
     "js/main.js"
 )
 
