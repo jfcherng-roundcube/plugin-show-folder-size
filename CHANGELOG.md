@@ -2,6 +2,11 @@
 ## VERSION 0  INIT
 
  * Version **0.6** - refactor
+   * 2020-04-26 10:22  **0.6.1**  some refactoring
+      * 58de565 refactor: tidy codes
+      * b909644 chore: update deps
+      * 745329e chore: move js/ to assets/
+      * 54bfa18 refactor: simplify codes for auto_show_folder_size
    * 2020-04-26 03:09  **0.6.0**  initial release
       * 4dcaec9 chore: update deps
       * e21c53b refactor: extract common methods between plugins
