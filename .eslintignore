@@ -1,0 +1,15 @@
+# auto generated
+/public/build/
+/node_modules/
+/vendor/
+
+# git worktree
+/br-*/
+/branch-*/
+
+# ...
+/assets/**/*.min.*
+/assets/pdfjs-dist/
+/scripts/
+/skins/**/*.min.*
+CHANGELOG.md

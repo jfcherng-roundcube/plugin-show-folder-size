@@ -19,6 +19,11 @@
         "friendsofphp/php-cs-fixer": "^2.16",
         "liip/rmt": "^1.5"
     },
+    "replace": {
+        "symfony/polyfill-php71": "*",
+        "symfony/polyfill-php70": "*",
+        "symfony/polyfill-php56": "*"
+    },
     "config": {
         "sort-packages": true
     },

@@ -7,7 +7,7 @@ $config = PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules([
         '@PHP71Migration' => true,
-        '@PHP73Migration' => false,
+        '@PHP73Migration' => true,
         '@PhpCsFixer' => true,
         '@PhpCsFixer:risky' => true,
         '@PSR2' => true,
@@ -64,12 +64,13 @@ $config = PhpCsFixer\Config::create()
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
-            ->notPath('/branch-\\w+/') // git worktree
-            ->exclude('libs')
-            ->exclude('tests/Fixtures')
+            ->in(__DIR__)
+            // git worktree
+            ->notPath('/branch-[^\\/]+/')
+            // symfony
+            ->exclude('bin')
             ->exclude('var')
             ->exclude('vendor')
-            ->in(__DIR__)
     )
 ;
 
