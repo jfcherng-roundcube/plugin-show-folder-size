@@ -5,5 +5,5 @@
 .menu a.show-folder-size:before,
 .toolbar a.show-folder-size:before,
 .toolbarmenu li a.show-folder-size:before {
-  content: "\f200"
+  content: '\f200'
 }

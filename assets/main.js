@@ -12,12 +12,13 @@ const config = rcmail.env['show_folder_size.config'] || {};
  */
 const plugin_button_selector = 'a.show-folder-size';
 
-/**
- * Button onclick function.
- *
- * @global
- */
-const plugin_show_folder_size = () => {
+const set_mailbox_size_text = (mailbox, text) => {
+  const attr_selector = mailbox ? `[rel="${mailbox}"]` : '[rel]';
+
+  $(`#mailboxlist a${attr_selector}`).attr('data-folder-size', text);
+};
+
+const update_size_text = () => {
   const $btn = $(plugin_button_selector);
 
   if ($btn.hasClass('disabled')) {
@@ -26,49 +27,41 @@ const plugin_show_folder_size = () => {
 
   $btn.addClass('disabled');
 
-  get_mailbox_a().attr('data-folder-size', '');
-  rcmail.http_post('plugin.folder-size', {_folders: '__ALL__', _humanize: 1}, true);
-};
+  // clear all size text
+  set_mailbox_size_text(null, '');
 
-/**
- * The callback function when RC's API responses.
- *
- * @param {Object.<string, string|Number>} resp the response, { mailbox: size }
- */
-const callback_show_folder_size = (resp) => {
-  if (debug) {
-    console.log('callback_show_folder_size', resp);
-  }
-
-  $.each(resp, (mailbox, size) => {
-    get_mailbox_a(mailbox).attr('data-folder-size', `(${size})`);
+  rcmail.http_post('plugin.show_folder_size.get', {
+    _callback: 'plugin.show_folder_size.update-data-callback',
+    _folders: '__ALL__',
+    _humanize: 1,
   });
-
-  $(plugin_button_selector).removeClass('disabled');
-};
-
-/**
- * Get the jQuery DOM of a mailbox.
- *
- * @param  {string}   mailbox the mailbox
- * @return {JQuery[]} jQuery DOMs
- */
-const get_mailbox_a = (mailbox) => {
-  const attr_selector = typeof mailbox !== 'undefined' ? `[rel="${mailbox}"]` : '[rel]';
-
-  return $(`#mailboxlist a${attr_selector}`);
 };
 
 rcmail.addEventListener('init', (evt) => {
-  rcmail.addEventListener('plugin.callback_folder_size', callback_show_folder_size);
+  // register the main command
+  rcmail.register_command('plugin.show_folder_size.update-data', update_size_text, true);
+
+  /**
+   * The callback function when server-side's API responses.
+   *
+   * @param {Object.<string, string|Number>} resp the response, { mailbox: size }
+   */
+  rcmail.addEventListener('plugin.show_folder_size.update-data-callback', (resp) => {
+    if (debug) {
+      console.log('callback_show_folder_size', resp);
+    }
+
+    $.each(resp, (mailbox, size) => {
+      set_mailbox_size_text(mailbox, `(${size})`);
+    });
+
+    $(plugin_button_selector).removeClass('disabled');
+  });
 });
 
 $(() => {
   // auto show folder size?
   if (config['auto_show_folder_size'] && $('#mailboxlist').length) {
-    plugin_show_folder_size();
+    update_size_text();
   }
 });
-
-// expose
-global.plugin_show_folder_size = plugin_show_folder_size;

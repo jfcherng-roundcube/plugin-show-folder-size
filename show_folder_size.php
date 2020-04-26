@@ -35,7 +35,7 @@ final class show_folder_size extends rcube_plugin
         $this->exposePluginConfig();
 
         $this->add_texts('localization/', false);
-        $this->register_action('plugin.folder-size', [$this, 'actionFolderSize']);
+        $this->register_action('plugin.show_folder_size.get', [$this, 'actionGet']);
 
         $this->addPluginAssets();
         $this->addPluginButtons();
@@ -54,15 +54,17 @@ final class show_folder_size extends rcube_plugin
     }
 
     /**
-     * The action handler for "plugin.folder-size".
+     * The action handler for "plugin.show_folder_size.get".
      */
-    public function actionFolderSize(): void
+    public function actionGet(): void
     {
         $rcmail = rcmail::get_instance();
         $storage = $rcmail->get_storage();
 
+        $callback = rcube_utils::get_input_value('_callback', rcube_utils::INPUT_POST);
+
         // sanitize: _folders
-        $folders = rcube_utils::get_input_value('_folders', rcube_utils::INPUT_POST) ?: '__ALL__';
+        $folders = rcube_utils::get_input_value('_folders', rcube_utils::INPUT_POST) ?? '__ALL__';
         $folders = $folders === '__ALL__' ? $storage->list_folders() : (array) $folders;
 
         // sanitize: _humanize
@@ -73,7 +75,7 @@ final class show_folder_size extends rcube_plugin
 
         $sizes = $this->getFolderSize($folders, $humanize);
 
-        $rcmail->output->command('plugin.callback_folder_size', $sizes);
+        $callback && $rcmail->output->command($callback, $sizes);
         $rcmail->output->send();
     }
 
@@ -82,7 +84,7 @@ final class show_folder_size extends rcube_plugin
      */
     private function can_stop_init(): bool
     {
-        $action = (string) rcube_utils::get_input_value('_action', rcube_utils::INPUT_GET);
+        $action = rcube_utils::get_input_value('_action', rcube_utils::INPUT_GET) ?? '';
         $isApiCall = \stripos($action, 'plugin.') === 0;
 
         return $action !== '' && !$isApiCall;
@@ -110,7 +112,7 @@ final class show_folder_size extends rcube_plugin
                     'title' => "{$this->ID}.show_folder_size (longer)",
                     'class' => 'show-folder-size active',
                     'href' => '#',
-                    'onclick' => 'plugin_show_folder_size()',
+                    'command' => 'plugin.show_folder_size.update-data',
                 ],
             ]);
         }
@@ -123,7 +125,7 @@ final class show_folder_size extends rcube_plugin
                     'title' => "{$this->ID}.show_folder_size (longer)",
                     'class' => 'show-folder-size',
                     'href' => '#',
-                    'onclick' => 'plugin_show_folder_size()',
+                    'command' => 'plugin.show_folder_size.update-data',
                 ],
             ]);
         }
