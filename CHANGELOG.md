@@ -2,6 +2,8 @@
 ## VERSION 0  INIT
 
  * Version **0.4** - Add mailbox options button
+   * 2020-04-27 23:41  **0.4.13**  add translations: bg_BG
+      * f744648 feat: add translations: bg_BG
    * 2020-01-19 13:09  **0.4.12**  Add translations: de_DE and id_ID
       * 6f57f1a Add translations: de_DE and id_ID
    * 2020-01-08 14:47  **0.4.11**  Add translation: lv_LV
