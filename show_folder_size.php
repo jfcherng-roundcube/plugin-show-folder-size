@@ -16,45 +16,43 @@ final class show_folder_size extends rcube_plugin
     public $task = 'mail';
 
     /**
-     * The loaded configuration.
+     * Plugin actions and handlers.
      *
-     * @var rcube_config
+     * @var array<string,string>
      */
-    private $config;
+    public $actions = [
+        'get' => 'actionGet',
+    ];
+
+    /**
+     * The plugin user preferences.
+     *
+     * @var array
+     */
+    private $config = [];
 
     /**
      * {@inheritdoc}
      */
     public function init(): void
     {
-        if ($this->can_stop_init()) {
-            return;
-        }
-
-        $this->loadPluginConfig();
-        $this->exposePluginConfig();
-
-        $this->add_texts('localization/', false);
-        $this->register_action('plugin.show_folder_size.get', [$this, 'actionGet']);
-
-        $this->addPluginAssets();
-        $this->addPluginButtons();
-    }
-
-    public function exposePluginConfig(): void
-    {
         $rcmail = rcmail::get_instance();
 
-        $rcmail->output->set_env(
-            'show_folder_size.config',
-            [
-                'auto_show_folder_size' => $this->config->get('auto_show_folder_size'),
-            ]
-        );
+        $this->loadPluginConfigurations();
+        $this->exposePluginConfigurations();
+        $this->registerPluginActions();
+
+        $this->add_texts('localization/', false);
+
+        if ($rcmail->action === '' || $rcmail->action === 'show') {
+            $this->addPluginButtons();
+            $this->include_stylesheet($this->local_skin_path() . '/main.css');
+            $this->include_script('assets/main.min.js');
+        }
     }
 
     /**
-     * The action handler for "plugin.show_folder_size.get".
+     * Handler for plugin's "get" action.
      */
     public function actionGet(): void
     {
@@ -80,31 +78,11 @@ final class show_folder_size extends rcube_plugin
     }
 
     /**
-     * Determine can we stop the plugin initialization.
-     */
-    private function can_stop_init(): bool
-    {
-        $action = rcube_utils::get_input_value('_action', rcube_utils::INPUT_GET) ?? '';
-        $isApiCall = \stripos($action, 'plugin.') === 0;
-
-        return $action !== '' && !$isApiCall;
-    }
-
-    /**
-     * Add plugin assets.
-     */
-    private function addPluginAssets(): void
-    {
-        $this->include_stylesheet($this->local_skin_path() . '/main.css');
-        $this->include_script('assets/main.min.js');
-    }
-
-    /**
      * Add plugin buttons.
      */
     private function addPluginButtons(): void
     {
-        if ($this->config->get('show_mailboxoptions_button')) {
+        if ($this->config['show_mailboxoptions_button']) {
             $this->add_buttons_mailboxoptions([
                 [
                     'type' => 'link-menuitem',
@@ -117,7 +95,7 @@ final class show_folder_size extends rcube_plugin
             ]);
         }
 
-        if ($this->config->get('show_toolbar_button')) {
+        if ($this->config['show_toolbar_button']) {
             $this->add_buttons_toolbar([
                 [
                     'type' => 'link',
@@ -129,19 +107,6 @@ final class show_folder_size extends rcube_plugin
                 ],
             ]);
         }
-    }
-
-    /**
-     * Load plugin configuration.
-     */
-    private function loadPluginConfig(): void
-    {
-        $rcmail = rcmail::get_instance();
-
-        $this->load_config('config.inc.php.dist');
-        $this->load_config('config.inc.php');
-
-        $this->config = $rcmail->config;
     }
 
     /**

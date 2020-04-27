@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Jfcherng\Roundcube\Plugin\ShowFolderSize;
 
+use rcmail;
+
 trait RoundcubePluginTrait
 {
     /**
@@ -15,6 +17,17 @@ trait RoundcubePluginTrait
      * @see rcube_remplate::button()
      */
     abstract public function add_button(array $p, string $container);
+
+    /**
+     * Register a handler for a specific client-request action.
+     *
+     * The callback will be executed upon a request like /?_task=mail&_action=plugin.myaction
+     *
+     * @param string $action   Action name (should be unique)
+     * @param mixed  $callback Callback function as string
+     *                         or array with object reference and method name
+     */
+    abstract public function register_action(string $action, $callback);
 
     /**
      * Add buttons to the "attachmentmenu" container.
@@ -180,6 +193,82 @@ trait RoundcubePluginTrait
 
         foreach ($btns as $btn) {
             $this->add_button($btn, 'toolbar');
+        }
+    }
+
+    /**
+     * Load plugin configurations.
+     */
+    private function loadPluginConfigurations(): void
+    {
+        $configFiles = [
+            "{$this->home}/config.inc.php.dist",
+            "{$this->home}/config.inc.php",
+        ];
+
+        $rcmail = rcmail::get_instance();
+
+        $this->config = \array_reduce(
+            $configFiles,
+            function (array $carry, string $file): array {
+                \is_file($file) && (include $file);
+
+                return \array_merge($carry, (array) ($config ?? []));
+            },
+            []
+        );
+
+        $rcmail->config->merge([$this->ID => $this->config]);
+    }
+
+    /**
+     * Load user plugin preferences.
+     */
+    private function loadPluginPreferences(): void
+    {
+        $rcmail = rcmail::get_instance();
+
+        $prefsDefault = [
+            'enabled' => 1,
+            'viewer' => $this->config['viewer'],
+            'view_button_layouts' => $this->config['view_button_layouts'],
+        ];
+
+        $prefsUser = $rcmail->user->get_prefs()[$this->ID] ?? [];
+
+        $this->prefs = \array_merge($prefsDefault, $prefsUser);
+    }
+
+    /**
+     * Expose plugin configurations.
+     *
+     * @param null|array $keys the keys which will be exposed, null will expose all
+     */
+    private function exposePluginConfigurations(?array $keys = null): void
+    {
+        $rcmail = rcmail::get_instance();
+
+        if (null === $keys) {
+            $config = $this->config;
+        } else {
+            $config = [];
+            foreach ($keys as $key) {
+                $config[$key] = $this->config[$key];
+            }
+        }
+
+        $rcmail->output->set_env("{$this->ID}.config", $config);
+    }
+
+    /**
+     * Register plugin actions.
+     */
+    private function registerPluginActions(): void
+    {
+        $actions = (array) ($this->actions ?? []);
+
+        foreach ($actions as $action => $handler) {
+            $this->register_action("plugin.{$this->ID}.{$action}", [$this, $handler]);
         }
     }
 }
