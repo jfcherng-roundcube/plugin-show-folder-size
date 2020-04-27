@@ -24,7 +24,7 @@ final class RoundcubeHelper
         $parts = \parse_url($requestedUrl);
 
         // remove potential trailing index.php
-        $parts['path'] = \preg_replace('/(\/)index.php$/iuS', '$1', $parts['path']);
+        $parts['path'] = \preg_replace('/\/index\.php$/iuS', '/', $parts['path']);
         unset($parts['query'], $parts['fragment']);
 
         return $url = self::unparseUrl($parts);
@@ -60,16 +60,15 @@ final class RoundcubeHelper
      */
     public static function unparseUrl(array $parts): string
     {
-        $scheme = isset($parts['scheme']) ? $parts['scheme'] . '://' : '';
-        $host = $parts['host'] ?? '';
-        $port = isset($parts['port']) ? ":{$parts['port']}" : '';
-        $user = $parts['user'] ?? '';
-        $pass = isset($parts['pass']) ? ":{$parts['pass']}" : '';
-        $pass = ($user || $pass) ? "{$pass}@" : '';
-        $path = $parts['path'] ?? '';
-        $query = isset($parts['query']) ? "?{$parts['query']}" : '';
-        $fragment = isset($parts['fragment']) ? "#{$parts['fragment']}" : '';
-
-        return "{$scheme}{$user}{$pass}{$host}{$port}{$path}{$query}{$fragment}";
+        return
+            (isset($parts['scheme']) ? "{$parts['scheme']}://" : '') .
+            ($parts['user'] ?? '') .
+            (isset($parts['pass']) ? ":{$parts['pass']}" : '') .
+            (isset($parts['user']) ? '@' : '') .
+            ($parts['host'] ?? '') .
+            (isset($parts['port']) ? ":{$parts['port']}" : '') .
+            ($parts['path'] ?? '') .
+            (isset($parts['query']) ? "?{$parts['query']}" : '') .
+            (isset($parts['fragment']) ? "#{$parts['fragment']}" : '');
     }
 }
