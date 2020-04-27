@@ -2,6 +2,8 @@
 ## VERSION 0  INIT
 
  * Version **0.6** - refactor
+   * 2020-04-27 22:04  **0.6.2**  nits
+      * 9cb453b refactor: tidy codes
    * 2020-04-26 10:22  **0.6.1**  some refactoring
       * 58de565 refactor: tidy codes
       * b909644 chore: update deps
