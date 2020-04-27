@@ -16,9 +16,10 @@ I only test this plugin with following environments. Other setup may work with l
 - Roundcube: `1.3.9`, `1.4.0`
 - Supported skins: `Classic`, `Larry`, `Elastic`
 
-If you need support for PHP `5.4` ~ `7.0`, go to
+If you need support for PHP `5.4` ~ `7.0`, go to the
 [php5](https://github.com/jfcherng-roundcube/plugin-show-folder-size/tree/php5)
-branch or just let Composer decide the version to be installed.
+branch or just let Composer decide the version to be installed. But note that
+I am not meant to maintain the `php5` branch because even PHP 5.6 is quite outdated nowadays.
 
 ## Demo
 
