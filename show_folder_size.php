@@ -4,51 +4,51 @@ declare(strict_types=1);
 
 include __DIR__ . '/lib/vendor/autoload.php';
 
-use Jfcherng\Roundcube\Plugin\ShowFolderSize\RoundcubePluginTrait;
+use Jfcherng\Roundcube\Plugin\ShowFolderSize\AbstractRoundcubePlugin;
 
-final class show_folder_size extends rcube_plugin
+final class show_folder_size extends AbstractRoundcubePlugin
 {
-    use RoundcubePluginTrait;
-
     /**
      * {@inheritdoc}
      */
     public $task = 'mail';
 
     /**
-     * Plugin actions and handlers.
-     *
-     * @var array<string,string>
+     * {@inheritdoc}
      */
     public $actions = [
         'get' => 'actionGet',
     ];
 
     /**
-     * The plugin user preferences.
-     *
-     * @var array
+     * {@inheritdoc}
      */
-    private $config = [];
+    public $hooks = [];
 
     /**
      * {@inheritdoc}
      */
     public function init(): void
     {
+        parent::init();
+
         $rcmail = rcmail::get_instance();
 
-        $this->loadPluginConfigurations();
-        $this->exposePluginConfigurations();
-        $this->registerPluginActions();
-
-        $this->add_texts('localization/', false);
+        $this->exposePluginConfigurations(['auto_show_folder_size']);
+        $this->include_stylesheet("{$this->skinPath}/main.css");
+        $this->include_script('assets/main.min.js');
 
         if ($rcmail->action === '' || $rcmail->action === 'show') {
             $this->addPluginButtons();
-            $this->include_stylesheet($this->local_skin_path() . '/main.css');
-            $this->include_script('assets/main.min.js');
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaultPluginPreferences(): array
+    {
+        return [];
     }
 
     /**

@@ -5,29 +5,84 @@ declare(strict_types=1);
 namespace Jfcherng\Roundcube\Plugin\ShowFolderSize;
 
 use rcmail;
+use rcube_plugin;
 
-trait RoundcubePluginTrait
+abstract class AbstractRoundcubePlugin extends rcube_plugin
 {
     /**
-     * Append a button to a certain container.
+     * Plugin actions and handlers.
      *
-     * @param array  $p         Hash array with named parameters (as used in skin templates)
-     * @param string $container Container name where the buttons should be added to
-     *
-     * @see rcube_remplate::button()
+     * @var array<string,string>
      */
-    abstract public function add_button(array $p, string $container);
+    public $actions = [];
 
     /**
-     * Register a handler for a specific client-request action.
+     * Plugin hooks and handlers.
      *
-     * The callback will be executed upon a request like /?_task=mail&_action=plugin.myaction
-     *
-     * @param string $action   Action name (should be unique)
-     * @param mixed  $callback Callback function as string
-     *                         or array with object reference and method name
+     * @var array<string,string>
      */
-    abstract public function register_action(string $action, $callback);
+    public $hooks = [];
+
+    /**
+     * The plugin configuration.
+     *
+     * @var array
+     */
+    protected $config = [];
+
+    /**
+     * The plugin user preferences.
+     *
+     * @var array
+     */
+    protected $prefs = [];
+
+    /**
+     * The directory where localization files are located.
+     *
+     * @var string
+     */
+    protected $localizationDir = 'localization/';
+
+    /**
+     * The corresponding usable skin path for this plugin.
+     *
+     * @var string like "skins/larry"
+     */
+    protected $skinPath = '';
+
+    /**
+     * The corresponding usable skin name for this plugin.
+     *
+     * @var string like "larry"
+     */
+    protected $skinName = '';
+
+    /**
+     * Get the default plugin preferences.
+     *
+     * @return array the default plugin preferences
+     */
+    abstract public function getDefaultPluginPreferences(): array;
+
+    /**
+     * The initiator method for child classes.
+     *
+     * This should be called in the very beginning of chile class' init() method.
+     */
+    public function init(): void
+    {
+        $this->loadPluginConfigurations();
+        $this->loadPluginPreferences();
+        $this->exposePluginPreferences();
+        $this->registerPluginActions();
+        $this->registerPluginHooks();
+
+        $this->add_texts($this->localizationDir, false);
+
+        $this->skinPath = $this->local_skin_path();
+        $this->skinName = \substr($this->skinPath, 6); // remove prefixed "skins/"
+    }
 
     /**
      * Add buttons to the "attachmentmenu" container.
@@ -199,7 +254,7 @@ trait RoundcubePluginTrait
     /**
      * Load plugin configurations.
      */
-    private function loadPluginConfigurations(): void
+    protected function loadPluginConfigurations(): void
     {
         $configFiles = [
             "{$this->home}/config.inc.php.dist",
@@ -224,19 +279,14 @@ trait RoundcubePluginTrait
     /**
      * Load user plugin preferences.
      */
-    private function loadPluginPreferences(): void
+    protected function loadPluginPreferences(): void
     {
         $rcmail = rcmail::get_instance();
 
-        $prefsDefault = [
-            'enabled' => 1,
-            'viewer' => $this->config['viewer'],
-            'view_button_layouts' => $this->config['view_button_layouts'],
-        ];
-
-        $prefsUser = $rcmail->user->get_prefs()[$this->ID] ?? [];
-
-        $this->prefs = \array_merge($prefsDefault, $prefsUser);
+        $this->prefs = \array_merge(
+            $this->getDefaultPluginPreferences(),
+            $rcmail->user->get_prefs()[$this->ID] ?? []
+        );
     }
 
     /**
@@ -244,7 +294,7 @@ trait RoundcubePluginTrait
      *
      * @param null|array $keys the keys which will be exposed, null will expose all
      */
-    private function exposePluginConfigurations(?array $keys = null): void
+    protected function exposePluginConfigurations(?array $keys = null): void
     {
         $rcmail = rcmail::get_instance();
 
@@ -253,7 +303,7 @@ trait RoundcubePluginTrait
         } else {
             $config = [];
             foreach ($keys as $key) {
-                $config[$key] = $this->config[$key];
+                $config[$key] = $this->config[$key] ?? null;
             }
         }
 
@@ -261,14 +311,47 @@ trait RoundcubePluginTrait
     }
 
     /**
+     * Expose plugin preferences.
+     *
+     * @param null|array $keys the keys which will be exposed, null will expose all
+     */
+    protected function exposePluginPreferences(?array $keys = null): void
+    {
+        $rcmail = rcmail::get_instance();
+
+        if (null === $keys) {
+            $prefs = $this->prefs;
+        } else {
+            $prefs = [];
+            foreach ($keys as $key) {
+                $prefs[$key] = $this->prefs[$key] ?? null;
+            }
+        }
+
+        $rcmail->output->set_env("{$this->ID}.prefs", $prefs);
+    }
+
+    /**
      * Register plugin actions.
      */
-    private function registerPluginActions(): void
+    protected function registerPluginActions(): void
     {
         $actions = (array) ($this->actions ?? []);
 
         foreach ($actions as $action => $handler) {
             $this->register_action("plugin.{$this->ID}.{$action}", [$this, $handler]);
+        }
+    }
+
+    /**
+     * Register plugin hooks.
+     */
+    protected function registerPluginHooks(): void
+    {
+        $hooks = (array) ($this->hooks ?? []);
+
+        foreach ($hooks as $hook => $handler) {
+            $this->add_hook($hook, [$this, $handler]);
         }
     }
 }
