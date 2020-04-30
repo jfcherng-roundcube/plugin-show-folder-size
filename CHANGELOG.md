@@ -2,6 +2,12 @@
 ## VERSION 0  INIT
 
  * Version **0.6** - refactor
+   * 2020-04-30 16:41  **0.6.3**  some refactoring
+      * 572bfdb refactor: tidy codes
+      * 457b474 chore: update RoundcubeHelper
+      * e00efdb docs: update readme
+      * ff31071 docs: update LICENSE year
+      * aba6748 chore: allow installing with PHP 8 for test purpose
    * 2020-04-27 22:04  **0.6.2**  nits
       * 9cb453b refactor: tidy codes
    * 2020-04-26 10:22  **0.6.1**  some refactoring
