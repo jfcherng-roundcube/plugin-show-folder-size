@@ -4,6 +4,7 @@ const $ = global.$;
 const rcmail = global.rcmail;
 
 const config = rcmail.env['show_folder_size.config'] || {};
+const prefs = rcmail.env['show_folder_size.prefs'] || {};
 
 /**
  * The jQuery selector for "Show folder size" buttons.
