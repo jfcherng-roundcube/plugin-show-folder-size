@@ -31,7 +31,7 @@ const update_size_text = () => {
   // clear all size text
   set_mailbox_size_text(null, '');
 
-  rcmail.http_post('plugin.show_folder_size.get', {
+  rcmail.http_post('plugin.show_folder_size.get-folder-size', {
     _callback: 'plugin.show_folder_size.update-data-callback',
     _folders: '__ALL__',
     _humanize: 1,

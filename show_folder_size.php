@@ -17,7 +17,7 @@ final class show_folder_size extends AbstractRoundcubePlugin
      * {@inheritdoc}
      */
     public $actions = [
-        'get' => 'actionGet',
+        'get-folder-size' => 'getFolderSizeAction',
     ];
 
     /**
@@ -52,9 +52,9 @@ final class show_folder_size extends AbstractRoundcubePlugin
     }
 
     /**
-     * Handler for plugin's "get" action.
+     * Handler for plugin's "get-folder-size" action.
      */
-    public function actionGet(): void
+    public function getFolderSizeAction(): void
     {
         $rcmail = rcmail::get_instance();
         /** @var rcmail_output_json */
