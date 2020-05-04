@@ -57,6 +57,8 @@ final class show_folder_size extends AbstractRoundcubePlugin
     public function actionGet(): void
     {
         $rcmail = rcmail::get_instance();
+        /** @var rcmail_output_json */
+        $output = $rcmail->output;
         $storage = $rcmail->get_storage();
 
         $callback = rcube_utils::get_input_value('_callback', rcube_utils::INPUT_POST);
@@ -73,8 +75,8 @@ final class show_folder_size extends AbstractRoundcubePlugin
 
         $sizes = $this->getFolderSize($folders, $humanize);
 
-        $callback && $rcmail->output->command($callback, $sizes);
-        $rcmail->output->send();
+        $callback && $output->command($callback, $sizes);
+        $output->send();
     }
 
     /**
