@@ -30,6 +30,9 @@
     "scripts": {
         "fix": [
             "php-cs-fixer fix --verbose"
+        ],
+        "lint": [
+            "php-cs-fixer fix --verbose --dry-run --stop-on-violation"
         ]
     }
 }

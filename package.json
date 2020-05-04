@@ -18,8 +18,9 @@
     "terser": "^4.1.2"
   },
   "scripts": {
+    "prettier-check": "prettier --write *.md assets/**/*.js skins/**/*.less",
     "fix": "prettier --write *.md assets/**/*.js skins/**/*.less",
-    "lint": "eslint *.md assets/**/*.js skins/**/*.less"
+    "lint": "eslint assets/**/*.js"
   },
   "browserslist": "> 1%",
   "resolutions": {}
