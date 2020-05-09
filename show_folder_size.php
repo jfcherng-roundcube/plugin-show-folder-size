@@ -35,10 +35,11 @@ final class show_folder_size extends AbstractRoundcubePlugin
         $rcmail = rcmail::get_instance();
 
         $this->exposePluginConfigurations(['auto_show_folder_size']);
-        $this->include_stylesheet("{$this->skinPath}/main.css");
-        $this->include_script('assets/main.min.js');
 
-        if ($rcmail->action === '' || $rcmail->action === 'show') {
+        // only shown in the main "mail" page
+        if ($rcmail->action === '') {
+            $this->include_stylesheet("{$this->skinPath}/main.css");
+            $this->include_script('assets/main.min.js');
             $this->addPluginButtons();
         }
     }
@@ -61,17 +62,15 @@ final class show_folder_size extends AbstractRoundcubePlugin
         $output = $rcmail->output;
         $storage = $rcmail->get_storage();
 
-        $callback = rcube_utils::get_input_value('_callback', rcube_utils::INPUT_POST);
+        // sanitize: _callback
+        $callback = \filter_input(\INPUT_POST, '_callback');
 
         // sanitize: _folders
-        $folders = rcube_utils::get_input_value('_folders', rcube_utils::INPUT_POST) ?? '__ALL__';
+        $folders = \filter_input(\INPUT_POST, '_folders') ?? '__ALL__';
         $folders = $folders === '__ALL__' ? $storage->list_folders() : (array) $folders;
 
         // sanitize: _humanize
-        $humanize = \filter_var(
-            rcube_utils::get_input_value('_humanize', rcube_utils::INPUT_POST),
-            \FILTER_VALIDATE_BOOLEAN
-        ) ?? true;
+        $humanize = \filter_input(\INPUT_POST, '_humanize', \FILTER_VALIDATE_BOOLEAN) ?? true;
 
         $sizes = $this->getFolderSize($folders, $humanize);
 
