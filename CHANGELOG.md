@@ -2,6 +2,15 @@
 ## VERSION 0  INIT
 
  * Version **0.6** - refactor
+   * 2020-05-12 00:37  **0.6.4**  feat: add nb_NO translation
+      * 6cac2be Add: Norwegian
+      * c6cebba refactor: tidy codes
+      * 51ac19e refactor: use "get-folder-size" as the action name
+      * 877cba3 chore: update deps
+      * a37e18a refactor: make intelephense happy
+      * 1c1a494 chore: add CI coding style chceking
+      * 9e0c1bf chore: tidy codes
+      * 6b02998 chore: add babel-eslint for linting latest JS syntax
    * 2020-04-30 16:41  **0.6.3**  some refactoring
       * 572bfdb refactor: tidy codes
       * 457b474 chore: update RoundcubeHelper
