@@ -59,6 +59,13 @@ abstract class AbstractRoundcubePlugin extends rcube_plugin
     protected $skinName = '';
 
     /**
+     * The rcmail singleton.
+     *
+     * @var rcmail
+     */
+    protected $rcmail;
+
+    /**
      * Get the default plugin preferences.
      *
      * @return array the default plugin preferences
@@ -72,6 +79,8 @@ abstract class AbstractRoundcubePlugin extends rcube_plugin
      */
     public function init(): void
     {
+        $this->rcmail = rcmail::get_instance();
+
         $this->loadPluginConfigurations();
         $this->loadPluginPreferences();
         $this->exposePluginPreferences();
@@ -261,8 +270,6 @@ abstract class AbstractRoundcubePlugin extends rcube_plugin
             "{$this->home}/config.inc.php",
         ];
 
-        $rcmail = rcmail::get_instance();
-
         $this->config = \array_reduce(
             $configFiles,
             function (array $carry, string $file): array {
@@ -273,7 +280,7 @@ abstract class AbstractRoundcubePlugin extends rcube_plugin
             []
         );
 
-        $rcmail->config->merge([$this->ID => $this->config]);
+        $this->rcmail->config->merge([$this->ID => $this->config]);
     }
 
     /**
@@ -281,11 +288,9 @@ abstract class AbstractRoundcubePlugin extends rcube_plugin
      */
     protected function loadPluginPreferences(): void
     {
-        $rcmail = rcmail::get_instance();
-
         $this->prefs = \array_merge(
             $this->getDefaultPluginPreferences(),
-            $rcmail->user->get_prefs()[$this->ID] ?? []
+            $this->rcmail->user->get_prefs()[$this->ID] ?? []
         );
     }
 
@@ -296,8 +301,6 @@ abstract class AbstractRoundcubePlugin extends rcube_plugin
      */
     protected function exposePluginConfigurations(?array $keys = null): void
     {
-        $rcmail = rcmail::get_instance();
-
         if (null === $keys) {
             $config = $this->config;
         } else {
@@ -307,7 +310,7 @@ abstract class AbstractRoundcubePlugin extends rcube_plugin
             }
         }
 
-        $rcmail->output->set_env("{$this->ID}.config", $config);
+        $this->rcmail->output->set_env("{$this->ID}.config", $config);
     }
 
     /**
@@ -317,8 +320,6 @@ abstract class AbstractRoundcubePlugin extends rcube_plugin
      */
     protected function exposePluginPreferences(?array $keys = null): void
     {
-        $rcmail = rcmail::get_instance();
-
         if (null === $keys) {
             $prefs = $this->prefs;
         } else {
@@ -328,7 +329,7 @@ abstract class AbstractRoundcubePlugin extends rcube_plugin
             }
         }
 
-        $rcmail->output->set_env("{$this->ID}.prefs", $prefs);
+        $this->rcmail->output->set_env("{$this->ID}.prefs", $prefs);
     }
 
     /**

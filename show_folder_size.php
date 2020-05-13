@@ -32,12 +32,10 @@ final class show_folder_size extends AbstractRoundcubePlugin
     {
         parent::init();
 
-        $rcmail = rcmail::get_instance();
-
         $this->exposePluginConfigurations(['auto_show_folder_size']);
 
         // only shown in the main "mail" page
-        if ($rcmail->action === '') {
+        if ($this->rcmail->action === '') {
             $this->include_stylesheet("{$this->skinPath}/main.css");
             $this->include_script('assets/main.min.js');
             $this->addPluginButtons();
@@ -57,10 +55,9 @@ final class show_folder_size extends AbstractRoundcubePlugin
      */
     public function getFolderSizeAction(): void
     {
-        $rcmail = rcmail::get_instance();
         /** @var rcmail_output_json */
-        $output = $rcmail->output;
-        $storage = $rcmail->get_storage();
+        $output = $this->rcmail->output;
+        $storage = $this->rcmail->get_storage();
 
         // sanitize: _callback
         $callback = \filter_input(\INPUT_POST, '_callback');
@@ -120,14 +117,13 @@ final class show_folder_size extends AbstractRoundcubePlugin
      */
     private function getFolderSize(array $folders, bool $humanize = false): array
     {
-        $rcmail = rcmail::get_instance();
-        $storage = $rcmail->get_storage();
+        $storage = $this->rcmail->get_storage();
 
         $folders = \array_unique($folders);
         $sizes = \array_map([$storage, 'folder_size'], $folders);
 
         if ($humanize) {
-            $sizes = \array_map([$rcmail, 'show_bytes'], $sizes);
+            $sizes = \array_map([$this->rcmail, 'show_bytes'], $sizes);
         }
 
         return \array_combine($folders, $sizes);
