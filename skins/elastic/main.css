@@ -1,6 +1,9 @@
-#mailboxlist li > a[rel]:after {
-  content: attr(data-folder-size);
-  padding-left: .5em
+#show-folder-size-table .path-separator {
+  margin: 0 .4em;
+  display: inline-block
+}
+#show-folder-size-table .path-separator:after {
+  content: '/'
 }
 .menu a.show-folder-size:before,
 .toolbar a.show-folder-size:before,

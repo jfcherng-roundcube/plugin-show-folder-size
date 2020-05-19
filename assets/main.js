@@ -1,68 +1,64 @@
-const debug = false;
-
 const $ = global.$;
 const rcmail = global.rcmail;
 
 const config = rcmail.env['show_folder_size.config'] || {};
 const prefs = rcmail.env['show_folder_size.prefs'] || {};
 
-/**
- * The jQuery selector for "Show folder size" buttons.
- *
- * @type {string}
- */
-const plugin_button_selector = 'a.show-folder-size';
+const generatePopupContent = (resp) => {
+  let html = `
+    <table id="show-folder-size-table" class="records-table">
+      <thead>
+        <th>${rcmail.gettext('name', 'show_folder_size')}</th>
+        <th>${rcmail.gettext('size', 'show_folder_size')}</th>
+      </thead>
+      <tbody>
+  `;
 
-const set_mailbox_size_text = (mailbox, text) => {
-  const attr_selector = mailbox ? `[rel="${mailbox}"]` : '[rel]';
+  for (let [name, size] of Object.entries(resp)) {
+    name = name.replace(/\//g, '<div class="path-separator"></div>');
 
-  $(`#mailboxlist a${attr_selector}`).attr('data-folder-size', text);
-};
-
-const update_size_text = () => {
-  const $btn = $(plugin_button_selector);
-
-  if ($btn.hasClass('disabled')) {
-    return;
+    html += `
+      <tr>
+        <td>${name}</td>
+        <td>${size}</td>
+      </tr>
+    `;
   }
 
-  $btn.addClass('disabled');
+  html += '</tbody></table>';
 
-  // clear all size text
-  set_mailbox_size_text(null, '');
-
-  rcmail.http_post('plugin.show_folder_size.get-folder-size', {
-    _callback: 'plugin.show_folder_size.update-data-callback',
-    _folders: '__ALL__',
-    _humanize: 1,
-  });
+  return html;
 };
 
 rcmail.addEventListener('init', (evt) => {
   // register the main command
-  rcmail.register_command('plugin.show_folder_size.update-data', update_size_text, true);
+  rcmail.register_command(
+    'plugin.show_folder_size.show-data',
+    () => {
+      rcmail.http_post(
+        'plugin.show_folder_size.get-folder-size',
+        {
+          _callback: 'plugin.show_folder_size.show-data-callback',
+          _folders: '__ALL__',
+          _humanize: 1,
+        },
+        rcmail.set_busy(true, 'loading')
+      );
+    },
+    true
+  );
 
   /**
    * The callback function when server-side's API responses.
    *
    * @param {Object.<string, string|Number>} resp the response, { mailbox: size }
    */
-  rcmail.addEventListener('plugin.show_folder_size.update-data-callback', (resp) => {
-    if (debug) {
-      console.log('callback_show_folder_size', resp);
-    }
+  rcmail.addEventListener('plugin.show_folder_size.show-data-callback', (resp) => {
+    delete resp.event; // unused entry
 
-    $.each(resp, (mailbox, size) => {
-      set_mailbox_size_text(mailbox, `(${size})`);
-    });
-
-    $(plugin_button_selector).removeClass('disabled');
+    rcmail.show_popup_dialog(
+      generatePopupContent(resp),
+      rcmail.gettext('folder_size', 'show_folder_size')
+    );
   });
-});
-
-$(() => {
-  // auto show folder size?
-  if (config['auto_show_folder_size'] && $('#mailboxlist').length) {
-    update_size_text();
-  }
 });

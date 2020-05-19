@@ -32,7 +32,7 @@ final class show_folder_size extends AbstractRoundcubePlugin
     {
         parent::init();
 
-        $this->exposePluginConfigurations(['auto_show_folder_size']);
+        $this->add_texts($this->localizationDir, true);
 
         // only shown in the main "mail" page
         if ($this->rcmail->action === '') {
@@ -65,6 +65,7 @@ final class show_folder_size extends AbstractRoundcubePlugin
         // sanitize: _folders
         $folders = \filter_input(\INPUT_POST, '_folders') ?? '__ALL__';
         $folders = $folders === '__ALL__' ? $storage->list_folders() : (array) $folders;
+        $folders = \array_unique($folders);
 
         // sanitize: _humanize
         $humanize = \filter_input(\INPUT_POST, '_humanize', \FILTER_VALIDATE_BOOLEAN) ?? true;
@@ -80,31 +81,15 @@ final class show_folder_size extends AbstractRoundcubePlugin
      */
     private function addPluginButtons(): void
     {
-        if ($this->config['show_mailboxoptions_button']) {
-            $this->add_buttons_mailboxoptions([
-                [
-                    'type' => 'link-menuitem',
-                    'label' => "{$this->ID}.show_folder_size (longer)",
-                    'title' => "{$this->ID}.show_folder_size (longer)",
-                    'class' => 'show-folder-size active',
-                    'href' => '#',
-                    'command' => 'plugin.show_folder_size.update-data',
-                ],
-            ]);
-        }
-
-        if ($this->config['show_toolbar_button']) {
-            $this->add_buttons_toolbar([
-                [
-                    'type' => 'link',
-                    'label' => "{$this->ID}.show_folder_size",
-                    'title' => "{$this->ID}.show_folder_size (longer)",
-                    'class' => 'show-folder-size',
-                    'href' => '#',
-                    'command' => 'plugin.show_folder_size.update-data',
-                ],
-            ]);
-        }
+        $this->add_buttons_mailboxoptions([
+            [
+                'type' => 'link-menuitem',
+                'label' => "{$this->ID}.show_folder_size",
+                'class' => 'show-folder-size active',
+                'href' => '#',
+                'command' => "plugin.{$this->ID}.show-data",
+            ],
+        ]);
     }
 
     /**

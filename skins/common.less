@@ -1,6 +1,12 @@
 @import (reference) '_variables';
 
-#mailboxlist li > a[rel]:after {
-  content: attr(data-folder-size);
-  padding-left: 0.5em;
+#show-folder-size-table {
+  .path-separator {
+    margin: 0 0.4em;
+    display: inline-block;
+
+    &:after {
+      content: '/';
+    }
+  }
 }
