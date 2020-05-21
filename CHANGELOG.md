@@ -1,6 +1,17 @@
 
 ## VERSION 0  INIT
 
+ * Version **0.7** - show in popup dialog
+   * 2020-05-21 17:34  **0.7.0**  initial release
+      * 5cd2a1c chore: add translations: zh_CN and zh_TW
+      * f50a568 refactor: tidy codes
+      * cc7f9d9 chore: remove unused files and CSS rules
+      * 6aa7a61 docs: update screenshot
+      * 5e1965c refactor: improve popup dialog content
+      * e240f4e refactor: use popup dialog to show folder size
+      * c6ecdec chore: update deps
+      * 044faea refactor: tidy codes
+
  * Version **0.6** - refactor
    * 2020-05-12 00:37  **0.6.4**  feat: add nb_NO translation
       * 6cac2be Add: Norwegian
