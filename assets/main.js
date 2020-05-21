@@ -65,7 +65,9 @@ rcmail.addEventListener('init', (evt) => {
 
     rcmail.show_popup_dialog(
       generatePopupContent(resp),
-      rcmail.gettext('folder_size', plugin_name)
+      rcmail.gettext('folder_size', plugin_name),
+      {},
+      { modal: false }
     );
   });
 });
