@@ -3,12 +3,20 @@
 #show-folder-size-table {
   width: 100%;
 
-  .path-separator {
-    margin: 0 0.4em;
-    display: inline-block;
+  tbody tr {
+    &:hover {
+      td,
+      th {
+        background-color: rgba(252, 225, 126, 0.2);
+      }
+    }
+  }
 
-    &:after {
-      content: '/';
+  .name {
+    cursor: pointer;
+
+    &.virtual {
+      cursor: default;
     }
   }
 }

@@ -23,11 +23,14 @@ const generatePopupContent = (resp) => {
 
     html += `
       <tr>
-        <td title="${id}">
-          <div
-            class="name ${mailbox.virtual ? 'virtual' : ''}"
-            style="margin-left: ${level * 1.5}em"
-          >${mailbox.name}</div>
+        <td
+          class="name ${mailbox.virtual ? 'virtual' : ''}"
+          onclick="return ${
+            mailbox.virtual ? 0 : 1
+          } ? rcmail.command('list', '${id}', this, event) : ''"
+          title="${id}"
+        >
+          <div style="margin-left: ${level * 1.5}em">${mailbox.name}</div>
         </td>
         <td data-size="${size}">${size_humanized}</td>
       </tr>

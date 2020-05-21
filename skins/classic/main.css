@@ -1,16 +1,15 @@
 #show-folder-size-table {
   width: 100%
 }
-#show-folder-size-table .path-separator {
-  margin: 0 .4em;
-  display: inline-block
-}
-#show-folder-size-table .path-separator:after {
-  content: '/'
+#show-folder-size-table tbody tr:hover td,
+#show-folder-size-table tbody tr:hover th {
+  background-color: rgba(252,225,126,.2)
 }
 #show-folder-size-table .name {
+  cursor: pointer;
   color: #000
 }
 #show-folder-size-table .name.virtual {
+  cursor: default;
   color: #666
 }
