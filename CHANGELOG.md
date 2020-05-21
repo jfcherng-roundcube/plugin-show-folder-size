@@ -2,6 +2,9 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2020-05-21 18:21  **0.7.1**  clickable folder name & non-modal dialog
+      * a1c11fd fix: use non-modal dialog
+      * f4ccf09 feat: clickable folder name
    * 2020-05-21 17:34  **0.7.0**  initial release
       * 5cd2a1c chore: add translations: zh_CN and zh_TW
       * f50a568 refactor: tidy codes
