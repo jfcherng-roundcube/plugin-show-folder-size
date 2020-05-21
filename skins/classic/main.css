@@ -14,10 +14,3 @@
 #show-folder-size-table .name.virtual {
   color: #666
 }
-#messagetoolbar a.show-folder-size {
-  background-image: url(images/capacity.png);
-  background-position: center top;
-  text-indent: 100%;
-  white-space: nowrap;
-  overflow: hidden
-}

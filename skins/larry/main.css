@@ -14,7 +14,3 @@
 #show-folder-size-table .name.virtual {
   color: #aaa
 }
-.toolbar a.show-folder-size {
-  background-image: url(images/capacity.png);
-  background-position: center top
-}
