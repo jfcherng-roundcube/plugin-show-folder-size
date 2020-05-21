@@ -1,6 +1,22 @@
 @import (reference) '_variables';
 
-#mailboxlist li > a[rel]:after {
-  content: attr(data-folder-size);
-  padding-left: 0.5em;
+#show-folder-size-table {
+  width: 100%;
+
+  tbody tr {
+    &:hover {
+      td,
+      th {
+        background-color: rgba(252, 225, 126, 0.2);
+      }
+    }
+  }
+
+  .name {
+    cursor: pointer;
+
+    &.virtual {
+      cursor: default;
+    }
+  }
 }

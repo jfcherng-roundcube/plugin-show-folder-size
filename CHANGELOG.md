@@ -1,7 +1,30 @@
 
 ## VERSION 0  INIT
 
+ * Version **0.7** - show in popup dialog
+   * 2020-05-21 18:21  **0.7.1**  clickable folder name & non-modal dialog
+      * a1c11fd fix: use non-modal dialog
+      * f4ccf09 feat: clickable folder name
+   * 2020-05-21 17:34  **0.7.0**  initial release
+      * 5cd2a1c chore: add translations: zh_CN and zh_TW
+      * f50a568 refactor: tidy codes
+      * cc7f9d9 chore: remove unused files and CSS rules
+      * 6aa7a61 docs: update screenshot
+      * 5e1965c refactor: improve popup dialog content
+      * e240f4e refactor: use popup dialog to show folder size
+      * c6ecdec chore: update deps
+      * 044faea refactor: tidy codes
+
  * Version **0.6** - refactor
+   * 2020-05-12 00:37  **0.6.4**  feat: add nb_NO translation
+      * 6cac2be Add: Norwegian
+      * c6cebba refactor: tidy codes
+      * 51ac19e refactor: use "get-folder-size" as the action name
+      * 877cba3 chore: update deps
+      * a37e18a refactor: make intelephense happy
+      * 1c1a494 chore: add CI coding style chceking
+      * 9e0c1bf chore: tidy codes
+      * 6b02998 chore: add babel-eslint for linting latest JS syntax
    * 2020-04-30 16:41  **0.6.3**  some refactoring
       * 572bfdb refactor: tidy codes
       * 457b474 chore: update RoundcubeHelper

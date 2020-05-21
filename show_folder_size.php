@@ -32,12 +32,10 @@ final class show_folder_size extends AbstractRoundcubePlugin
     {
         parent::init();
 
-        $rcmail = rcmail::get_instance();
-
-        $this->exposePluginConfigurations(['auto_show_folder_size']);
+        $this->add_texts($this->localizationDir, true);
 
         // only shown in the main "mail" page
-        if ($rcmail->action === '') {
+        if ($this->rcmail->action === '') {
             $this->include_stylesheet("{$this->skinPath}/main.css");
             $this->include_script('assets/main.min.js');
             $this->addPluginButtons();
@@ -57,22 +55,18 @@ final class show_folder_size extends AbstractRoundcubePlugin
      */
     public function getFolderSizeAction(): void
     {
-        $rcmail = rcmail::get_instance();
         /** @var rcmail_output_json */
-        $output = $rcmail->output;
-        $storage = $rcmail->get_storage();
+        $output = $this->rcmail->output;
+        $storage = $this->rcmail->get_storage();
 
         // sanitize: _callback
         $callback = \filter_input(\INPUT_POST, '_callback');
 
         // sanitize: _folders
-        $folders = \filter_input(\INPUT_POST, '_folders') ?? '__ALL__';
-        $folders = $folders === '__ALL__' ? $storage->list_folders() : (array) $folders;
+        $folders = (array) \filter_input(\INPUT_POST, '_folders', \FILTER_DEFAULT, \FILTER_FORCE_ARRAY);
+        $folders = empty($folders) ? $storage->list_folders() : \array_unique($folders);
 
-        // sanitize: _humanize
-        $humanize = \filter_input(\INPUT_POST, '_humanize', \FILTER_VALIDATE_BOOLEAN) ?? true;
-
-        $sizes = $this->getFolderSize($folders, $humanize);
+        $sizes = $this->getFolderSize($folders);
 
         $callback && $output->command($callback, $sizes);
         $output->send();
@@ -83,53 +77,40 @@ final class show_folder_size extends AbstractRoundcubePlugin
      */
     private function addPluginButtons(): void
     {
-        if ($this->config['show_mailboxoptions_button']) {
-            $this->add_buttons_mailboxoptions([
-                [
-                    'type' => 'link-menuitem',
-                    'label' => "{$this->ID}.show_folder_size (longer)",
-                    'title' => "{$this->ID}.show_folder_size (longer)",
-                    'class' => 'show-folder-size active',
-                    'href' => '#',
-                    'command' => 'plugin.show_folder_size.update-data',
-                ],
-            ]);
-        }
-
-        if ($this->config['show_toolbar_button']) {
-            $this->add_buttons_toolbar([
-                [
-                    'type' => 'link',
-                    'label' => "{$this->ID}.show_folder_size",
-                    'title' => "{$this->ID}.show_folder_size (longer)",
-                    'class' => 'show-folder-size',
-                    'href' => '#',
-                    'command' => 'plugin.show_folder_size.update-data',
-                ],
-            ]);
-        }
+        $this->add_buttons_mailboxoptions([
+            [
+                'type' => 'link-menuitem',
+                'label' => "{$this->ID}.show_folder_size",
+                'class' => 'show-folder-size active',
+                'href' => '#',
+                'command' => "plugin.{$this->ID}.show-data",
+            ],
+        ]);
     }
 
     /**
      * Get size for folders.
      *
-     * @param array $folders  folder names
-     * @param bool  $humanize format the result for human reading
+     * @param array $folders folder names
      *
-     * @return int[]|string[] an array in the form of [folder_1 => size_1, ...]
+     * @return array an array in the form of [folder_1 => [size_1, size_1(humanized)], ...]
      */
-    private function getFolderSize(array $folders, bool $humanize = false): array
+    private function getFolderSize(array $folders): array
     {
-        $rcmail = rcmail::get_instance();
-        $storage = $rcmail->get_storage();
+        $storage = $this->rcmail->get_storage();
 
-        $folders = \array_unique($folders);
-        $sizes = \array_map([$storage, 'folder_size'], $folders);
+        $ret = [];
 
-        if ($humanize) {
-            $sizes = \array_map([$rcmail, 'show_bytes'], $sizes);
+        foreach ($folders as $folder) {
+            $size = $storage->folder_size($folder);
+
+            $ret[$folder] = [
+                $size,
+                // humanized size
+                $this->rcmail->show_bytes($size),
+            ];
         }
 
-        return \array_combine($folders, $sizes);
+        return $ret;
     }
 }
