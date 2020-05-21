@@ -1,9 +1,18 @@
+#show-folder-size-table {
+  width: 100%
+}
 #show-folder-size-table .path-separator {
   margin: 0 .4em;
   display: inline-block
 }
 #show-folder-size-table .path-separator:after {
   content: '/'
+}
+#show-folder-size-table .name {
+  color: #2c363a
+}
+#show-folder-size-table .name.virtual {
+  opacity: .4
 }
 .menu a.show-folder-size:before,
 .toolbar a.show-folder-size:before,

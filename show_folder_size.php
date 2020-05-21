@@ -63,14 +63,10 @@ final class show_folder_size extends AbstractRoundcubePlugin
         $callback = \filter_input(\INPUT_POST, '_callback');
 
         // sanitize: _folders
-        $folders = \filter_input(\INPUT_POST, '_folders') ?? '__ALL__';
-        $folders = $folders === '__ALL__' ? $storage->list_folders() : (array) $folders;
-        $folders = \array_unique($folders);
+        $folders = (array) \filter_input(\INPUT_POST, '_folders', \FILTER_DEFAULT, \FILTER_FORCE_ARRAY);
+        $folders = empty($folders) ? $storage->list_folders() : \array_unique($folders);
 
-        // sanitize: _humanize
-        $humanize = \filter_input(\INPUT_POST, '_humanize', \FILTER_VALIDATE_BOOLEAN) ?? true;
-
-        $sizes = $this->getFolderSize($folders, $humanize);
+        $sizes = $this->getFolderSize($folders);
 
         $callback && $output->command($callback, $sizes);
         $output->send();
@@ -95,22 +91,26 @@ final class show_folder_size extends AbstractRoundcubePlugin
     /**
      * Get size for folders.
      *
-     * @param array $folders  folder names
-     * @param bool  $humanize format the result for human reading
+     * @param array $folders folder names
      *
-     * @return int[]|string[] an array in the form of [folder_1 => size_1, ...]
+     * @return array an array in the form of [folder_1 => [size_1, size_1(humanized)], ...]
      */
-    private function getFolderSize(array $folders, bool $humanize = false): array
+    private function getFolderSize(array $folders): array
     {
         $storage = $this->rcmail->get_storage();
 
-        $folders = \array_unique($folders);
-        $sizes = \array_map([$storage, 'folder_size'], $folders);
+        $ret = [];
 
-        if ($humanize) {
-            $sizes = \array_map([$this->rcmail, 'show_bytes'], $sizes);
+        foreach ($folders as $folder) {
+            $size = $storage->folder_size($folder);
+
+            $ret[$folder] = [
+                $size,
+                // humanized size
+                $this->rcmail->show_bytes($size),
+            ];
         }
 
-        return \array_combine($folders, $sizes);
+        return $ret;
     }
 }
