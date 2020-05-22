@@ -2,6 +2,8 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2020-05-23 03:26  **0.7.2**  feat: add translation: nb_NO
+      * a206c1b Add translations nb_NO
    * 2020-05-21 18:21  **0.7.1**  clickable folder name & non-modal dialog
       * a1c11fd fix: use non-modal dialog
       * f4ccf09 feat: clickable folder name
