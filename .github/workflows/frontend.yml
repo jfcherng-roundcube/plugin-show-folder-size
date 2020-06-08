@@ -1,0 +1,48 @@
+name: frontend
+
+on:
+  push:
+    branches:
+      - "*"
+      - "*/*"
+  pull_request:
+    branches:
+      - "*"
+      - "*/*"
+
+jobs:
+  job_linting:
+    name: Linting
+
+    strategy:
+      matrix:
+        os: ["ubuntu-latest"]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: GitHub Action for Yarn
+        uses: borales/actions-yarn@v2.3.0
+
+      - name: Show environment information
+        run: |
+          yarn -v
+
+      - name: Get cache directory - Yarn
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache dependencies - Yarn
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ matrix.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ matrix.os }}-yarn-
+
+      - name: Install dependencies
+        run: |
+          yarn install
+
+      - run: yarn run prettier-check
+      - run: yarn run lint

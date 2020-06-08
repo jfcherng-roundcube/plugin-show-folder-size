@@ -1,6 +1,7 @@
 # Roundcube Plugin: Show Folder Size
 
-[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jfcherng-roundcube/plugin-show-folder-size/main/master?style=flat-square)](https://github.com/jfcherng-roundcube/plugin-show-folder-size/actions)
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jfcherng-roundcube/plugin-show-folder-size/frontend/master?style=flat-square&label=build%20frontend)](https://github.com/jfcherng-roundcube/plugin-show-folder-size/actions)
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jfcherng-roundcube/plugin-show-folder-size/backend/master?style=flat-square&label=build%20backend)](https://github.com/jfcherng-roundcube/plugin-show-folder-size/actions)
 [![Packagist](https://img.shields.io/packagist/dt/jfcherng-roundcube/show-folder-size?style=flat-square)](https://packagist.org/packages/jfcherng-roundcube/show-folder-size)
 [![Packagist Version](https://img.shields.io/packagist/v/jfcherng-roundcube/show-folder-size?style=flat-square)](https://packagist.org/packages/jfcherng-roundcube/show-folder-size)
 [![Project license](https://img.shields.io/github/license/jfcherng-roundcube/plugin-show-folder-size?style=flat-square)](https://github.com/jfcherng-roundcube/plugin-show-folder-size/blob/v6/LICENSE)
