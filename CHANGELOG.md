@@ -2,6 +2,10 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2020-06-09 16:31  **0.7.3**  Add localization: hu_HU
+      * 4dabd19 Create hu_HU.inc
+      * 0ef98e0 chore(ci): improve CI scripts
+      * 221e6af chore: update deps
    * 2020-05-23 03:26  **0.7.2**  feat: add translation: nb_NO
       * a206c1b Add translations nb_NO
    * 2020-05-21 18:21  **0.7.1**  clickable folder name & non-modal dialog
