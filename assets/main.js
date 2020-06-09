@@ -12,12 +12,16 @@ const generatePopupContent = (resp) => {
         <tr>
           <th>${rcmail.gettext('name', plugin_name)}</th>
           <th>${rcmail.gettext('size', plugin_name)}</th>
+          <th>${rcmail.gettext('cumulative_size', plugin_name)}</th>
         </tr>
       </thead>
       <tbody>
   `;
 
-  for (let [id, [size, size_humanized]] of Object.entries(resp)) {
+  for (let [
+    id,
+    [size, size_humanized, cumulative_size, cumulative_size_humanized],
+  ] of Object.entries(resp)) {
     let mailbox = rcmail.env.mailboxes[id];
     let level = (id.match(/\//g) || []).length;
 
@@ -33,6 +37,7 @@ const generatePopupContent = (resp) => {
           <div style="margin-left: ${level * 1.5}em">${mailbox.name}</div>
         </td>
         <td data-size="${size}">${size_humanized}</td>
+        <td data-size="${cumulative_size}">${cumulative_size_humanized}</td>
       </tr>
     `;
   }
@@ -51,7 +56,6 @@ rcmail.addEventListener('init', (evt) => {
         `plugin.${plugin_name}.get-folder-size`,
         {
           _callback: `plugin.${plugin_name}.show-data-callback`,
-          _folders: rcmail.env.mailboxes_list,
         },
         rcmail.set_busy(true, 'loading')
       );

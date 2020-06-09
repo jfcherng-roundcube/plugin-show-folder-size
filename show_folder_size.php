@@ -57,16 +57,11 @@ final class show_folder_size extends AbstractRoundcubePlugin
     {
         /** @var rcmail_output_json */
         $output = $this->rcmail->output;
-        $storage = $this->rcmail->get_storage();
 
         // sanitize: _callback
         $callback = \filter_input(\INPUT_POST, '_callback');
 
-        // sanitize: _folders
-        $folders = (array) \filter_input(\INPUT_POST, '_folders', \FILTER_DEFAULT, \FILTER_FORCE_ARRAY);
-        $folders = empty($folders) ? $storage->list_folders() : \array_unique($folders);
-
-        $sizes = $this->getFolderSize($folders);
+        $sizes = $this->getFolderSizes();
 
         $callback && $output->command($callback, $sizes);
         $output->send();
@@ -89,25 +84,63 @@ final class show_folder_size extends AbstractRoundcubePlugin
     }
 
     /**
-     * Get size for folders.
+     * Get size for all folders.
      *
-     * @param array $folders folder names
-     *
-     * @return array an array in the form of [folder_1 => [size_1, size_1(humanized)], ...]
+     * @return array an array in the form of [
+     *               folder_1 => [size_1, size_1(humanized), cumulative_1, cumulative_1(humanized)],
+     *               ... ]
      */
-    private function getFolderSize(array $folders): array
+    private function getFolderSizes(): array
     {
+        static $folderDelimiter = '/';
+
         $storage = $this->rcmail->get_storage();
+        $folders = \array_unique($storage->list_folders());
+
+        $foldersSorted = $folders;
+        \usort($foldersSorted, function (string $folder1, string $folder2): int {
+            return \strlen($folder1) <=> \strlen($folder2);
+        });
+
+        /** @var array<string,string[]> $children folder => its child folders */
+        $children = [];
+        for ($i = \count($foldersSorted) - 1; $i >= 0; --$i) {
+            $folderChild = $foldersSorted[$i];
+
+            for ($j = $i; $j >= 0; --$j) {
+                $folderParent = $foldersSorted[$j];
+
+                // test if $folderChild is a child of $folderParent
+                if (0 === \strpos("{$folderChild}{$folderDelimiter}", "{$folderParent}{$folderDelimiter}")) {
+                    $children[$folderParent] = $children[$folderParent] ?? [];
+                    $children[$folderParent][] = $folderChild;
+                }
+            }
+        }
+
+        /** @var array<string,int> $rawSizes the non-cumulative folder sizes */
+        $rawSizes = [];
+        foreach ($folders as $folder) {
+            $rawSizes[$folder] = $storage->folder_size($folder);
+        }
+
+        /** @var array<string,int> $sumSizes the cumulative folder sizes */
+        $sumSizes = [];
+        foreach ($folders as $folder) {
+            $sumSizes[$folder] = 0;
+
+            foreach ($children[$folder] as $child) {
+                $sumSizes[$folder] += $rawSizes[$child];
+            }
+        }
 
         $ret = [];
-
         foreach ($folders as $folder) {
-            $size = $storage->folder_size($folder);
-
             $ret[$folder] = [
-                $size,
-                // humanized size
-                $this->rcmail->show_bytes($size),
+                $rawSizes[$folder],
+                $this->rcmail->show_bytes($rawSizes[$folder]),
+                $sumSizes[$folder],
+                $this->rcmail->show_bytes($sumSizes[$folder]),
             ];
         }
 
