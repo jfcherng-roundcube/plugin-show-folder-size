@@ -2,8 +2,8 @@ const $ = global.$;
 const rcmail = global.rcmail;
 
 const plugin_name = 'show_folder_size';
-const config = rcmail.env[`${plugin_name}.config`] || {};
-const prefs = rcmail.env[`${plugin_name}.prefs`] || {};
+const config = rcmail.env[`${plugin_name}.config`] ?? {};
+const prefs = rcmail.env[`${plugin_name}.prefs`] ?? {};
 
 const generatePopupContent = (resp) => {
   let html = `
@@ -23,7 +23,7 @@ const generatePopupContent = (resp) => {
     [size, size_humanized, cumulative_size, cumulative_size_humanized],
   ] of Object.entries(resp)) {
     let mailbox = rcmail.env.mailboxes[id];
-    let level = (id.match(/\//g) || []).length;
+    let level = (id.match(/\//g) ?? []).length;
 
     html += `
       <tr>
