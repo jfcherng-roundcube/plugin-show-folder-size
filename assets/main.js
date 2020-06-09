@@ -7,7 +7,7 @@ const prefs = rcmail.env[`${plugin_name}.prefs`] ?? {};
 
 const generatePopupContent = (resp) => {
   let html = `
-    <table id="show-folder-size-table" class="records-table">
+    <table id="show-folder-size-table" class="records-table" style="table-layout: auto;">
       <thead>
         <tr>
           <th>${rcmail.gettext('name', plugin_name)}</th>
