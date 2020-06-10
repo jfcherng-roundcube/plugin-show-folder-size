@@ -67,10 +67,10 @@ rcmail.addEventListener('init', (evt) => {
   rcmail.addEventListener(`plugin.${plugin_name}.show-data-callback`, (resp) => {
     delete resp.event; // unused entry
 
-    rcmail.show_popup_dialog(
+    rcmail.simple_dialog(
       generatePopupContent(resp),
       rcmail.gettext('folder_size', plugin_name),
-      {},
+      null,
       { modal: false }
     );
   });
