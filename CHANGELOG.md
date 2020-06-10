@@ -2,6 +2,12 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2020-06-10 15:43  **0.7.4**  Show cumulative folder sizes
+      * 6617d27 mod: use auto width table layout
+      * d15efce docs: update screenshot
+      * b2d837e chore: tidy codes
+      * 9962ac7 feat: also show cumulative folder sizes
+      * 3718ec7 chore: update deps
    * 2020-06-09 16:31  **0.7.3**  Add localization: hu_HU
       * 4dabd19 Create hu_HU.inc
       * 0ef98e0 chore(ci): improve CI scripts
