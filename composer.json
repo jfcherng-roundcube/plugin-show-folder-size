@@ -4,7 +4,7 @@
     "type": "roundcube-plugin",
     "license": "MIT",
     "homepage": "https://github.com/jfcherng-roundcube/plugin-show-folder-size",
-    "version": "0.7.4",
+    "version": "0.7.5",
     "authors": [
         {
             "name": "Jack Cherng",

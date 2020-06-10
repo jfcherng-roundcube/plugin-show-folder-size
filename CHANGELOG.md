@@ -2,6 +2,10 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2020-06-11 00:33  **0.7.5**  fix: no way closing the popup dialog on Elastic mobile
+      * bddd3b3 fix: no way closing the popup dialog on Elastic mobile
+      * 1da4c63 refactor: tidy codes
+      * a395f2a docs: remove unexpected chars
    * 2020-06-10 15:43  **0.7.4**  Show cumulative folder sizes
       * 6617d27 mod: use auto width table layout
       * d15efce docs: update screenshot
