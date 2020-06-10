@@ -87,41 +87,63 @@ final class show_folder_size extends AbstractRoundcubePlugin
      * Get size for all folders.
      *
      * @return array an array in the form of [
-     *               folder_1 => [size_1, size_1(humanized), cumulative_1, cumulative_1(humanized)],
+     *               folder_1 => [size_1, size_1_humanized, cumulative_1, cumulative_1_humanized],
      *               ... ]
      */
     private function getFolderSizes(): array
     {
-        static $folderDelimiter = '/';
-
         $storage = $this->rcmail->get_storage();
         $folders = \array_unique($storage->list_folders());
-
-        $foldersSorted = $folders;
-        \usort($foldersSorted, function (string $folder1, string $folder2): int {
-            return \strlen($folder1) <=> \strlen($folder2);
-        });
-
-        /** @var array<string,string[]> $children folder => its child folders */
-        $children = [];
-        for ($i = \count($foldersSorted) - 1; $i >= 0; --$i) {
-            $folderChild = $foldersSorted[$i];
-
-            for ($j = $i; $j >= 0; --$j) {
-                $folderParent = $foldersSorted[$j];
-
-                // test if $folderChild is a child of $folderParent
-                if (0 === \strpos("{$folderChild}{$folderDelimiter}", "{$folderParent}{$folderDelimiter}")) {
-                    $children[$folderParent] = $children[$folderParent] ?? [];
-                    $children[$folderParent][] = $folderChild;
-                }
-            }
-        }
 
         /** @var array<string,int> $rawSizes the non-cumulative folder sizes */
         $rawSizes = [];
         foreach ($folders as $folder) {
             $rawSizes[$folder] = $storage->folder_size($folder);
+        }
+
+        $cumulativeSizes = $this->calcualteCumulativeSizes($rawSizes);
+
+        $ret = [];
+        foreach ($folders as $folder) {
+            $ret[$folder] = [
+                $rawSizes[$folder],
+                $this->rcmail->show_bytes($rawSizes[$folder]),
+                $cumulativeSizes[$folder],
+                $this->rcmail->show_bytes($cumulativeSizes[$folder]),
+            ];
+        }
+
+        return $ret;
+    }
+
+    /**
+     * Calculates cumulative folder sizes from raw sizes.
+     *
+     * @param array $rawSizes the raw sizes
+     *
+     * @return array<string,int> the cumulative folder sizes
+     */
+    private function calcualteCumulativeSizes(array $rawSizes): array
+    {
+        /** @var string[] $folders sorted folder names by name length ascending */
+        $folders = \array_keys($rawSizes);
+        \usort($folders, static function (string $folder1, string $folder2): int {
+            return \strlen($folder1) <=> \strlen($folder2);
+        });
+
+        /** @var array<string,string[]> $children folder => its child folders */
+        $children = [];
+        for ($i = \count($folders) - 1; $i >= 0; --$i) {
+            $child = $folders[$i];
+
+            for ($j = $i; $j >= 0; --$j) {
+                $parent = $folders[$j];
+
+                if ($this->isFolderParentAndChild($parent, $child, true)) {
+                    $children[$parent] = $children[$parent] ?? [];
+                    $children[$parent][] = $child;
+                }
+            }
         }
 
         /** @var array<string,int> $sumSizes the cumulative folder sizes */
@@ -134,16 +156,28 @@ final class show_folder_size extends AbstractRoundcubePlugin
             }
         }
 
-        $ret = [];
-        foreach ($folders as $folder) {
-            $ret[$folder] = [
-                $rawSizes[$folder],
-                $this->rcmail->show_bytes($rawSizes[$folder]),
-                $sumSizes[$folder],
-                $this->rcmail->show_bytes($sumSizes[$folder]),
-            ];
+        return $sumSizes;
+    }
+
+    /**
+     * Determine if folders are in a parent-child relationship.
+     *
+     * @param string $parent     the parent
+     * @param string $child      the child
+     * @param bool   $sameIsTrue return true if folders are the same
+     *
+     * @return bool true if parent and child folder, false otherwise
+     */
+    private function isFolderParentAndChild(string $parent, string $child, bool $sameIsTrue = false): bool
+    {
+        static $delimiter = '/';
+
+        if ($parent === $child) {
+            return $sameIsTrue;
         }
 
-        return $ret;
+        $parent .= $delimiter;
+
+        return \substr($child, 0, \strlen($parent)) === $parent;
     }
 }
