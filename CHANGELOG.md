@@ -8,7 +8,7 @@
       * b2d837e chore: tidy codes
       * 9962ac7 feat: also show cumulative folder sizes
       * 3718ec7 chore: update deps
-   * 2020-06-09 16:31  **0.7.3**  Add localization: hu_HU
+   * 2020-06-09 16:31  **0.7.3**  Add localization: hu_HU
       * 4dabd19 Create hu_HU.inc
       * 0ef98e0 chore(ci): improve CI scripts
       * 221e6af chore: update deps
@@ -28,7 +28,7 @@
       * 044faea refactor: tidy codes
 
  * Version **0.6** - refactor
-   * 2020-05-12 00:37  **0.6.4**  feat: add nb_NO translation
+   * 2020-05-12 00:37  **0.6.4**  feat: add nb_NO translation
       * 6cac2be Add: Norwegian
       * c6cebba refactor: tidy codes
       * 51ac19e refactor: use "get-folder-size" as the action name
