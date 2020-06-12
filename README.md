@@ -29,7 +29,7 @@ I am not meant to maintain the `php5` branch because even PHP 5.6 is quite outda
 
 ## How to install this plugin in Roundcube
 
-### Install via Composer
+### Install via Composer (Recommended)
 
 This plugin has been published on [Packagist](https://packagist.org) by the name of [jfcherng-roundcube/show-folder-size](https://packagist.org/packages/jfcherng-roundcube/show-folder-size).
 
@@ -54,3 +54,11 @@ $config['plugins'] = [
     'show_folder_size', // <-- add this line
 ];
 ```
+
+## For Developers
+
+### Compile Frontend Assets
+
+- You will need to have [Node.js](https://nodejs.org) installed.
+- Install dependencies via `npm install` (or `yarn` if you prefer)
+- Compile assets with `./compile.sh`
