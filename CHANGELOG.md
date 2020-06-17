@@ -2,6 +2,11 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2020-06-17 22:42  **0.7.6**  fix: unsubscribed mailboxes make popup not shown
+      * ed97a2c fix: unsubscribed mailboxes make popup not shown
+      * 129afae chore: update deps
+      * 3eaa32e docs: update readme for developers
+      * e68e05d docs: update screenshot
    * 2020-06-11 00:33  **0.7.5**  fix: no way closing the popup dialog on Elastic mobile
       * bddd3b3 fix: no way closing the popup dialog on Elastic mobile
       * 1da4c63 refactor: tidy codes
