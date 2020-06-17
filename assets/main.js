@@ -23,6 +23,12 @@ const generatePopupContent = (resp) => {
     [size, size_humanized, cumulative_size, cumulative_size_humanized],
   ] of Object.entries(resp)) {
     let mailbox = rcmail.env.mailboxes[id];
+
+    // skip unsubscribed mailboxes
+    if (!mailbox) {
+      continue;
+    }
+
     let level = (id.match(/\//g) ?? []).length;
 
     html += `
