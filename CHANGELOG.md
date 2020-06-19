@@ -2,6 +2,10 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2020-06-19 20:38  **0.7.7**  add fr_FR localization
+      * 5995c08 feat: add fr_FR localization (by @rdacn)
+      * 3d5b59c chore: nits
+      * 9bce887 chore: update build script
    * 2020-06-17 22:42  **0.7.6**  fix: unsubscribed mailboxes make popup not shown
       * ed97a2c fix: unsubscribed mailboxes make popup not shown
       * 129afae chore: update deps
