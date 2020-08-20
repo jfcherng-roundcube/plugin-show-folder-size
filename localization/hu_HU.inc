@@ -11,3 +11,4 @@ $labels['show_folder_size'] = 'Mappaméretek megjelenítése';
 $labels['folder_size'] = 'Mappák helyfoglalásai';
 $labels['name'] = 'Név';
 $labels['size'] = 'Méret';
+$labels['cumulative_size'] = 'Méret (Összesített)';
