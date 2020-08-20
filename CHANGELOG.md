@@ -2,6 +2,10 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2020-08-21 03:38  **0.7.8**  Update Hungarian localization
+      * 50bd482 chore: update deps
+      * cd95e3a Actualize hungarian translation (#21)
+      * 05c58f6 chore: update deps
    * 2020-06-19 20:38  **0.7.7**  add fr_FR localization
       * 5995c08 feat: add fr_FR localization (by @rdacn)
       * 3d5b59c chore: nits
