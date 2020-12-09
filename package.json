@@ -11,7 +11,7 @@
     "clean-css-cli": "^4.3.0",
     "core-js": "^3",
     "eslint": "^7",
-    "eslint-config-prettier": "^6",
+    "eslint-config-prettier": "^7",
     "eslint-plugin-prettier": "^3",
     "less": "^3.9.0",
     "prettier": "^2",
