@@ -71,6 +71,8 @@ $config = PhpCsFixer\Config::create()
             ->exclude('bin')
             ->exclude('var')
             ->exclude('vendor')
+            // frontend
+            ->exclude('node_modules')
     )
 ;
 
