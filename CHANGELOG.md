@@ -2,6 +2,15 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2020-12-09 10:12  **0.7.9**  add Italian/German localizations
+      * 504d214 chore: exclude node_modules for php-cs-fixer
+      * 624ce23 chore: recompile assets
+      * 0560ef1 chore: update deps
+      * 6c12023 Added italian translation (#24)
+      * 929a1a6 Added german translation (#23)
+      * 6464dce chore: recompile assets
+      * 9e381a0 chore: update deps
+      * 5fe8518 chore(ci): Composer 2 no longer needs hirak/prestissimo
    * 2020-08-21 03:38  **0.7.8**  Update Hungarian localization
       * 50bd482 chore: update deps
       * cd95e3a Actualize hungarian translation (#21)
