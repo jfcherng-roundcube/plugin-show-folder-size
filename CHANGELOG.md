@@ -2,6 +2,8 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2021-02-19 19:09  **0.7.10**  Add ru_RU localization
+      * 90e018a feat: add ru_RU localization (by @kotsar)
    * 2020-12-09 10:12  **0.7.9**  add Italian/German localizations
       * 504d214 chore: exclude node_modules for php-cs-fixer
       * 624ce23 chore: recompile assets
