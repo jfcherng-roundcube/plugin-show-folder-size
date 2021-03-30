@@ -42,6 +42,7 @@ This plugin has been published on [Packagist](https://packagist.org) by the name
 1. Create folder `show_folder_size` in `ROUNDCUBE_HOME/plugins` if it does not exist.
 2. Copy all plugin files there.
 3. If you want to do plugin configuration, copy `config.inc.php.dist` to `config.inc.php` and then edit `config.inc.php`.
+   (You can skip this step since there is no configuration for this plugin at this moment.)
 4. Edit your Roundcube's config file (`ROUNDCUBE_HOME/config/config.inc.php` or maybe `/etc/roundcube/config.inc.php`), locate `$config['plugins']` and add `'show_folder_size',`.
 
 ```php
