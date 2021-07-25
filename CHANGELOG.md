@@ -2,6 +2,12 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2021-07-25 12:27  **0.7.11**  fix versioning
+      * 0033c78 chore: add RMT executable
+      * 893ad15 chore: update deps
+      * 009495d chore: remove version info from composer.json
+      * 30d735d chore: update lisence year
+      * 43b623e docs: there is no configuration available at this moment
    * 2021-02-19 19:09  **0.7.10**  Add ru_RU localization
       * 90e018a feat: add ru_RU localization (by @kotsar)
    * 2020-12-09 10:12  **0.7.9**  add Italian/German localizations
