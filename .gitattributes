@@ -21,6 +21,7 @@ package.json export-ignore
 phpcs.xml export-ignore
 phpunit.xml export-ignore
 pyproject.toml export-ignore
+RMT export-ignore
 scripts/ export-ignore
 skins/_src/ export-ignore
 terser.json export-ignore
