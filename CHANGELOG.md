@@ -2,6 +2,9 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2021-08-11 12:19  **0.7.13**  fix deps
+      * 88317af chore: update deps
+      * 971afce chore: remove `replace` directive from composer.json (#27)
    * 2021-07-26 15:50  **0.7.12**  remove distributed RMT
       * e6001bb chore: no need to distribute RMT
    * 2021-07-25 12:27  **0.7.11**  fix versioning
