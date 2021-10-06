@@ -90,7 +90,7 @@ abstract class AbstractRoundcubePlugin extends rcube_plugin
         $this->add_texts($this->localizationDir, false);
 
         $this->skinPath = $this->local_skin_path();
-        $this->skinName = \substr($this->skinPath, 6); // remove prefixed "skins/"
+        $this->skinName = substr($this->skinPath, 6); // remove prefixed "skins/"
     }
 
     /**
@@ -105,7 +105,7 @@ abstract class AbstractRoundcubePlugin extends rcube_plugin
     {
         $skin = $skin ?? RoundcubeHelper::getBaseSkinName();
 
-        $btns = \array_map(function (array $btn) use ($skin): array {
+        $btns = array_map(function (array $btn) use ($skin): array {
             $btn['_id'] = $btn['_id'] ?? 'WTF_NO_BASE_ID';
             $btn['class'] = $btn['class'] ?? '';
             $btn['classact'] = $btn['classact'] ?? '';
@@ -151,7 +151,7 @@ abstract class AbstractRoundcubePlugin extends rcube_plugin
     {
         $skin = $skin ?? RoundcubeHelper::getBaseSkinName();
 
-        $btns = \array_map(function (array $btn) use ($skin): array {
+        $btns = array_map(function (array $btn) use ($skin): array {
             $btn['type'] = 'link';
             $btn['class'] = $btn['class'] ?? '';
             $btn['innerclass'] = $btn['innerclass'] ?? '';
@@ -198,7 +198,7 @@ abstract class AbstractRoundcubePlugin extends rcube_plugin
     {
         $skin = $skin ?? RoundcubeHelper::getBaseSkinName();
 
-        $btns = \array_map(function (array $btn) use ($skin): array {
+        $btns = array_map(function (array $btn) use ($skin): array {
             $btn['type'] = 'link';
             $btn['class'] = $btn['class'] ?? '';
             $btn['innerclass'] = $btn['innerclass'] ?? '';
@@ -237,7 +237,7 @@ abstract class AbstractRoundcubePlugin extends rcube_plugin
     {
         $skin = $skin ?? RoundcubeHelper::getBaseSkinName();
 
-        $btns = \array_map(function (array $btn) use ($skin): array {
+        $btns = array_map(function (array $btn) use ($skin): array {
             switch ($skin) {
                 case 'classic':
                     $btn['class'] .= ' button';
@@ -270,12 +270,12 @@ abstract class AbstractRoundcubePlugin extends rcube_plugin
             "{$this->home}/config.inc.php",
         ];
 
-        $this->config = \array_reduce(
+        $this->config = array_reduce(
             $configFiles,
             function (array $carry, string $file): array {
-                \is_file($file) && (include $file);
+                is_file($file) && (include $file);
 
-                return \array_merge($carry, (array) ($config ?? []));
+                return array_merge($carry, (array) ($config ?? []));
             },
             []
         );
@@ -288,7 +288,7 @@ abstract class AbstractRoundcubePlugin extends rcube_plugin
      */
     protected function loadPluginPreferences(): void
     {
-        $this->prefs = \array_merge(
+        $this->prefs = array_merge(
             $this->getDefaultPluginPreferences(),
             $this->rcmail->user->get_prefs()[$this->ID] ?? []
         );

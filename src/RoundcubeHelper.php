@@ -19,12 +19,12 @@ final class RoundcubeHelper
             return $url;
         }
 
-        $scheme = \filter_var($_SERVER['HTTPS'] ?? 'off', \FILTER_VALIDATE_BOOLEAN) ? 'https' : 'http';
+        $scheme = filter_var($_SERVER['HTTPS'] ?? 'off', \FILTER_VALIDATE_BOOLEAN) ? 'https' : 'http';
         $requestedUrl = "{$scheme}://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-        $parts = \parse_url($requestedUrl);
+        $parts = parse_url($requestedUrl);
 
         // remove potential trailing index.php
-        $parts['path'] = \preg_replace('/\/index\.php$/iuS', '/', $parts['path']);
+        $parts['path'] = preg_replace('/\/index\.php$/iuS', '/', $parts['path']);
         unset($parts['query'], $parts['fragment']);
 
         return $url = self::unparseUrl($parts);

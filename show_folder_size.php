@@ -59,7 +59,7 @@ final class show_folder_size extends AbstractRoundcubePlugin
         $output = $this->rcmail->output;
 
         // sanitize: _callback
-        $callback = \filter_input(\INPUT_POST, '_callback');
+        $callback = filter_input(\INPUT_POST, '_callback');
 
         $sizes = $this->getFolderSizes();
 
@@ -93,7 +93,7 @@ final class show_folder_size extends AbstractRoundcubePlugin
     private function getFolderSizes(): array
     {
         $storage = $this->rcmail->get_storage();
-        $folders = \array_unique($storage->list_folders());
+        $folders = array_unique($storage->list_folders());
 
         /** @var array<string,int> $rawSizes the non-cumulative folder sizes */
         $rawSizes = [];
@@ -126,8 +126,8 @@ final class show_folder_size extends AbstractRoundcubePlugin
     private function calcualteCumulativeSizes(array $rawSizes): array
     {
         /** @var string[] $folders sorted folder names by name length ascending */
-        $folders = \array_keys($rawSizes);
-        \usort($folders, static function (string $folder1, string $folder2): int {
+        $folders = array_keys($rawSizes);
+        usort($folders, static function (string $folder1, string $folder2): int {
             return \strlen($folder1) <=> \strlen($folder2);
         });
 
@@ -178,6 +178,6 @@ final class show_folder_size extends AbstractRoundcubePlugin
 
         $parent .= $delimiter;
 
-        return \substr($child, 0, \strlen($parent)) === $parent;
+        return substr($child, 0, \strlen($parent)) === $parent;
     }
 }
