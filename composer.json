@@ -15,7 +15,7 @@
         "roundcube/plugin-installer": "~0.1"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.17",
+        "friendsofphp/php-cs-fixer": "^3",
         "liip/rmt": "^1.5"
     },
     "config": {

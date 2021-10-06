@@ -12,7 +12,7 @@
     "core-js": "^3",
     "eslint": "^7",
     "eslint-config-prettier": "^8",
-    "eslint-plugin-prettier": "^3",
+    "eslint-plugin-prettier": "^4",
     "less": "^4",
     "prettier": "^2",
     "terser": "^5"
