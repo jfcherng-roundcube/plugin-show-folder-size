@@ -18,10 +18,7 @@ const generatePopupContent = (resp) => {
       <tbody>
   `;
 
-  for (let [
-    id,
-    [size, size_humanized, cumulative_size, cumulative_size_humanized],
-  ] of Object.entries(resp)) {
+  for (let [id, [size, size_humanized, cumulative_size, cumulative_size_humanized]] of Object.entries(resp)) {
     let mailbox = rcmail.env.mailboxes[id];
 
     // skip unsubscribed mailboxes
@@ -35,9 +32,7 @@ const generatePopupContent = (resp) => {
       <tr>
         <td
           class="name ${mailbox.virtual ? 'virtual' : ''}"
-          onclick="return ${
-            mailbox.virtual ? 0 : 1
-          } ? rcmail.command('list', '${id}', this, event) : ''"
+          onclick="return ${mailbox.virtual ? 0 : 1} ? rcmail.command('list', '${id}', this, event) : ''"
           title="${id}"
         >
           <div style="margin-left: ${level * 1.5}em">${mailbox.name}</div>
@@ -73,11 +68,8 @@ rcmail.addEventListener('init', (evt) => {
   rcmail.addEventListener(`plugin.${plugin_name}.show-data-callback`, (resp) => {
     delete resp.event; // unused entry
 
-    rcmail.simple_dialog(
-      generatePopupContent(resp),
-      rcmail.gettext('folder_size', plugin_name),
-      null,
-      { modal: false }
-    );
+    rcmail.simple_dialog(generatePopupContent(resp), rcmail.gettext('folder_size', plugin_name), null, {
+      modal: false,
+    });
   });
 });
