@@ -18,3 +18,6 @@
 .toolbarmenu li a.show-folder-size:before {
   content: '\f200'
 }
+html.dark-mode #show-folder-size-table .name {
+  color: #c5d1d3
+}
