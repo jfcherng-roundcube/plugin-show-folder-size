@@ -2,6 +2,10 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2021-11-30 01:05  **0.7.14**  fix color for RC 1.5 dark mode
+      * 4f2d8f9 chore: recompile assets
+      * 1d2cfc6 fix: bad folder name color with RC 1.5 dark theme
+      * efc74e4 chore: update deps
    * 2021-08-11 12:19  **0.7.13**  fix deps
       * 88317af chore: update deps
       * 971afce chore: remove `replace` directive from composer.json (#27)
