@@ -42,7 +42,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          yarn install
+          sudo yarn install
 
       - run: yarn run prettier-check
       - run: yarn run lint
