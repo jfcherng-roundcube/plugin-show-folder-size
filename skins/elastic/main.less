@@ -2,8 +2,6 @@
 
 #show-folder-size-table {
   .name {
-    color: #2c363a;
-
     &.virtual {
       opacity: 0.4;
     }
@@ -15,14 +13,5 @@
 .toolbarmenu li {
   a.@{plugin-name}:before {
     content: '\f200'; // fontawesome 5: chart-pie
-  }
-}
-
-// dark mode overwrite
-html.dark-mode {
-  #show-folder-size-table {
-    .name {
-      color: #c5d1d3;
-    }
   }
 }

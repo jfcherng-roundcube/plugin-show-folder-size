@@ -6,8 +6,7 @@
   background-color: rgba(252,225,126,.2)
 }
 #show-folder-size-table .name {
-  cursor: pointer;
-  color: #2c363a
+  cursor: pointer
 }
 #show-folder-size-table .name.virtual {
   cursor: default;
@@ -17,7 +16,4 @@
 .toolbar a.show-folder-size:before,
 .toolbarmenu li a.show-folder-size:before {
   content: '\f200'
-}
-html.dark-mode #show-folder-size-table .name {
-  color: #c5d1d3
 }
