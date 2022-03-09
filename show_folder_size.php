@@ -126,7 +126,7 @@ final class show_folder_size extends AbstractRoundcubePlugin
     private function calcualteCumulativeSizes(array $rawSizes): array
     {
         /** @var string[] $folders sorted folder names by name length ascending */
-        $folders = array_keys($rawSizes);
+        $folders = array_map('strval', array_keys($rawSizes));
         usort($folders, static function (string $folder1, string $folder2): int {
             return \strlen($folder1) <=> \strlen($folder2);
         });
