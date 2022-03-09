@@ -2,6 +2,15 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2022-03-09 19:44  **0.7.15**  fix for folder name is numeric
+      * 5f777c3 fix: 500 error when folder name is numeric
+      * 0450ce8 chore: recompile assets
+      * 5d1248d chore: update deps
+      * d2e7f8e chore: license year +1
+      * 0dde4e0 chore(ci): fix "Error: Must use import to load ES Module"
+      * 727afda chore(ci): fix frontend CI not working
+      * c113850 chore(ci): also test against PHP 8.0
+      * 48523a6 refactor: simplify CSS rules
    * 2021-11-30 01:05  **0.7.14**  fix color for RC 1.5 dark mode
       * 4f2d8f9 chore: recompile assets
       * 1d2cfc6 fix: bad folder name color with RC 1.5 dark theme
