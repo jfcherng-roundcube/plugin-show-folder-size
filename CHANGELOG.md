@@ -2,6 +2,8 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2022-03-09 20:50  **0.7.16**  add es_ES localization
+      * bbe1a17 feat: add es_ES localization (by @nodo50)
    * 2022-03-09 19:44  **0.7.15**  fix for folder name is numeric
       * 5f777c3 fix: 500 error when folder name is numeric
       * 0450ce8 chore: recompile assets
