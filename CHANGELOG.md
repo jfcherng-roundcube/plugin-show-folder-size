@@ -2,6 +2,9 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2022-06-07 09:26  **0.7.17**  Update deps
+      * bd74aa2 chore: recompile assets
+      * b3abbca chore: update deps
    * 2022-03-09 20:50  **0.7.16**  add es_ES localization
       * bbe1a17 feat: add es_ES localization (by @nodo50)
    * 2022-03-09 19:44  **0.7.15**  fix for folder name is numeric
