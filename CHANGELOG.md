@@ -2,6 +2,8 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2022-06-08 17:48  **0.7.18**  add cs_CZ localization
+      * c25449b feat: add cs_CZ localization (by @RCejdik)
    * 2022-06-07 09:26  **0.7.17**  Update deps
       * bd74aa2 chore: recompile assets
       * b3abbca chore: update deps
