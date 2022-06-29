@@ -2,6 +2,11 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2022-06-29 08:43  **0.7.19**  pt_PT localization
+      * 7e33cf2 chore: recompile assets
+      * a042f4f chore: update deps
+      * 0981b2b chore: show version (#32)
+      * 5b481f2 Create pt_PT.inc (#31)
    * 2022-06-08 17:48  **0.7.18**  add cs_CZ localization
       * c25449b feat: add cs_CZ localization (by @RCejdik)
    * 2022-06-07 09:26  **0.7.17**  Update deps
