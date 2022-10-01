@@ -17,11 +17,11 @@ jobs:
     strategy:
       matrix:
         os: ["ubuntu-latest"]
-        php-versions: ["7.1", "7.2", "7.3", "7.4", "8.0"]
+        php-versions: ["7.1", "7.2", "7.3", "7.4", "8.0", "8.1"]
 
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: GitHub Action for PHP
         uses: shivammathur/setup-php@v2
@@ -40,7 +40,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Cache dependencies - Composer
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ matrix.os }}-${{ matrix.php-versions }}-composer-${{ hashFiles('**/composer.lock') }}
