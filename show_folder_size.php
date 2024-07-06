@@ -87,7 +87,7 @@ final class show_folder_size extends AbstractRoundcubePlugin
      * Get size for all folders.
      *
      * @return array an array in the form of [
-     *               folder_1 => [size_1, size_1_humanized, cumulative_1, cumulative_1_humanized],
+     *               folder_1 => [size_1, cumulative_1],
      *               ... ]
      */
     private function getFolderSizes(): array
@@ -105,12 +105,7 @@ final class show_folder_size extends AbstractRoundcubePlugin
 
         $ret = [];
         foreach ($folders as $folder) {
-            $ret[$folder] = [
-                $rawSizes[$folder],
-                $this->rcmail->show_bytes($rawSizes[$folder]),
-                $cumulativeSizes[$folder],
-                $this->rcmail->show_bytes($cumulativeSizes[$folder]),
-            ];
+            $ret[$folder] = [$rawSizes[$folder], $cumulativeSizes[$folder]];
         }
 
         return $ret;

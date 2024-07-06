@@ -12,3 +12,4 @@ $labels['folder_size'] = '資料夾大小';
 $labels['name'] = '資料夾';
 $labels['size'] = '大小';
 $labels['cumulative_size'] = '大小（累計）';
+$labels['total'] = '總計';

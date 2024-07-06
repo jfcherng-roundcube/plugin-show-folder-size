@@ -12,3 +12,4 @@ $labels['folder_size'] = 'Folder Size';
 $labels['name'] = 'Name';
 $labels['size'] = 'Size';
 $labels['cumulative_size'] = 'Size (Cumulative)';
+$labels['total'] = 'Total';
