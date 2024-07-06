@@ -12,9 +12,9 @@
     "core-js": "^3",
     "eslint": "^8",
     "eslint-config-prettier": "^8",
-    "eslint-plugin-prettier": "^4",
+    "eslint-plugin-prettier": "^5",
     "less": "^4",
-    "prettier": "^2",
+    "prettier": "^3",
     "terser": "^5"
   },
   "scripts": {
@@ -23,5 +23,6 @@
     "lint": "eslint assets/**/*.js"
   },
   "browserslist": "> 1%",
-  "resolutions": {}
+  "resolutions": {},
+  "packageManager": "yarn@1.22.22+sha256.c17d3797fb9a9115bf375e31bfd30058cac6bc9c3b8807a3d8cb2094794b51ca"
 }
