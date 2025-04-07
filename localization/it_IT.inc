@@ -12,3 +12,4 @@ $labels['folder_size'] = 'Dimensione cartella';
 $labels['name'] = 'Nome';
 $labels['size'] = 'Dimensione';
 $labels['cumulative_size'] = 'Dimensione (cumulativa)';
+$labels['total'] = 'Totale';
