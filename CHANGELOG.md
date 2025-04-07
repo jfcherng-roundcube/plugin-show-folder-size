@@ -2,6 +2,9 @@
 ## VERSION 0  INIT
 
  * Version **0.7** - show in popup dialog
+   * 2025-04-08 01:12  **0.7.21**  Update Italian
+      * 3d85d14 chore: update deps
+      * e5ae3c0 chore: update Italian translation
    * 2024-07-07 02:49  **0.7.20**  show total folder size
       * 1114a60 chore: recompile assets
       * f1c57e1 feat: show total folder size
