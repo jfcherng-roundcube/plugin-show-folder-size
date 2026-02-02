@@ -1,0 +1,52 @@
+ame: backend
+
+on:
+  push:
+    branches:
+      - "*"
+      - "*/*"
+  pull_request:
+    branches:
+      - "*"
+      - "*/*"
+
+jobs:
+  job_linting:
+    name: Linting (PHP ${{ matrix.php-versions }})
+
+    strategy:
+      matrix:
+        os: ["ubuntu-latest"]
+        php-versions: ["7.1", "7.2", "7.3", "7.4", "8.0", "8.1"]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: GitHub Action for PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          tools: pecl
+          extensions: ast, mbstring, curl, json, intl, gd, xml, zip, bz2, opcache, sockets
+
+      - name: Show environment information
+        run: |
+          php -v
+          php -m
+      - name: Get cache directory - Composer
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies - Composer
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ matrix.os }}-${{ matrix.php-versions }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ matrix.os }}-${{ matrix.php-versions }}-composer-
+
+      - name: Install dependencies
+        run: |
+          composer config platform.php $(php -r 'preg_match("#^\d+\.\d+\.\d+#", PHP_VERSION, $v); echo $v[0];')
+          composer update --prefer-dist --no-progress --no-suggest
+      - run: composer run-script lint
