@@ -6,6 +6,17 @@ const config = rcmail.env[`${plugin_name}.config`] ?? {};
 const prefs = rcmail.env[`${plugin_name}.prefs`] ?? {};
 
 /**
+ * Escape a string for safe use in HTML text content and double-quoted HTML attributes.
+ */
+const escapeHtml = (str) => String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+
+/**
+ * Escape a string for safe use in a single-quoted JavaScript string literal
+ * inside a double-quoted HTML attribute (like onclick).
+ */
+const escapeJsAttr = (str) => escapeHtml(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '\\r');
+
+/**
  * Format bytes as human-readable text.
  *
  * @param bytes Number of bytes.
@@ -55,8 +66,8 @@ const generatePopupContent = (resp) => {
   let total_size = 0;
 
   for (let [id, [size, cumulative_size]] of entries) {
-    let mailbox = rcmail.env.mailboxes[id];
-    let level = (id.match(/\//g) ?? []).length;
+    const mailbox = rcmail.env.mailboxes[id];
+    const level = (id.match(/\//g) ?? []).length;
 
     // skip unsubscribed mailboxes
     if (!mailbox) {
@@ -69,10 +80,10 @@ const generatePopupContent = (resp) => {
       <tr>
         <td
           class="name ${mailbox.virtual ? 'virtual' : ''}"
-          onclick="return ${mailbox.virtual ? 0 : 1} ? rcmail.command('list', '${id}', this, event) : ''"
-          title="${id}"
+          onclick="return ${mailbox.virtual ? 0 : 1} ? rcmail.command('list', '${escapeJsAttr(id)}', this, event) : ''"
+          title="${escapeHtml(id)}"
         >
-          <div style="margin-left: ${level * 1.5}em">${mailbox.name}</div>
+          <div style="margin-left: ${level * 1.5}em">${escapeHtml(mailbox.name)}</div>
         </td>
         <td data-size="${size !== false ? size : -1}">
           ${size !== false ? humanizeBytes(size) : '-'}
