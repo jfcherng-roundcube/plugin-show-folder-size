@@ -13,8 +13,10 @@ const escapeHtml = (str) => String(str).replace(/&/g, '&amp;').replace(/</g, '&l
 /**
  * Escape a string for safe use in a single-quoted JavaScript string literal
  * inside a double-quoted HTML attribute (like onclick).
+ * JavaScript first, then HTML: the browser decodes the attribute before it parses the handler.
  */
-const escapeJsAttr = (str) => escapeHtml(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '\\r');
+const escapeJsAttr = (str) =>
+  escapeHtml(String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '\\r'));
 
 /**
  * Format bytes as human-readable text.
